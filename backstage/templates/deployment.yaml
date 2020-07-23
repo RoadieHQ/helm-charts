@@ -1,0 +1,172 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "backstage.fullname" . }}-frontend
+
+spec:
+  replicas: {{ .Values.frontend.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: backstage
+      component: frontend
+
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/backstage.logs: '[{"source":"backstage","service":"frontend"}]'
+      labels:
+        app: backstage
+        component: frontend
+
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-frontend
+          image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
+          ports:
+            - containerPort: {{ .Values.frontend.containerPort }}
+          resources:
+            {{- toYaml .Values.backend.resources | nindent 12 }}
+          envFrom:
+          - configMapRef:
+              name: {{ include "backstage.name" . }}-app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "backstage.fullname" . }}-backend
+
+spec:
+  replicas: {{ .Values.backend.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: backstage
+      component: backend
+
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/backstage.logs: '[{"source":"backstage","service":"backend"}]'
+      labels:
+        app: backstage
+        component: backend
+
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-backend
+          image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
+          ports:
+            - containerPort: {{ .Values.backend.containerPort }}
+          resources:
+            {{- toYaml .Values.backend.resources | nindent 12 }}
+
+          volumeMounts:
+            - name: ca-pemstore
+              mountPath: {{ .Values.pg.caVolumeMountDir }}
+
+          envFrom:
+            - configMapRef:
+                name: backstage-app
+            - configMapRef:
+                name: backstage-auth
+            - configMapRef:
+                name: backstage-pg
+            - secretRef:
+                name: backstage-backend
+            - secretRef:
+                name: backstage-pg
+
+      volumes:
+        - name: ca-pemstore
+          configMap:
+            name: ca-pemstore
+{{- if .Values.lighthouse.enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "backstage.fullname" . }}-lighthouse
+
+spec:
+  replicas: {{ .Values.lighthouse.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: backstage
+      component: lighthouse-audit-service
+
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/backstage.logs: '[{"source":"backstage","service":"lighthouse"}]'
+      labels:
+        app: backstage
+        component: lighthouse-audit-service
+
+    spec:
+      containers:
+        - name: lighthouse-audit-service
+          image: {{ .Values.lighthouse.image.repository }}:{{ .Values.lighthouse.image.tag }}
+          ports:
+            - containerPort: {{ .Values.lighthouse.containerPort }}
+          resources:
+            {{- toYaml .Values.lighthouse.resources | nindent 12 }}
+
+          envFrom:
+            - configMapRef:
+                name: backstage-pg
+            - secretRef:
+                name: backstage-pg
+
+          env:
+            - name: LAS_PORT
+              value: {{ .Values.lighthouse.containerPort | quote }}
+            - name: LAS_CORS
+              value: "true"
+
+          volumeMounts:
+            - name: ca-pemstore
+              mountPath: {{ .Values.pg.caVolumeMountDir }}
+
+      volumes:
+        - name: ca-pemstore
+          configMap:
+            name: ca-pemstore
+{{- end }}
+{{- if .Values.gitops.enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "backstage.fullname" . }}-gitops-api
+
+spec:
+  replicas: {{ .Values.gitops.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: backstage
+      component: gitops-api
+
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/backstage.logs: '[{"source":"backstage","service":"gitops-api"}]'
+      labels:
+        app: backstage
+        component: gitops-api
+
+    spec:
+      containers:
+        - name: gitops-api
+          image: {{ .Values.gitops.image.repository }}:{{ .Values.gitops.image.tag }}
+          ports:
+            - containerPort: {{ .Values.gitops.containerPort }}
+          resources:
+            {{- toYaml .Values.gitops.resources | nindent 12 }}
+
+          env:
+            - name: GIN_MODE
+              value: release
+{{- end }}

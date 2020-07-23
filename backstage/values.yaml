@@ -1,0 +1,133 @@
+# Default values for backstage.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+frontend:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: registry.digitalocean.com/larder/backstage-frontend
+    tag: 0.0.15
+  containerPort: 80
+  resources:
+    requests:
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+
+backend:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: registry.digitalocean.com/larder/backstage-backend
+    tag: 0.0.25
+  containerPort: 7000
+  resources:
+    requests:
+      memory: 512Mi
+    limits:
+      memory: 1024Mi
+
+lighthouse:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: registry.digitalocean.com/larder/lighthouse-audit-service
+    tag: v1.0.2.beta4
+  containerPort: 3003
+  resources:
+    requests:
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+
+gitops:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: chanwit/gitops-api
+    tag: latest
+  containerPort: 8080
+  resources:
+    requests:
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+
+nameOverride: ""
+fullnameOverride: ""
+
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+
+  hosts:
+    - host: lighthouse.example.com
+      paths:
+        - service: lighthouse
+    - host: demo.example.com
+      paths:
+        - service: frontend
+    - host: backend.example.com
+      paths:
+        - service: backend
+    - host: gitops.example.com
+      paths:
+        - service: gitops-api
+  tls:
+    - secretName: backstage-tls
+      hosts:
+        - lighthouse.example.com
+        - demo.example.com
+        - backend.example.com
+        - gitops.example.com
+
+pg:
+  password: 
+  hostname:
+  user:
+  port:
+  ssl:
+  caVolumeMountDir:
+  caFileName:
+  database:
+
+appConfig:
+  app:
+    baseUrl: https://demo.example.com
+    title: Backstage
+  backend:
+    baseUrl: https://backend.example.com
+    lighthouseHostname: https://lighthouse.example.com
+    gitOpsHostname: https://gitops.example.com
+    listen: 0.0.0.0:7000
+    cors:
+      origin: https://demo.example.com
+  sentry:
+    organization: spotify
+
+auth:
+  google:
+    clientId: a
+    clientSecret: a
+  github:
+    clientId: c
+    clientSecret: c
+  gitlab:
+    clientId: b
+    clientSecret: b
+  okta:
+    clientId: b
+    clientSecret: b
+    audience: b
+  oauth2:
+    clientId: b
+    clientSecret: b
+    authUrl: b
+    tokenUrl: b
+  sentryToken: e
+  rollbarAccountToken: f
+
+issuer:
+  email: hello@example.com
