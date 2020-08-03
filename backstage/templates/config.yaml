@@ -31,6 +31,9 @@ data:
   AUTH_GOOGLE_CLIENT_ID: {{ .Values.auth.google.clientId }}
   AUTH_GITHUB_CLIENT_ID: {{ .Values.auth.github.clientId }}
   AUTH_GITLAB_CLIENT_ID: {{ .Values.auth.gitlab.clientId }}
+  # This should not be prefixed with AUTH_. This could be a typo in the Backstage app config.
+  # Regardless, it is not decided by me.
+  GITLAB_BASE_URL: {{ .Values.auth.gitlab.baseUrl }}
   AUTH_OKTA_CLIENT_ID: {{ .Values.auth.okta.clientId }}
   AUTH_OKTA_AUDIENCE: {{ .Values.auth.okta.audience }}
   AUTH_OAUTH2_CLIENT_ID: {{ .Values.auth.oauth2.clientId }}

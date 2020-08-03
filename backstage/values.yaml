@@ -192,6 +192,7 @@ auth:
   gitlab:
     clientId: b
     clientSecret: b
+    baseUrl: b
   okta:
     clientId: b
     clientSecret: b
