@@ -70,8 +70,6 @@ spec:
                 name: backstage-app
             - configMapRef:
                 name: backstage-auth
-            - configMapRef:
-                name: backstage-pg
             - secretRef:
                 name: backstage-backend
             - secretRef:

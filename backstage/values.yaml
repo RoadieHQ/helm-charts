@@ -84,14 +84,7 @@ ingress:
         - gitops.example.com
 
 pg:
-  password: 
-  hostname:
-  user:
-  port:
-  ssl:
   caVolumeMountDir:
-  caFileName:
-  database:
 
 appConfig:
   app:
@@ -104,6 +97,12 @@ appConfig:
     listen: 0.0.0.0:7000
     cors:
       origin: https://demo.example.com
+    postgresUser:
+    postgresPort:
+    postgresDatabase:
+    postgresHost:
+    postgresPathToCa:
+    postgresPassword:
   sentry:
     organization: spotify
 
