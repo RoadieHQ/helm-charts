@@ -105,6 +105,24 @@ appConfig:
     postgresPassword:
   sentry:
     organization: spotify
+  techdocs:
+    storageUrl:
+
+  auth:
+    providers:
+      github:
+        development:
+          appOrigin: "http://localhost:3000/"
+          secure: false
+          clientId:
+            $secret:
+              env: AUTH_GITHUB_CLIENT_ID
+          clientSecret:
+            $secret:
+              env: AUTH_GITHUB_CLIENT_SECRET
+          enterpriseInstanceUrl: 
+            $secret:
+              env: AUTH_GITHUB_ENTERPRISE_INSTANCE_URL
 
 auth:
   google:

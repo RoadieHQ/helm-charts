@@ -16,6 +16,8 @@ data:
   APP_CONFIG_backend_postgresHost: {{ .Values.appConfig.backend.postgresHost | quote | quote }}
   APP_CONFIG_backend_postgresPathToCa: {{ .Values.appConfig.backend.postgresPathToCa | quote | quote }}
   APP_CONFIG_sentry_organization: {{ .Values.appConfig.sentry.organization | quote | quote }}
+  APP_CONFIG_techdocs_storageUrl: {{ .Values.appConfig.techdocs.storageUrl | quote | quote }}
+  APP_CONFIG_auth_providers_github_development_appOrigin: {{ .Values.appConfig.auth.providers.github.development.appOrigin | quote | quote }}
 ---
 apiVersion: v1
 kind: ConfigMap
