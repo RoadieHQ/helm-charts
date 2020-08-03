@@ -108,8 +108,24 @@ appConfig:
   techdocs:
     storageUrl:
 
+  # Auth config has recently moved into the app config file in upstream Backstage. However,
+  # most of this config simply mandates that items like the client id and client secret should
+  # be picked up from the environment variables named below. Those environment variables are
+  # set in this helm controlled environment by the 'auth' configuration below this section.
+  # Thus, the only key in this config which directly controls an app config is the
+  # auth.providers.github.development.appOrigin property.
   auth:
     providers:
+      google:
+        development:
+          appOrigin: "http://localhost:3000/"
+          secure: false
+          clientId:
+            $secret:
+              env: AUTH_GOOGLE_CLIENT_ID
+          clientSecret:
+            $secret:
+              env: AUTH_GOOGLE_CLIENT_SECRET
       github:
         development:
           appOrigin: "http://localhost:3000/"
@@ -123,6 +139,48 @@ appConfig:
           enterpriseInstanceUrl: 
             $secret:
               env: AUTH_GITHUB_ENTERPRISE_INSTANCE_URL
+      gitlab:
+        development:
+          appOrigin: "http://localhost:3000/"
+          secure: false
+          clientId:
+            $secret:
+              env: AUTH_GITLAB_CLIENT_ID
+          clientSecret:
+            $secret:
+              env: AUTH_GITLAB_CLIENT_SECRET
+          audience:
+            $secret:
+              env: GITLAB_BASE_URL
+      okta:
+        development:
+          appOrigin: "http://localhost:3000/"
+          secure: false
+          clientId:
+            $secret:
+              env: AUTH_OKTA_CLIENT_ID
+          clientSecret:
+            $secret:
+              env: AUTH_OKTA_CLIENT_SECRET
+          audience:
+            $secret:
+              env: AUTH_OKTA_AUDIENCE
+      oauth2:
+        development:
+          appOrigin: "http://localhost:3000/"
+          secure: false
+          clientId:
+            $secret:
+              env: AUTH_OAUTH2_CLIENT_ID
+          clientSecret:
+            $secret:
+              env: AUTH_OAUTH2_CLIENT_SECRET
+          authorizationURL:
+            $secret:
+              env: AUTH_OAUTH2_AUTH_URL
+          tokenURL:
+            $secret:
+              env: AUTH_OAUTH2_TOKEN_URL
 
 auth:
   google:
