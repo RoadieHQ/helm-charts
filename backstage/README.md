@@ -1,5 +1,12 @@
 # Getting started
 
+Once the prerequisites are handled, installing Backstage should be a simple matter of:
+
+```shell
+helm repo add roadie https://charts.roadie.io
+helm install backstage roadie/backstage -f my-custom-values.yml
+```
+
 ## Accessing PostgreSQL
 
 Both the Backstage backend and Lighthouse Audit Service require access to a PostgreSQL
@@ -91,6 +98,18 @@ helm install nginx-ingress stable/nginx-ingress --set controller.publishService.
 ```
 
 ## Install the app
+
+### General install
+
+```shell
+helm repo add roadie https://charts.roadie.io
+helm install backstage roadie/backstage -f my-custom-values.yml
+```
+
+### Local install
+
+If you've made local changes to the Helm charts, you may wish to test them before releasing
+to the general public. To install a local chart, do the following.
 
 ```shell
 helm install backstage ./
