@@ -1,6 +1,11 @@
-The KubeWise Helm chart is available in the KubeWise repo.
+The KubeWise Helm chart is available in [the KubeWise repo](https://github.com/RoadieHQ/kubewise).
 
-https://github.com/RoadieHQ/kubewise
+KubeWise can be installed like this:
+
+```shell
+helm repo add roadie https://charts.roadie.io
+helm install kubewise roadie/kubewise
+```
 
 There are a number of packaged KubeWise charts in the root directory of this repository,
 rather than within this directory, as might be expected. This is because the repo was migrated
