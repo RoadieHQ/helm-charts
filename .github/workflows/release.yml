@@ -1,0 +1,26 @@
+name: Release helm charts
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  publish_k8s_demo:
+    runs-on: ubuntu-latest
+
+    env:
+      CI: true
+      NODE_OPTIONS: --max-old-space-size=4096
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.0.0-rc.1
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
