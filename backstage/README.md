@@ -1,43 +1,105 @@
 # Getting started
 
-## Getting docker images
-Set up the cluster to work with the Digital Ocean registry.
-
-[Instructions](https://www.digitalocean.com/docs/images/container-registry/quickstart/#use-images-in-your-registry-with-kubernetes)
-
-The name of the container registry in my DO account is: `larder`.
-
-```shell
-doctl registry kubernetes-manifest | kubectl apply -f -
-kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "registry-larder"}]}'
-```
-
 ## Accessing PostgreSQL
 
-Ensure that there is a posgres database running where the lighthouse app expects it to be.
-Ensure that DO connection security allows a connection from the kubernetes cluster.
+Both the Backstage backend and Lighthouse Audit Service require access to a PostgreSQL
+database. These helm charts require that communication with the database happen over SSL.
 
-Make the DB certificate authority available to the pods which need it.
+The location of the PG database can be specified by overriding the `app-config.yaml` which comes
+with Backstage with some environment variables.
 
-First download the CA file from DigitalOcean (it's available where the database is created).
+To do this, set the following Helm values:
+
+```yaml
+appConfig:
+  backend:
+    postgresUser:
+    postgresPort:
+    postgresDatabase:
+    postgresHost: 
+    postgresPathToCa:
+    postgresPassword:
+
+pg:
+  caVolumeMountDir:
+```
+
+`appConfig.backend.postgresPathToCa` and `pg.caVolumeMountDir` are properties which are not
+required to run Backstage locally and connect it to your local Posgtres instance.
+
+`postgresPathToCa` is used to tell the NodeJS `pg` library where to find the certificate authority (CA)
+cert that it can use to validate SSL connections. `pg.caVolumeMountDir` tells Kubernetes where
+on each pod to mount the CA cert.
+
+The CA cert must be loaded into a configmap manually so that Kubernetes can find it and mount
+it to the pods which require it.
 
 ```shell
-k create configmap ca-pemstore --from-file=/Users/davidtuite/Downloads/ca-certificate.crt
+kubectl create configmap ca-pemstore --from-file=/path/to/ca-certificate.crt
 ```
+
+### Example for DigitalOcean
+
+First create a managed PostgreSQL database on DigitalOcean, using their console. Note the
+connection properties it provides for you.
+
+Download the CA file from DigitalOcean.
+
+Create a `values.yaml` file which we will use to override some default Helm values.
+
+```yaml
+appConfig:
+  backend: 
+    postgresUser: doadmin
+    postgresPort: 25061
+    postgresDatabase: defaultdb
+    postgresHost: private-db-postgresql-lon1-18737-do-user-9374938-0.a.db.ondigitalocean.com
+    postgresPathToCa: /etc/config/ca-certificate.crt
+    postgresPassword: "<your password>"
+
+pg:
+  # This must match the path provided to appConfig.backend.postgresPathToCa. For example, if
+  # postgresPathToCa is /etc/config/my-ca.crt then pg.caVolumeMountDir must be /etc/config.
+  caVolumeMountDir: /etc/config
+
+```
+
+Now store the `crt` file that you downloaded from DigitalOcean in a configmap so Kubernetes can
+moount it onto each pod.
+
+```shell
+kubectl create configmap ca-pemstore --from-file=/path/to/ca-certificate.crt
+```
+
+## Getting docker images
+Docker images are public on docker hub. No credentials are needed to pull them.
 
 ## Install dependencies
 
+All HTTP ingress to the cluster must happen over SSL. In order to get SSL certificates for
+ingress, we must install [cert-manager](https://cert-manager.io/) into the cluster.
+
 ```shell
-# Install the certificate manager for suppliying letsencrypt certificates.
 kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml
-# Install nginx-ingress
+```
+
+Nginx is required to act as the ingress. (Note: It is likely possible to skip this part and
+use native Kubernetes ingress but I haven't tested that path).
+
+```shell
 helm install nginx-ingress stable/nginx-ingress --set controller.publishService.enabled=true
 ```
 
 ## Install the app
 
-```
+```shell
 helm install backstage ./
+```
+
+You will likely need to provide some custom Helm values like this:
+
+```shell
+hem install backstage ./ -f custom-values.yaml
 ```
 
 # Adding new components
@@ -52,7 +114,8 @@ There are usually a few steps
  2. Add values for the service in `values.yaml`.
  3. Add a service for the new component in `templates/service.yaml`.
  4. Add ingress rules for the new component in the `values.yaml`.
- 5. Add the new component's URL (e.g. gitops.backstage-demo.roadie.io) to DNS in the NS1 interface.
+ 5. Add the new component's URL (e.g. gitops.backstage-demo.roadie.io) as an A record in your DNS provider,
+    pointing to the external ingress IP of the cluster.
  6. Upgrade everything with helm: `helm upgrade backstage ./`.
  7. Ensure a certificate is generated for the new URL.
 
@@ -79,15 +142,10 @@ I debugged this by describing the HTTP acme challenges.
 
 ```shell
 k get challenges -o wide
-NAME                                             STATE     DOMAIN                                REASON                                                                                                                                                                                                                                                                                                                                                                                                     AGE
-backstage-tls-2934582588-2220160209-1297212253   valid     lighthouse.backstage-demo.roadie.io                                                                                                                                                                                                                                                                                                                                                                                                              13m
-backstage-tls-2934582588-2220160209-2098817713   pending   gitops.backstage-demo.roadie.io       Waiting for http-01 challenge propagation: failed to perform self check GET request 'http://gitops.backstage-demo.roadie.io/.well-known/acme-challenge/Yl68GfAzL5f4-CkSJs_Hm0_PcngkkwjzKRXhCMp3SU8': Get http://gitops.backstage-demo.roadie.io/.well-known/acme-challenge/Yl68GfAzL5f4-CkSJs_Hm0_PcngkkwjzKRXhCMp3SU8: dial tcp: lookup gitops.backstage-demo.roadie.io on 10.245.0.10:53: no such host   13m
-backstage-tls-2934582588-2220160209-3026955619   valid     backstage-demo.roadie.io                                                                                                                                                                                                                                                                                                                                                                                                                         13m
-backstage-tls-2934582588-2220160209-3265927229   valid     backend.backstage-demo.roadie.io
 ```
 
-The `pending` challenge stayed pending for a long time. I found I could `curl` the `.well-known`
-endpoint from my laptop but not from within a pod.
+One challenge is marked as `pending` and stayed in this state for a long time. I found I could
+ `curl` the `.well-known` endpoint from my laptop but not from within a pod.
 
 I eventually fixed this by reinstalling `nginx-ingress` with Helm. I was pointed to this idea
 by [this page](https://cert-manager.io/docs/faq/acme/) and [this GitHub issue.](https://github.com/jetstack/cert-manager/issues/656#issuecomment-415606297).
@@ -98,4 +156,4 @@ helm install nginx-ingress stable/nginx-ingress --set controller.publishService.
 ```
 
 **WARNING:** Reinstalling `nginx-ingress` will change the external IP of the cluster and require
-updating NS1 with the new A records.
+updating your DNS provider with the new A records.

@@ -6,8 +6,8 @@ frontend:
   enabled: true
   replicaCount: 1
   image:
-    repository: registry.digitalocean.com/larder/backstage-frontend
-    tag: 0.0.15
+    repository: roadiehq/backstage-k8s-demo-frontend
+    tag: latest
   containerPort: 80
   resources:
     requests:
@@ -19,8 +19,8 @@ backend:
   enabled: true
   replicaCount: 1
   image:
-    repository: registry.digitalocean.com/larder/backstage-backend
-    tag: 0.0.25
+    repository: roadiehq/backstage-k8s-demo-backend
+    tag: latest
   containerPort: 7000
   resources:
     requests:
@@ -32,8 +32,8 @@ lighthouse:
   enabled: true
   replicaCount: 1
   image:
-    repository: registry.digitalocean.com/larder/lighthouse-audit-service
-    tag: v1.0.2.beta4
+    repository: roadiehq/lighthouse-audit-service
+    tag: latest
   containerPort: 3003
   resources:
     requests:
@@ -42,7 +42,7 @@ lighthouse:
       memory: 256Mi
 
 gitops:
-  enabled: true
+  enabled: false
   replicaCount: 1
   image:
     repository: chanwit/gitops-api
@@ -84,6 +84,8 @@ ingress:
         - gitops.example.com
 
 pg:
+  # This must match the path provided to appConfig.backend.postgresPathToCa. For example, if
+  # postgresPathToCa is /etc/config/my-ca.crt then pg.caVolumeMountDir must be /etc/config.
   caVolumeMountDir:
 
 appConfig:
