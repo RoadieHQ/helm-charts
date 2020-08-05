@@ -24,3 +24,6 @@ jobs:
 
       - name: Commit changes
         run: git commit --message "Index charts"
+
+      - name: Push changes
+        run: git push
