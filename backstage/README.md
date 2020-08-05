@@ -25,7 +25,7 @@ pg:
 ```
 
 `appConfig.backend.postgresPathToCa` and `pg.caVolumeMountDir` are properties which are not
-required to run Backstage locally and connect it to your local Posgtres instance.
+required to run Backstage locally and connect it to your local PosgtreSQL instance.
 
 `postgresPathToCa` is used to tell the NodeJS `pg` library where to find the certificate authority (CA)
 cert that it can use to validate SSL connections. `pg.caVolumeMountDir` tells Kubernetes where
@@ -65,7 +65,7 @@ pg:
 ```
 
 Now store the `crt` file that you downloaded from DigitalOcean in a configmap so Kubernetes can
-moount it onto each pod.
+mount it onto each pod.
 
 ```shell
 kubectl create configmap ca-pemstore --from-file=/path/to/ca-certificate.crt
@@ -104,7 +104,7 @@ hem install backstage ./ -f custom-values.yaml
 
 # Adding new components
 
-A semi-frequent activity is adding new components to the cluster. For example, when Weaveworks
+A semi-frequent activity is adding new components to the cluster. For example, when WeaveWorks
 released their GitOps Backstage plugin, I wanted to make it available in the demo for people
 to try out.
 
