@@ -26,3 +26,12 @@ new charts.
  4. Open a pull request against the master branch,
  5. Review the changes, merge the branch to master,
  6. The repo will be indexed automatically upon merge.
+
+## Using new chart versions
+
+Wait for the GitHub action which indexes and publishes the chars to run, then:
+
+```shell
+helm repo update
+helm upgrade backstage roadie/backstage -f values-overrides.yaml
+```
