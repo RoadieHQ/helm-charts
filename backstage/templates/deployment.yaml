@@ -23,7 +23,7 @@ spec:
       containers:
         - name: {{ .Chart.Name }}-frontend
           image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.frontend.containerPort }}
           resources:
@@ -57,7 +57,7 @@ spec:
       containers:
         - name: {{ .Chart.Name }}-backend
           image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.backend.containerPort }}
           resources:
@@ -108,7 +108,7 @@ spec:
       containers:
         - name: lighthouse-audit-service
           image: {{ .Values.lighthouse.image.repository }}:{{ .Values.lighthouse.image.tag }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.lighthouse.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.lighthouse.containerPort }}
           resources:
@@ -162,7 +162,7 @@ spec:
       containers:
         - name: gitops-api
           image: {{ .Values.gitops.image.repository }}:{{ .Values.gitops.image.tag }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.gitops.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.gitops.containerPort }}
           resources:
