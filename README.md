@@ -20,11 +20,11 @@ Helm (backstage does!).
 Merging to master will automatically run a GitHub action which packages and releases
 new charts.
 
- 1. Make changes to a chart in a branch and bump the chart version on that branch, 
+ 1. `git pull --rebase` on the master branch to pick up any commits made by GitHub actions.
+ 2. Bump the chart version in `Chart.yaml`.
  2. Package the chart with `helm package .`. Be sure to run `helm package` within the chart directory, not in the root diractory.
  3. **Do not** run `helm repo index`,
- 4. Open a pull request against the master branch,
- 5. Review the changes, merge the branch to master,
+ 5. Review the changes, commit and push to GitHub.
  6. The repo will be indexed automatically upon merge.
 
 ## Using new chart versions
