@@ -63,9 +63,6 @@ fullnameOverride: ""
 
 ingress:
   annotations:
-    kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-
   hosts:
     - host: lighthouse.example.com
       paths:
@@ -79,13 +76,7 @@ ingress:
     - host: gitops.example.com
       paths:
         - service: gitops-api
-  tls:
-    - secretName: backstage-tls
-      hosts:
-        - lighthouse.example.com
-        - demo.example.com
-        - backend.example.com
-        - gitops.example.com
+  tls: []
 
 pg:
   # This must match the path provided to appConfig.backend.postgresPathToCa. For example, if
