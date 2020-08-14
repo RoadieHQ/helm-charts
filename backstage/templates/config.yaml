@@ -33,16 +33,3 @@ data:
   AUTH_OAUTH2_CLIENT_ID: {{ .Values.auth.oauth2.clientId }}
   AUTH_OAUTH2_AUTH_URL: {{ .Values.auth.oauth2.authUrl }}
   AUTH_OAUTH2_TOKEN_URL: {{ .Values.auth.oauth2.tokenUrl }}
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: backstage-pg
-data:
-  # Need to duplicate some values because lighthouse expects different environment variable
-  # names than Backstage does.
-  PGDATABASE: {{ .Values.appConfig.backend.postgresDatabase }}
-  PGUSER: {{ .Values.appConfig.backend.postgresUser }}
-  PGPORT: {{ .Values.appConfig.backend.postgresPort | quote }}
-  PGHOST: {{ .Values.appConfig.backend.postgresHost }}
-  PGPATH_TO_CA: {{ .Values.appConfig.backend.postgresPathToCa }}

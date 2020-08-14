@@ -70,8 +70,6 @@ spec:
                 name: backstage-auth
             - secretRef:
                 name: backstage-backend
-            - secretRef:
-                name: backstage-pg
 {{- if .Values.lighthouse.enabled }}
 ---
 apiVersion: apps/v1
@@ -104,12 +102,6 @@ spec:
             - containerPort: {{ .Values.lighthouse.containerPort }}
           resources:
             {{- toYaml .Values.lighthouse.resources | nindent 12 }}
-
-          envFrom:
-            - configMapRef:
-                name: backstage-pg
-            - secretRef:
-                name: backstage-pg
 
           env:
             - name: LAS_PORT
