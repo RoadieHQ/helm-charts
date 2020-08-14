@@ -7,14 +7,8 @@ data:
   APP_CONFIG_app_title: {{ .Values.appConfig.app.title | quote | quote }}
   APP_CONFIG_backend_baseUrl: {{ .Values.appConfig.backend.baseUrl | quote | quote }}
   APP_CONFIG_backend_lighthouseHostname: {{ .Values.appConfig.backend.lighthouseHostname | quote | quote }}
-  APP_CONFIG_backend_gitOpsHostname: {{ .Values.appConfig.backend.gitOpsHostname | quote | quote }}
   APP_CONFIG_backend_listen: {{ .Values.appConfig.backend.listen | quote | quote }}
   APP_CONFIG_backend_cors_origin: {{ .Values.appConfig.backend.cors.origin | quote | quote }}
-  APP_CONFIG_backend_postgresUser: {{ .Values.appConfig.backend.postgresUser | quote | quote }}
-  APP_CONFIG_backend_postgresPort: {{ .Values.appConfig.backend.postgresPort | quote }}
-  APP_CONFIG_backend_postgresDatabase: {{ .Values.appConfig.backend.postgresDatabase | quote | quote }}
-  APP_CONFIG_backend_postgresHost: {{ .Values.appConfig.backend.postgresHost | quote | quote }}
-  APP_CONFIG_backend_postgresPathToCa: {{ .Values.appConfig.backend.postgresPathToCa | quote | quote }}
   APP_CONFIG_sentry_organization: {{ .Values.appConfig.sentry.organization | quote | quote }}
   APP_CONFIG_techdocs_storageUrl: {{ .Values.appConfig.techdocs.storageUrl | quote | quote }}
   APP_CONFIG_auth_providers_github_development_appOrigin: {{ .Values.appConfig.auth.providers.github.development.appOrigin | quote | quote }}
