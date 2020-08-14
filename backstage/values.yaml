@@ -31,7 +31,7 @@ backend:
       memory: 1024Mi
 
 lighthouse:
-  enabled: true
+  enabled: false
   replicaCount: 1
   image:
     repository: roadiehq/lighthouse-audit-service
@@ -64,24 +64,13 @@ fullnameOverride: ""
 ingress:
   annotations:
   hosts:
-    - host: lighthouse.example.com
-      paths:
-        - service: lighthouse
     - host: demo.example.com
       paths:
         - service: frontend
     - host: backend.example.com
       paths:
         - service: backend
-    - host: gitops.example.com
-      paths:
-        - service: gitops-api
   tls: []
-
-pg:
-  # This must match the path provided to appConfig.backend.postgresPathToCa. For example, if
-  # postgresPathToCa is /etc/config/my-ca.crt then pg.caVolumeMountDir must be /etc/config.
-  caVolumeMountDir:
 
 appConfig:
   app:
