@@ -1,26 +1,15 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: backstage-app
+  name: {{ include "backstage.fullname" . }}-app
 data:
-  APP_CONFIG_app_baseUrl: {{ .Values.appConfig.app.baseUrl | quote | quote }}
-  APP_CONFIG_app_title: {{ .Values.appConfig.app.title | quote | quote }}
-  APP_CONFIG_backend_baseUrl: {{ .Values.appConfig.backend.baseUrl | quote | quote }}
-  APP_CONFIG_backend_lighthouseHostname: {{ .Values.appConfig.backend.lighthouseHostname | quote | quote }}
-  APP_CONFIG_backend_listen: {{ .Values.appConfig.backend.listen | quote | quote }}
-  APP_CONFIG_backend_cors_origin: {{ .Values.appConfig.backend.cors.origin | quote | quote }}
-  APP_CONFIG_sentry_organization: {{ .Values.appConfig.sentry.organization | quote | quote }}
-  APP_CONFIG_techdocs_storageUrl: {{ .Values.appConfig.techdocs.storageUrl | quote | quote }}
-  APP_CONFIG_auth_providers_github_development_appOrigin: {{ .Values.appConfig.auth.providers.github.development.appOrigin | quote | quote }}
-  APP_CONFIG_auth_providers_google_development_appOrigin: {{ .Values.appConfig.auth.providers.google.development.appOrigin | quote | quote }}
-  APP_CONFIG_auth_providers_gitlab_development_appOrigin: {{ .Values.appConfig.auth.providers.gitlab.development.appOrigin | quote | quote }}
-  APP_CONFIG_auth_providers_okta_development_appOrigin: {{ .Values.appConfig.auth.providers.okta.development.appOrigin | quote | quote }}
-  APP_CONFIG_auth_providers_oauth2_development_appOrigin: {{ .Values.appConfig.auth.providers.oauth2.development.appOrigin | quote | quote }}
+  app-config.yaml: |
+{{ tpl .Values.appConfig $| indent 4 }}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: backstage-auth
+  name: {{ include "backstage.fullname" . }}-auth
 data:
   AUTH_GOOGLE_CLIENT_ID: {{ .Values.auth.google.clientId }}
   AUTH_GITHUB_CLIENT_ID: {{ .Values.auth.github.clientId }}
@@ -33,3 +22,4 @@ data:
   AUTH_OAUTH2_CLIENT_ID: {{ .Values.auth.oauth2.clientId }}
   AUTH_OAUTH2_AUTH_URL: {{ .Values.auth.oauth2.authUrl }}
   AUTH_OAUTH2_TOKEN_URL: {{ .Values.auth.oauth2.tokenUrl }}
+---

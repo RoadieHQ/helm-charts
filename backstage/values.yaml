@@ -62,7 +62,6 @@ nameOverride: ""
 fullnameOverride: ""
 
 ingress:
-  annotations:
   hosts:
     - host: demo.example.com
       paths:
@@ -72,7 +71,7 @@ ingress:
         - service: backend
   tls: []
 
-appConfig:
+appConfig: |
   app:
     baseUrl: https://demo.example.com
     title: Backstage
@@ -83,12 +82,6 @@ appConfig:
     listen: 0.0.0.0:7000
     cors:
       origin: https://demo.example.com
-    postgresUser:
-    postgresPort:
-    postgresDatabase:
-    postgresHost:
-    postgresPathToCa:
-    postgresPassword:
   sentry:
     organization: spotify
   techdocs:

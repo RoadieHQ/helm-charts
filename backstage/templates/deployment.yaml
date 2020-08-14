@@ -28,9 +28,14 @@ spec:
             - containerPort: {{ .Values.frontend.containerPort }}
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
-          envFrom:
-          - configMapRef:
-              name: {{ include "backstage.name" . }}-app
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/src/app
+              name: {{ include "backstage.fullname" . }}-app
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "backstage.fullname" . }}-app
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -63,13 +68,19 @@ spec:
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
 
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/src/app
+              name: {{ include "backstage.fullname" . }}-app
           envFrom:
             - configMapRef:
-                name: backstage-app
-            - configMapRef:
-                name: backstage-auth
+                name: {{ include "backstage.fullname" . }}-auth
             - secretRef:
-                name: backstage-backend
+                name: {{ include "backstage.fullname" . }}-backend
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "backstage.fullname" . }}-app
 {{- if .Values.lighthouse.enabled }}
 ---
 apiVersion: apps/v1
