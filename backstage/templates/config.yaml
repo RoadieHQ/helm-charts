@@ -4,7 +4,119 @@ metadata:
   name: {{ include "backstage.fullname" . }}-app
 data:
   app-config.yaml: |
-{{ tpl .Values.appConfig $| indent 4 }}
+    app:
+      baseUrl: {{ .Values.appConfig.app.baseUrl }}
+      title: {{ .Values.appConfig.app.title }}
+    backend:
+      baseUrl: {{ .Values.appConfig.backend.baseUrl }}
+      lighthouseHostname: https://lighthouse.example.com
+      gitOpsHostname: https://gitops.example.com
+      listen: 0.0.0.0:7000
+      database:
+        client: pg
+        connection:
+          user: {{ .Values.appConfig.backend.db.user }}
+          port: 5432
+          host: {{ .Values.appConfig.backend.db.host }}
+          password: {{ .Values.appConfig.backend.db.password }}
+          ssl: require
+      cors:
+        origin: {{ .Values.appConfig.backend.cors.origin }}
+        methods: [GET, POST, PUT, DELETE]
+        credentials: true
+    rollbar:
+      organization: spotify
+      accountToken:
+        $secret:
+          env: ROLLBAR_ACCOUNT_TOKEN
+
+    sentry:
+      organization: spotify
+    techdocs:
+      storageUrl:
+    proxy:
+      '/circleci/api':
+        target: 'https://circleci.com/api/v1.1'
+        changeorigin: true
+        pathrewrite:
+          '^/proxy/circleci/api/': '/'
+      '/jenkins/api':
+        target: 'http://localhost:8080'
+        changeorigin: true
+        headers:
+          authorization:
+            $secret:
+              env: jenkins_basic_auth_header
+        pathrewrite:
+          '^/proxy/jenkins/api/': '/'
+
+    auth:
+      providers:
+        google:
+          development:
+            appOrigin: "https://backstage.sandbox.platform.hmcts.net/"
+            secure: false
+            clientId:ƒ
+              $secret:
+                env: AUTH_GOOGLE_CLIENT_ID
+            clientSecret:
+              $secret:
+                env: AUTH_GOOGLE_CLIENT_SECRET
+        github:
+          development:
+            appOrigin: {{ .Values.appConfig.auth.github.development.appOrigin }}
+            secure: true
+            clientId:
+              $secret:
+                env: AUTH_GITHUB_CLIENT_ID
+            clientSecret:
+              $secret:
+                env: AUTH_GITHUB_CLIENT_SECRET
+            enterpriseInstanceUrl: 
+              $secret:
+                env: AUTH_GITHUB_ENTERPRISE_INSTANCE_URL
+        gitlab:
+          development:
+            appOrigin: "https://backstage.sandbox.platform.hmcts.net/"
+            secure: false
+            clientId:
+              $secret:
+                env: AUTH_GITLAB_CLIENT_ID
+            clientSecret:
+              $secret:
+                env: AUTH_GITLAB_CLIENT_SECRET
+            audience:
+              $secret:
+                env: GITLAB_BASE_URL
+        okta:
+          development:
+            appOrigin: "https://backstage.sandbox.platform.hmcts.net/"
+            secure: false
+            clientId:
+              $secret:
+                env: AUTH_OKTA_CLIENT_ID
+            clientSecret:
+              $secret:
+                env: AUTH_OKTA_CLIENT_SECRET
+            audience:
+              $secret:
+                env: AUTH_OKTA_AUDIENCE
+        oauth2:
+          development:
+            appOrigin: "https://backstage.sandbox.platform.hmcts.net/"
+            secure: false
+            clientId:
+              $secret:
+                env: AUTH_OAUTH2_CLIENT_ID
+            clientSecret:
+              $secret:
+                env: AUTH_OAUTH2_CLIENT_SECRET
+            authorizationURL:
+              $secret:
+                env: AUTH_OAUTH2_AUTH_URL
+            tokenURL:
+              $secret:
+                env: AUTH_OAUTH2_TOKEN_URL
 ---
 apiVersion: v1
 kind: ConfigMap

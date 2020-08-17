@@ -28,14 +28,12 @@ spec:
             - containerPort: {{ .Values.frontend.containerPort }}
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
-          volumeMounts:
-            - name: config-volume
-              mountPath: /usr/src/app
-              name: {{ include "backstage.fullname" . }}-app
-      volumes:
-        - name: config-volume
-          configMap:
-            name: {{ include "backstage.fullname" . }}-app
+          # env:
+          #   - name: APP_CONFIG_backend_baseUrl
+          #     value: {{ .Values.appConfig.backend.baseUrl }}
+          #   - name: APP_CONFIG_app_baseUrl
+          #     value: {{ .Values.appConfig.app.baseUrl }}
+      
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -70,8 +68,8 @@ spec:
 
           volumeMounts:
             - name: config-volume
-              mountPath: /usr/src/app
-              name: {{ include "backstage.fullname" . }}-app
+              mountPath: /usr/src/app/app-config.yaml
+              subPath: app-config.yaml
           envFrom:
             - configMapRef:
                 name: {{ include "backstage.fullname" . }}-auth
@@ -81,6 +79,9 @@ spec:
         - name: config-volume
           configMap:
             name: {{ include "backstage.fullname" . }}-app
+            items:
+              - key: app-config.yaml
+                path: app-config.yaml
 {{- if .Values.lighthouse.enabled }}
 ---
 apiVersion: apps/v1
