@@ -56,7 +56,7 @@ data:
           development:
             appOrigin: "https://backstage.sandbox.platform.hmcts.net/"
             secure: false
-            clientId:ƒ
+            clientId:
               $secret:
                 env: AUTH_GOOGLE_CLIENT_ID
             clientSecret:
