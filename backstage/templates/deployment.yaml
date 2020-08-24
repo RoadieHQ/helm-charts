@@ -13,8 +13,6 @@ spec:
 
   template:
     metadata:
-      annotations:
-        ad.datadoghq.com/backstage.logs: '[{"source":"backstage","service":"frontend"}]'
       labels:
         app: backstage
         component: frontend
@@ -24,15 +22,15 @@ spec:
         - name: {{ .Chart.Name }}-frontend
           image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          env:
+            - name: APP_CONFIG_backend_baseUrl
+              value: {{ .Values.backend.baseUrl }}
+            - name: APP_CONFIG_baseUrl 
+              value: {{ .Values.frontend.baseUrl }}
           ports:
             - containerPort: {{ .Values.frontend.containerPort }}
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
-          # env:
-          #   - name: APP_CONFIG_backend_baseUrl
-          #     value: {{ .Values.appConfig.backend.baseUrl }}
-          #   - name: APP_CONFIG_app_baseUrl
-          #     value: {{ .Values.appConfig.app.baseUrl }}
       
 ---
 apiVersion: apps/v1
@@ -50,8 +48,6 @@ spec:
 
   template:
     metadata:
-      annotations:
-        ad.datadoghq.com/backstage.logs: '[{"source":"backstage","service":"backend"}]'
       labels:
         app: backstage
         component: backend
@@ -66,22 +62,25 @@ spec:
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
 
-          volumeMounts:
-            - name: config-volume
-              mountPath: /usr/src/app/app-config.yaml
-              subPath: app-config.yaml
+          env:
+            - name: POSTGRES_USER
+              value: {{ .Values.backend.db.user }}
+            - name: POSTGRES_HOST
+              value: {{ .Values.backend.db.host }}
+            - name: POSTGRES_SSL
+              value: {{ .Values.backend.db.ssl }}
+            - name: APP_CONFIG_backend_baseUrl
+              value: {{ .Values.backend.baseUrl }}
+            - name: APP_CONFIG_baseUrl 
+              value: {{ .Values.frontend.baseUrl }}
+            - name: APP_CONFIG_backend_cors_origin
+              value: {{ .Values.backend.cors.origin }}
+            
           envFrom:
             - configMapRef:
                 name: {{ include "backstage.fullname" . }}-auth
             - secretRef:
                 name: {{ include "backstage.fullname" . }}-backend
-      volumes:
-        - name: config-volume
-          configMap:
-            name: {{ include "backstage.fullname" . }}-app
-            items:
-              - key: app-config.yaml
-                path: app-config.yaml
 {{- if .Values.lighthouse.enabled }}
 ---
 apiVersion: apps/v1
@@ -99,8 +98,6 @@ spec:
 
   template:
     metadata:
-      annotations:
-        ad.datadoghq.com/backstage.logs: '[{"source":"backstage","service":"lighthouse"}]'
       labels:
         app: backstage
         component: lighthouse-audit-service
@@ -138,8 +135,6 @@ spec:
 
   template:
     metadata:
-      annotations:
-        ad.datadoghq.com/backstage.logs: '[{"source":"backstage","service":"gitops-api"}]'
       labels:
         app: backstage
         component: gitops-api

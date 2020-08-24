@@ -71,19 +71,6 @@ ingress:
         - service: backend
   tls: []
 
-appConfig:
-  app:
-    baseUrl: backstage.example.com
-    title: Backstage
-  backend:
-    baseUrl: https://backend.example.com
-    cors:
-      origin: https://backend.example.com
-  auth:
-    github:
-      development:
-        appOrigin: "http://localhost:3000/"
-
 auth:
   google:
     clientId: a
