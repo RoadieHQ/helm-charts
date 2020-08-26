@@ -20,8 +20,8 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-frontend
-          image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
-          imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          image: {{ .Values.frontend.image }}
+          imagePullPolicy: {{ .Values.frontend.imagePullPolicy }}
           env:
             - name: APP_CONFIG_backend_baseUrl
               value: {{ .Values.backend.baseUrl }}
@@ -55,8 +55,8 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-backend
-          image: {{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}
-          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
+          image: {{ .Values.backend.image }}
+          imagePullPolicy: {{ .Values.backend.imagePullPolicy }}
           ports:
             - containerPort: {{ .Values.backend.containerPort }}
           resources:

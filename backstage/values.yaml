@@ -5,10 +5,8 @@
 frontend:
   enabled: true
   replicaCount: 1
-  image:
-    repository: roadiehq/backstage-k8s-demo-frontend
-    tag: latest
-    pullPolicy: IfNotPresent
+  image: roadiehq/backstage-k8s-demo-frontend
+  imagePullPolicy: IfNotPresent
   containerPort: 80
   resources:
     requests:
@@ -19,11 +17,11 @@ frontend:
 backend:
   enabled: true
   replicaCount: 1
-  image:
-    repository: roadiehq/backstage-k8s-demo-backend
-    tag: latest
-    pullPolicy: IfNotPresent
+  image: roadiehq/backstage-k8s-demo-backend
+  imagePullPolicy: IfNotPresent
   containerPort: 7000
+  cors:
+    origin: https://demo.example.com
   resources:
     requests:
       memory: 512Mi
