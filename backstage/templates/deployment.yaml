@@ -75,7 +75,8 @@ spec:
               value: {{ .Values.frontend.baseUrl }}
             - name: APP_CONFIG_backend_cors_origin
               value: {{ .Values.backend.cors.origin }}
-            
+            - name: APP_CONFIG_auth_providers_microsoft_development_appOrigin
+              value: {{ .Values.frontend.baseUrl }}
           envFrom:
             - configMapRef:
                 name: {{ include "backstage.fullname" . }}-auth
