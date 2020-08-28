@@ -25,7 +25,7 @@ spec:
           env:
             - name: APP_CONFIG_backend_baseUrl
               value: {{ .Values.backend.baseUrl }}
-            - name: APP_CONFIG_baseUrl 
+            - name: APP_CONFIG_app_baseUrl 
               value: {{ .Values.frontend.baseUrl }}
           ports:
             - containerPort: {{ .Values.frontend.containerPort }}
@@ -71,12 +71,10 @@ spec:
               value: {{ .Values.backend.db.ssl }}
             - name: APP_CONFIG_backend_baseUrl
               value: {{ .Values.backend.baseUrl }}
-            - name: APP_CONFIG_baseUrl 
+            - name: APP_CONFIG_app_baseUrl 
               value: {{ .Values.frontend.baseUrl }}
             - name: APP_CONFIG_backend_cors_origin
               value: {{ .Values.backend.cors.origin }}
-            - name: APP_CONFIG_auth_providers_microsoft_development_appOrigin
-              value: {{ .Values.frontend.baseUrl }}
           envFrom:
             - configMapRef:
                 name: {{ include "backstage.fullname" . }}-auth
