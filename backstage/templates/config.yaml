@@ -10,18 +10,16 @@ data:
   APP_CONFIG_backend_gitOpsHostname: {{ .Values.appConfig.backend.gitOpsHostname | quote | quote }}
   APP_CONFIG_backend_listen: {{ .Values.appConfig.backend.listen | quote | quote }}
   APP_CONFIG_backend_cors_origin: {{ .Values.appConfig.backend.cors.origin | quote | quote }}
-  APP_CONFIG_backend_postgresUser: {{ .Values.appConfig.backend.postgresUser | quote | quote }}
-  APP_CONFIG_backend_postgresPort: {{ .Values.appConfig.backend.postgresPort | quote }}
-  APP_CONFIG_backend_postgresDatabase: {{ .Values.appConfig.backend.postgresDatabase | quote | quote }}
-  APP_CONFIG_backend_postgresHost: {{ .Values.appConfig.backend.postgresHost | quote | quote }}
-  APP_CONFIG_backend_postgresPathToCa: {{ .Values.appConfig.backend.postgresPathToCa | quote | quote }}
+  APP_CONFIG_backend_database_connection_user: {{ .Values.appConfig.backend.database.connection.user | quote | quote }}
+  APP_CONFIG_backend_database_connection_port: {{ .Values.appConfig.backend.database.connection.port | quote }}
+  APP_CONFIG_backend_database_connection_database: {{ .Values.appConfig.backend.database.connection.database | quote | quote }}
+  APP_CONFIG_backend_database_connection_host: {{ .Values.appConfig.backend.database.connection.host | quote | quote }}
+  APP_CONFIG_backend_database_client: {{ .Values.appConfig.backend.database.client | quote | quote }}
   APP_CONFIG_sentry_organization: {{ .Values.appConfig.sentry.organization | quote | quote }}
   APP_CONFIG_techdocs_storageUrl: {{ .Values.appConfig.techdocs.storageUrl | quote | quote }}
-  APP_CONFIG_auth_providers_github_development_appOrigin: {{ .Values.appConfig.auth.providers.github.development.appOrigin | quote | quote }}
-  APP_CONFIG_auth_providers_google_development_appOrigin: {{ .Values.appConfig.auth.providers.google.development.appOrigin | quote | quote }}
-  APP_CONFIG_auth_providers_gitlab_development_appOrigin: {{ .Values.appConfig.auth.providers.gitlab.development.appOrigin | quote | quote }}
-  APP_CONFIG_auth_providers_okta_development_appOrigin: {{ .Values.appConfig.auth.providers.okta.development.appOrigin | quote | quote }}
-  APP_CONFIG_auth_providers_oauth2_development_appOrigin: {{ .Values.appConfig.auth.providers.oauth2.development.appOrigin | quote | quote }}
+  {{- range $providerName, $providerConfig := .Values.appConfig.auth.providers }}
+  APP_CONFIG_auth_providers_{{$providerName}}_development_appOrigin: {{ $providerConfig.development.appOrigin | quote | quote }}
+  {{- end}}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -47,8 +45,8 @@ metadata:
 data:
   # Need to duplicate some values because lighthouse expects different environment variable
   # names than Backstage does.
-  PGDATABASE: {{ .Values.appConfig.backend.postgresDatabase }}
-  PGUSER: {{ .Values.appConfig.backend.postgresUser }}
-  PGPORT: {{ .Values.appConfig.backend.postgresPort | quote }}
-  PGHOST: {{ .Values.appConfig.backend.postgresHost }}
-  PGPATH_TO_CA: {{ .Values.appConfig.backend.postgresPathToCa }}
+  PGDATABASE: {{ .Values.appConfig.backend.database.connection.database }}
+  PGUSER: {{ .Values.appConfig.backend.database.connection.user }}
+  PGPORT: {{ .Values.appConfig.backend.database.connection.port | quote }}
+  PGHOST: {{ .Values.appConfig.backend.database.connection.host }}
+  PGPATH_TO_CA: {{ .Values.appConfig.backend.database.connection.pathToCa }}

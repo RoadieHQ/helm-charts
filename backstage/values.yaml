@@ -103,14 +103,17 @@ appConfig:
     listen: 0.0.0.0:7000
     cors:
       origin: https://demo.example.com
-    postgresUser:
-    postgresPort:
-    postgresDatabase:
-    postgresHost:
-    postgresPathToCa:
-    postgresPassword:
+    database:
+      client: pg
+      connection:
+        host:
+        user:
+        port:
+        password:
+        database:
+        ssl: true
   sentry:
-    organization: spotify
+    organization:
   techdocs:
     storageUrl:
 
@@ -122,71 +125,71 @@ appConfig:
   # auth.providers.github.development.appOrigin property.
   auth:
     providers:
-      google:
-        development:
-          appOrigin: "http://localhost:3000/"
-          secure: false
-          clientId:
-            $secret:
-              env: AUTH_GOOGLE_CLIENT_ID
-          clientSecret:
-            $secret:
-              env: AUTH_GOOGLE_CLIENT_SECRET
-      github:
-        development:
-          appOrigin: "http://localhost:3000/"
-          secure: false
-          clientId:
-            $secret:
-              env: AUTH_GITHUB_CLIENT_ID
-          clientSecret:
-            $secret:
-              env: AUTH_GITHUB_CLIENT_SECRET
-          enterpriseInstanceUrl: 
-            $secret:
-              env: AUTH_GITHUB_ENTERPRISE_INSTANCE_URL
-      gitlab:
-        development:
-          appOrigin: "http://localhost:3000/"
-          secure: false
-          clientId:
-            $secret:
-              env: AUTH_GITLAB_CLIENT_ID
-          clientSecret:
-            $secret:
-              env: AUTH_GITLAB_CLIENT_SECRET
-          audience:
-            $secret:
-              env: GITLAB_BASE_URL
-      okta:
-        development:
-          appOrigin: "http://localhost:3000/"
-          secure: false
-          clientId:
-            $secret:
-              env: AUTH_OKTA_CLIENT_ID
-          clientSecret:
-            $secret:
-              env: AUTH_OKTA_CLIENT_SECRET
-          audience:
-            $secret:
-              env: AUTH_OKTA_AUDIENCE
-      oauth2:
-        development:
-          appOrigin: "http://localhost:3000/"
-          secure: false
-          clientId:
-            $secret:
-              env: AUTH_OAUTH2_CLIENT_ID
-          clientSecret:
-            $secret:
-              env: AUTH_OAUTH2_CLIENT_SECRET
-          authorizationURL:
-            $secret:
-              env: AUTH_OAUTH2_AUTH_URL
-          tokenURL:
-            $secret:
-              env: AUTH_OAUTH2_TOKEN_URL
+#      google:
+#        development:
+#          appOrigin: "http://localhost:3000/"
+#          secure: false
+#          clientId:
+#            $secret:
+#              env: AUTH_GOOGLE_CLIENT_ID
+#          clientSecret:
+#            $secret:
+#              env: AUTH_GOOGLE_CLIENT_SECRET
+#      github:
+#        development:
+#          appOrigin: "http://localhost:3000/"
+#          secure: false
+#          clientId:
+#            $secret:
+#              env: AUTH_GITHUB_CLIENT_ID
+#          clientSecret:
+#            $secret:
+#              env: AUTH_GITHUB_CLIENT_SECRET
+#          enterpriseInstanceUrl:
+#            $secret:
+#              env: AUTH_GITHUB_ENTERPRISE_INSTANCE_URL
+#      gitlab:
+#        development:
+#          appOrigin: "http://localhost:3000/"
+#          secure: false
+#          clientId:
+#            $secret:
+#              env: AUTH_GITLAB_CLIENT_ID
+#          clientSecret:
+#            $secret:
+#              env: AUTH_GITLAB_CLIENT_SECRET
+#          audience:
+#            $secret:
+#              env: GITLAB_BASE_URL
+#      okta:
+#        development:
+#          appOrigin: "http://localhost:3000/"
+#          secure: false
+#          clientId:
+#            $secret:
+#              env: AUTH_OKTA_CLIENT_ID
+#          clientSecret:
+#            $secret:
+#              env: AUTH_OKTA_CLIENT_SECRET
+#          audience:
+#            $secret:
+#              env: AUTH_OKTA_AUDIENCE
+#      oauth2:
+#        development:
+#          appOrigin: "http://localhost:3000/"
+#          secure: false
+#          clientId:
+#            $secret:
+#              env: AUTH_OAUTH2_CLIENT_ID
+#          clientSecret:
+#            $secret:
+#              env: AUTH_OAUTH2_CLIENT_SECRET
+#          authorizationURL:
+#            $secret:
+#              env: AUTH_OAUTH2_AUTH_URL
+#          tokenURL:
+#            $secret:
+#              env: AUTH_OAUTH2_TOKEN_URL
 
 auth:
   google:

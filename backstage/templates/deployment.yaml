@@ -62,11 +62,6 @@ spec:
             - containerPort: {{ .Values.backend.containerPort }}
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
-
-          volumeMounts:
-            - name: ca-pemstore
-              mountPath: {{ .Values.pg.caVolumeMountDir }}
-
           envFrom:
             - configMapRef:
                 name: backstage-app
@@ -76,11 +71,12 @@ spec:
                 name: backstage-backend
             - secretRef:
                 name: backstage-pg
-
-      volumes:
-        - name: ca-pemstore
-          configMap:
-            name: ca-pemstore
+          env:
+            - name: APP_CONFIG_backend_database_connection_ssl_ca
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.pg.caConfigMapName | default "ca-pemstore" }}
+                  key: {{ .Values.pg.caConfigMapKey }}
 {{- if .Values.lighthouse.enabled }}
 ---
 apiVersion: apps/v1
@@ -125,7 +121,6 @@ spec:
               value: {{ .Values.lighthouse.containerPort | quote }}
             - name: LAS_CORS
               value: "true"
-
           volumeMounts:
             - name: ca-pemstore
               mountPath: {{ .Values.pg.caVolumeMountDir }}

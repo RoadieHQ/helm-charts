@@ -1,0 +1,160 @@
+# Default values for backstage.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+frontend:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: roadiehq/backstage-k8s-demo-frontend
+    tag: dev
+    pullPolicy: Always
+  containerPort: 80
+  resources:
+    requests:
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+
+backend:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: roadiehq/backstage-k8s-demo-backend
+    tag: dev
+    pullPolicy: Always
+  containerPort: 7000
+  resources:
+    requests:
+      memory: 512Mi
+    limits:
+      memory: 1024Mi
+
+lighthouse:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: roadiehq/lighthouse-audit-service
+    tag: latest
+    pullPolicy: IfNotPresent
+  containerPort: 3003
+  resources:
+    requests:
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+
+gitops:
+  enabled: false
+  replicaCount: 1
+  image:
+    repository: chanwit/gitops-api
+    tag: latest
+    pullPolicy: IfNotPresent
+  containerPort: 8080
+  resources:
+    requests:
+      memory: 128Mi
+    limits:
+      memory: 256Mi
+
+nameOverride: ""
+fullnameOverride: ""
+
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+
+  hosts:
+    - host: demo.roadiehq.io
+      paths:
+        - service: frontend
+    - host: backend.demo.roadiehq.io
+      paths:
+        - service: backend
+  tls:
+    - secretName: backstage-tls
+      hosts:
+        - demo.roadiehq.io
+        - backend.demo.roadiehq.io
+
+pg:
+  # This must match the path provided to appConfig.backend.postgresPathToCa. For example, if
+  # postgresPathToCa is /etc/config/my-ca.crt then pg.caVolumeMountDir must be /etc/config.
+  caVolumeMountDir: /etc/config
+  # This config is unrelated to the above. The above is still relevant for the lighthouse config only.
+  # This config map needs to be created as documented in README
+  caConfigMapName: ca-pemstore
+  caConfigMapKey: rds-ca-2019-root.pem
+
+appConfig:
+  app:
+    baseUrl: https://demo.roadiehq.io
+    title: Backstage
+  backend:
+    baseUrl: https://backend.demo.roadiehq.io
+    lighthouseHostname: https://lighthouse.demo.roadiehq.io
+    gitOpsHostname: https://gitops.example.com
+    listen: 0.0.0.0:7000
+    cors:
+      origin: https://demo.roadiehq.io
+    database:
+      client: pg
+      connection:
+        host: backstage-demo-2-db.c5o5g9cyus7c.eu-west-1.rds.amazonaws.com
+        user: postgres
+        port: 5400
+        password:
+        database: backstage
+        # Unfortunately, I don't see how this (below) will work with backstage currently.
+        # afaik we'll need to set ssl { ca: <pem> } with the
+        # actual pem content, not a path... this is from node "tls" module ConnectionOptions
+        pathToCa: /etc/config/rds-ca-2019-root.pem
+  sentry:
+    organization: roadie
+  techdocs:
+    storageUrl:
+
+  # Auth config has recently moved into the app config file in upstream Backstage. However,
+  # most of this config simply mandates that items like the client id and client secret should
+  # be picked up from the environment variables named below. Those environment variables are
+  # set in this helm controlled environment by the 'auth' configuration below this section.
+  # Thus, the only key in this config which directly controls an app config is the
+  # auth.providers.github.development.appOrigin property.
+  auth:
+    providers:
+      google:
+        development:
+          appOrigin: "http://localhost:3000/"
+          secure: false
+          clientId:
+            $secret:
+              env: AUTH_GOOGLE_CLIENT_ID
+          clientSecret:
+            $secret:
+              env: AUTH_GOOGLE_CLIENT_SECRET
+      github:
+        development:
+          appOrigin: "http://localhost:3000/"
+          secure: false
+          clientId:
+            $secret:
+              env: AUTH_GITHUB_CLIENT_ID
+          clientSecret:
+            $secret:
+              env: AUTH_GITHUB_CLIENT_SECRET
+          enterpriseInstanceUrl:
+            $secret:
+              env: AUTH_GITHUB_ENTERPRISE_INSTANCE_URL
+
+auth:
+  google:
+    clientId:
+    clientSecret:
+  github:
+    clientId:
+    clientSecret:
+
+issuer:
+  email: iain@roadie.io
