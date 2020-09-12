@@ -18,15 +18,30 @@ with Backstage with some environment variables.
 To do this, set the following Helm values:
 
 ```yaml
+lighthouse:
+  database:
+    connection:
+      port:
+      host:
+      user:
+      password:
+      database:
+  pathToDatabaseCa:
+
 appConfig:
   backend:
-    postgresUser:
-    postgresPort:
-    postgresDatabase:
-    postgresHost: 
-    postgresPathToCa:
-    postgresPassword:
+    database:
+      client: pg
+      connection:
+        # Do not specifiy a database. Database names are inferred from plugin names.
+        host:
+        user:
+        port:
+        password:
+        ssl:
+          rejectUnauthorized: false
 
+# This is only used by lighthouse.
 pg:
   caVolumeMountDir:
 ```
@@ -55,14 +70,28 @@ Download the CA file from DigitalOcean.
 Create a `values.yaml` file which we will use to override some default Helm values.
 
 ```yaml
+lighthouse:
+  database:
+    connection:
+      port: 25061
+      host: private-db-postgresql-lon1-18737-do-user-9374938-0.a.db.ondigitalocean.com
+      user: doadmin
+      password:  "<your password>"
+      database: lighthouse_audit_service
+  pathToDatabaseCa: /etc/config/ca-certificate.crt
+
 appConfig:
-  backend: 
-    postgresUser: doadmin
-    postgresPort: 25061
-    postgresDatabase: defaultdb
-    postgresHost: private-db-postgresql-lon1-18737-do-user-9374938-0.a.db.ondigitalocean.com
-    postgresPathToCa: /etc/config/ca-certificate.crt
-    postgresPassword: "<your password>"
+  backend:
+    database:
+      client: pg
+      connection:
+        # Do not specifiy a database. Database names are inferred from plugin names.
+        host: private-db-postgresql-lon1-18737-do-user-9374938-0.a.db.ondigitalocean.com
+        user: doadmin
+        port: 25061
+        password: "<your password>"
+        ssl:
+          rejectUnauthorized: false
 
 pg:
   # This must match the path provided to appConfig.backend.postgresPathToCa. For example, if

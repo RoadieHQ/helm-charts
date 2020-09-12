@@ -43,7 +43,16 @@ lighthouse:
       memory: 128Mi
     limits:
       memory: 256Mi
-
+  database:
+    connection:
+      port:
+      host:
+      user:
+      password:
+      database: lighthouse_audit_service
+  # TODO: Next this under the configs above?
+  pathToDatabaseCa:
+      
 gitops:
   enabled: false
   replicaCount: 1
@@ -103,12 +112,15 @@ appConfig:
     listen: 0.0.0.0:7000
     cors:
       origin: https://demo.example.com
-    postgresUser:
-    postgresPort:
-    postgresDatabase:
-    postgresHost:
-    postgresPathToCa:
-    postgresPassword:
+    database:
+      client: pg
+      connection:
+        host:
+        user:
+        port:
+        password:
+        ssl:
+          rejectUnauthorized: false
   sentry:
     organization: spotify
   techdocs:
@@ -187,6 +199,28 @@ appConfig:
           tokenURL:
             $secret:
               env: AUTH_OAUTH2_TOKEN_URL
+      auth0:
+        development:
+          clientId:
+            $secret:
+              env: AUTH_AUTH0_CLIENT_ID
+          clientSecret:
+            $secret:
+              env: AUTH_AUTH0_CLIENT_SECRET
+          domain:
+            $secret:
+              env: AUTH_AUTH0_DOMAIN
+      microsoft:
+        development:
+          clientId:
+            $secret:
+              env: AUTH_MICROSOFT_CLIENT_ID
+          clientSecret:
+            $secret:
+              env: AUTH_MICROSOFT_CLIENT_SECRET
+          tenantId:
+            $secret:
+              env: AUTH_MICROSOFT_TENANT_ID
 
 auth:
   google:
@@ -208,6 +242,14 @@ auth:
     clientSecret: b
     authUrl: b
     tokenUrl: b
+  auth0:
+    clientId: b
+    clientSecret: b
+    domain: b
+  microsoft:
+    clientId: f
+    clientSecret: f
+    tenantId: f
   sentryToken: e
   rollbarAccountToken: f
 

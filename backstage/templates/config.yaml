@@ -10,11 +10,11 @@ data:
   APP_CONFIG_backend_gitOpsHostname: {{ .Values.appConfig.backend.gitOpsHostname | quote | quote }}
   APP_CONFIG_backend_listen: {{ .Values.appConfig.backend.listen | quote | quote }}
   APP_CONFIG_backend_cors_origin: {{ .Values.appConfig.backend.cors.origin | quote | quote }}
-  APP_CONFIG_backend_postgresUser: {{ .Values.appConfig.backend.postgresUser | quote | quote }}
-  APP_CONFIG_backend_postgresPort: {{ .Values.appConfig.backend.postgresPort | quote }}
-  APP_CONFIG_backend_postgresDatabase: {{ .Values.appConfig.backend.postgresDatabase | quote | quote }}
-  APP_CONFIG_backend_postgresHost: {{ .Values.appConfig.backend.postgresHost | quote | quote }}
-  APP_CONFIG_backend_postgresPathToCa: {{ .Values.appConfig.backend.postgresPathToCa | quote | quote }}
+  APP_CONFIG_backend_database_client: {{ .Values.appConfig.backend.database.client | quote | quote }}
+  APP_CONFIG_backend_database_connection_port: {{ .Values.appConfig.backend.database.connection.port | quote }}
+  APP_CONFIG_backend_database_connection_host: {{ .Values.appConfig.backend.database.connection.host | quote | quote }}
+  APP_CONFIG_backend_database_connection_user: {{ .Values.appConfig.backend.database.connection.user | quote | quote }}
+  APP_CONFIG_backend_database_connection_ssl_rejectUnauthorized: {{ .Values.appConfig.backend.database.connection.ssl.rejectUnauthorized | quote }}
   APP_CONFIG_sentry_organization: {{ .Values.appConfig.sentry.organization | quote | quote }}
   APP_CONFIG_techdocs_storageUrl: {{ .Values.appConfig.techdocs.storageUrl | quote | quote }}
   APP_CONFIG_auth_providers_github_development_appOrigin: {{ .Values.appConfig.auth.providers.github.development.appOrigin | quote | quote }}
@@ -39,16 +39,19 @@ data:
   AUTH_OAUTH2_CLIENT_ID: {{ .Values.auth.oauth2.clientId }}
   AUTH_OAUTH2_AUTH_URL: {{ .Values.auth.oauth2.authUrl }}
   AUTH_OAUTH2_TOKEN_URL: {{ .Values.auth.oauth2.tokenUrl }}
+  AUTH_AUTH0_CLIENT_ID: {{ .Values.auth.auth0.clientId }}
+  AUTH_AUTH0_DOMAIN: {{ .Values.auth.auth0.domain }}
+  AUTH_MICROSOFT_CLIENT_ID: {{ .Values.auth.microsoft.clientId }}
+  AUTH_MICROSOFT_TENANT_ID: {{ .Values.auth.microsoft.tenantId }}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  # TODO: This is only used by lighthouse and needs a name change.
   name: backstage-pg
 data:
-  # Need to duplicate some values because lighthouse expects different environment variable
-  # names than Backstage does.
-  PGDATABASE: {{ .Values.appConfig.backend.postgresDatabase }}
-  PGUSER: {{ .Values.appConfig.backend.postgresUser }}
-  PGPORT: {{ .Values.appConfig.backend.postgresPort | quote }}
-  PGHOST: {{ .Values.appConfig.backend.postgresHost }}
-  PGPATH_TO_CA: {{ .Values.appConfig.backend.postgresPathToCa }}
+  PGDATABASE: {{ .Values.lighthouse.database.connection.database }}
+  PGUSER: {{ .Values.lighthouse.database.connection.user }}
+  PGPORT: {{ .Values.lighthouse.database.connection.port | quote }}
+  PGHOST: {{ .Values.lighthouse.database.connection.host }}
+  PGPATH_TO_CA: {{ .Values.lighthouse.pathToDatabaseCa }}
