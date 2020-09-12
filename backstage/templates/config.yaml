@@ -22,6 +22,7 @@ data:
   APP_CONFIG_auth_providers_gitlab_development_appOrigin: {{ .Values.appConfig.auth.providers.gitlab.development.appOrigin | quote | quote }}
   APP_CONFIG_auth_providers_okta_development_appOrigin: {{ .Values.appConfig.auth.providers.okta.development.appOrigin | quote | quote }}
   APP_CONFIG_auth_providers_oauth2_development_appOrigin: {{ .Values.appConfig.auth.providers.oauth2.development.appOrigin | quote | quote }}
+  APP_CONFIG_lighthouse_baseUrl: {{ .Values.appConfig.lighthouse.baseUrl | quote | quote }}
 ---
 apiVersion: v1
 kind: ConfigMap
