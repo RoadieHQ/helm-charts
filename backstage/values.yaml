@@ -52,20 +52,6 @@ lighthouse:
       database: lighthouse_audit_service
   # TODO: Next this under the configs above?
   pathToDatabaseCa:
-      
-gitops:
-  enabled: false
-  replicaCount: 1
-  image:
-    repository: chanwit/gitops-api
-    tag: latest
-    pullPolicy: IfNotPresent
-  containerPort: 8080
-  resources:
-    requests:
-      memory: 128Mi
-    limits:
-      memory: 256Mi
 
 nameOverride: ""
 fullnameOverride: ""
@@ -85,16 +71,12 @@ ingress:
     - host: backend.example.com
       paths:
         - service: backend
-    - host: gitops.example.com
-      paths:
-        - service: gitops-api
   tls:
     - secretName: backstage-tls
       hosts:
         - lighthouse.example.com
         - demo.example.com
         - backend.example.com
-        - gitops.example.com
 
 pg:
   # This must match the path provided to appConfig.backend.postgresPathToCa. For example, if
