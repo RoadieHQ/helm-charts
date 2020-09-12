@@ -15,6 +15,7 @@ data:
   APP_CONFIG_backend_database_connection_host: {{ .Values.appConfig.backend.database.connection.host | quote | quote }}
   APP_CONFIG_backend_database_connection_user: {{ .Values.appConfig.backend.database.connection.user | quote | quote }}
   APP_CONFIG_backend_database_connection_ssl_rejectUnauthorized: {{ .Values.appConfig.backend.database.connection.ssl.rejectUnauthorized | quote }}
+  APP_CONFIG_backend_database_connection_ssl_ca: {{ .Values.appConfig.backend.database.connection.ssl.ca | quote | quote }}
   APP_CONFIG_sentry_organization: {{ .Values.appConfig.sentry.organization | quote | quote }}
   APP_CONFIG_techdocs_storageUrl: {{ .Values.appConfig.techdocs.storageUrl | quote | quote }}
   APP_CONFIG_auth_providers_github_development_appOrigin: {{ .Values.appConfig.auth.providers.github.development.appOrigin | quote | quote }}
@@ -48,8 +49,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  # TODO: This is only used by lighthouse and needs a name change.
-  name: backstage-pg
+  name: backstage-lighthouse
 data:
   PGDATABASE: {{ .Values.lighthouse.database.connection.database }}
   PGUSER: {{ .Values.lighthouse.database.connection.user }}
