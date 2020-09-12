@@ -53,22 +53,3 @@ spec:
 
   type: ClusterIP
 {{- end }}
-
-{{- if .Values.gitops.enabled }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ include "backstage.fullname" . }}-gitops-api
-
-spec:
-  ports:
-    - port: 80
-      targetPort: {{ .Values.gitops.containerPort }}
-
-  selector:
-    app: backstage
-    component: gitops-api
-
-  type: ClusterIP
-{{- end }}
