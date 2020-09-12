@@ -116,7 +116,7 @@ spec:
 
           envFrom:
             - configMapRef:
-                name: backstage-pg
+                name: backstage-lighthouse
             - secretRef:
                 name: backstage-pg
 

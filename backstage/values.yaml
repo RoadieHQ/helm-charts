@@ -119,6 +119,7 @@ appConfig:
         password:
         ssl:
           rejectUnauthorized: false
+          ca:
   sentry:
     organization: spotify
   techdocs:
