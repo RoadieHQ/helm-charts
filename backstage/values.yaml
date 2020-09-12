@@ -107,8 +107,6 @@ appConfig:
     title: Backstage
   backend:
     baseUrl: https://backend.example.com
-    lighthouseHostname: https://lighthouse.example.com
-    gitOpsHostname: https://gitops.example.com
     listen: 0.0.0.0:7000
     cors:
       origin: https://demo.example.com
@@ -125,6 +123,8 @@ appConfig:
     organization: spotify
   techdocs:
     storageUrl:
+  lighthouse:
+    baseUrl: https://lighthouse.example.com
 
   # Auth config has recently moved into the app config file in upstream Backstage. However,
   # most of this config simply mandates that items like the client id and client secret should
