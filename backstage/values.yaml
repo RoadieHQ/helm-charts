@@ -108,6 +108,8 @@ appConfig:
     storageUrl:
   lighthouse:
     baseUrl: https://lighthouse.example.com
+  rollbar:
+    organization: roadie
 
   # Auth config has recently moved into the app config file in upstream Backstage. However,
   # most of this config simply mandates that items like the client id and client secret should
