@@ -17,6 +17,7 @@ data:
   APP_CONFIG_backend_database_client: {{ .Values.appConfig.backend.database.client | quote | quote }}
   APP_CONFIG_sentry_organization: {{ .Values.appConfig.sentry.organization | quote | quote }}
   APP_CONFIG_techdocs_storageUrl: {{ .Values.appConfig.techdocs.storageUrl | quote | quote }}
+  APP_CONFIG_techdocs_requestUrl: {{ .Values.appConfig.techdocs.requestUrl | quote | quote }}
   {{- range $providerName, $providerConfig := .Values.appConfig.auth.providers }}
   APP_CONFIG_auth_providers_{{$providerName}}_development_appOrigin: {{ $providerConfig.development.appOrigin | quote | quote }}
   {{- end}}
@@ -37,6 +38,9 @@ data:
   AUTH_OAUTH2_CLIENT_ID: {{ .Values.auth.oauth2.clientId }}
   AUTH_OAUTH2_AUTH_URL: {{ .Values.auth.oauth2.authUrl }}
   AUTH_OAUTH2_TOKEN_URL: {{ .Values.auth.oauth2.tokenUrl }}
+  {{- if .Values.GITHUB_ACCESS_TOKEN}}
+  GITHUB_ACCESS_TOKEN: {{ .Values.GITHUB_ACCESS_TOKEN }}
+  {{- end }}
 ---
 apiVersion: v1
 kind: ConfigMap

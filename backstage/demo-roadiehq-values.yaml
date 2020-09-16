@@ -114,7 +114,8 @@ appConfig:
   sentry:
     organization: roadie
   techdocs:
-    storageUrl:
+    storageUrl: https://backend.demo.roadiehq.io/techdocs/static/docs
+    requestUrl: https://backend.demo.roadiehq.io/techdocs/docs
 
   # Auth config has recently moved into the app config file in upstream Backstage. However,
   # most of this config simply mandates that items like the client id and client secret should
@@ -158,3 +159,5 @@ auth:
 
 issuer:
   email: iain@roadie.io
+
+GITHUB_ACCESS_TOKEN:
