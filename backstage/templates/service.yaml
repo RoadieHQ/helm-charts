@@ -40,7 +40,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "backstage.fullname" . }}-lighthouse
+  name: {{ include "lighthouse.serviceName" . }}
 
 spec:
   ports:

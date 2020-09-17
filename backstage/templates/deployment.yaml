@@ -63,24 +63,27 @@ spec:
           resources:
             {{- toYaml .Values.backend.resources | nindent 12 }}
 
-          volumeMounts:
-            - name: ca-pemstore
-              mountPath: {{ .Values.pg.caVolumeMountDir }}
-
           envFrom:
             - configMapRef:
                 name: backstage-app
             - configMapRef:
                 name: backstage-auth
             - secretRef:
-                name: backstage-backend
-            - secretRef:
-                name: backstage-pg
+                name: {{ include "backstage.fullname" . }}-backend
+          env:
+            - name: APP_CONFIG_backend_postgresPassword
+              valueFrom:
+                secretKeyRef:
+                  name: backstage-postgresql
+                  key: postgresql-password
+          volumeMounts:
+            - name: ca-pemstore
+              mountPath: {{ .Values.global.caVolumeMountDir }}
 
       volumes:
         - name: ca-pemstore
-          configMap:
-            name: ca-pemstore
+          secret:
+            secretName: {{ .Values.postgresql.fullnameOverride }}-ca
 {{- if .Values.lighthouse.enabled }}
 ---
 apiVersion: apps/v1
@@ -117,21 +120,24 @@ spec:
           envFrom:
             - configMapRef:
                 name: backstage-lighthouse
-            - secretRef:
-                name: backstage-pg
 
           env:
             - name: LAS_PORT
               value: {{ .Values.lighthouse.containerPort | quote }}
             - name: LAS_CORS
               value: "true"
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: backstage-postgresql
+                  key: postgresql-password
 
           volumeMounts:
             - name: ca-pemstore
-              mountPath: {{ .Values.pg.caVolumeMountDir }}
+              mountPath: {{ .Values.global.caVolumeMountDir }}
 
       volumes:
         - name: ca-pemstore
-          configMap:
-            name: ca-pemstore
+          secret:
+            secretName: {{ .Values.postgresql.fullnameOverride }}-ca
 {{- end }}

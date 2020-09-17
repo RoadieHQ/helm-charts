@@ -78,3 +78,69 @@ Create the name of the service account to use for the backend
     {{ default "default" .Values.backend.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Path to the CA certificate file in the backend
+*/}}
+{{- define "backstage.backend.postgresCaFilename" -}}
+{{ .Values.global.caVolumeMountDir }}/tls.crt
+{{- end -}}
+{{/*
+
+Path to the CA certificate file in lighthouse
+*/}}
+{{- define "backstage.lighthouse.postgresCaFilename" -}}
+{{ .Values.global.caVolumeMountDir }}/tls.crt
+{{- end -}}
+
+{{/*
+Generate ca for postgresql
+*/}}
+{{- define "backstage.postgresql.generateCA" -}}
+{{- $ca := .ca | default (genCA .Values.postgresql.fullnameOverride 365) -}}
+{{- $_ := set . "ca" $ca -}}
+tls.crt: {{ $ca.Cert | b64enc }}
+tls.key: {{ $ca.Key | b64enc }}
+{{- end -}}
+
+{{/*
+Generate certificates for postgresql
+*/}}
+{{- define "generateCerts" -}}
+{{- $altNames := list ( printf "%s.%s" ( .Values.postgresql.fullnameOverride ) .Release.Namespace ) ( printf "%s.%s.svc" ( .Values.postgresql.fullnameOverride ) .Release.Namespace ) -}}
+{{- $ca := .ca | default (genCA .Values.postgresql.fullnameOverride 365) -}}
+{{- $_ := set . "ca" $ca -}}
+{{- $cert := genSignedCert ( .Values.postgresql.fullnameOverride ) nil $altNames 365 $ca -}}
+tls.crt: {{ $cert.Cert | b64enc }}
+tls.key: {{ $cert.Key | b64enc }}
+{{- end -}}
+
+{{/*
+Generate a password for the postgres user used for the connections from the backend and lighthouse
+*/}}
+{{- define "postgresql.generateUserPassword" -}}
+{{- $pgPassword := .pgPassword | default ( randAlphaNum 12 ) -}}
+{{- $_ := set . "pgPassword" $pgPassword -}}
+{{ $pgPassword}}
+{{- end -}}
+
+{{/*
+Name of the backend service
+*/}}
+{{- define "backend.serviceName" -}}
+{{ include "backstage.fullname" . }}-backend
+{{- end -}}
+
+{{/*
+Name of the frontend service
+*/}}
+{{- define "frontend.serviceName" -}}
+{{ include "backstage.fullname" . }}-frontend
+{{- end -}}
+
+{{/*
+Name of the lighthouse backend service
+*/}}
+{{- define "lighthouse.serviceName" -}}
+{{ include "backstage.fullname" . }}-lighthouse
+{{- end -}}

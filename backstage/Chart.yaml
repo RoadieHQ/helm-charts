@@ -24,6 +24,12 @@ sources:
   - https://github.com/spotify/backstage
   - https://github.com/spotify/lighthouse-audit-service
 
+dependencies:
+  - name: postgresql
+    condition: postgresql.enabled
+    version: 9.4.1
+    repository: https://charts.bitnami.com/bitnami
+
 maintainers:
   - name: David Tuite
     email: david@roadie.io
