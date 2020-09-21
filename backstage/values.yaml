@@ -240,6 +240,9 @@ auth:
   rollbarAccountToken: f
   # This is a 'Personal Access Token'
   circleciAuthToken: r
+  # Used by the scaffolder to create GitHub repos. Must have 'repo' scope.
+  githubAccessToken: g
+  gitlabAccessToken: g
 
 issuer:
   email: hello@example.com
