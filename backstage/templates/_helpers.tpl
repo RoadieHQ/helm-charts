@@ -172,6 +172,99 @@ Name of the lighthouse backend service
 Name of the postgresql service
 */}}
 {{- define "postgresql.serviceName" -}}
-{{ .Values.postgresql.fullnameOverride }}
+{{- include "postgresql.fullname" . }}
 {{- end -}}
 
+{{/*
+Postgres host for lighthouse
+*/}}
+{{- define "lighthouse.postgresql.host" -}}
+{{- if .Values.postgresql.enabled }}
+{{- .Values.postgresql.service.port }}
+{{- else -}}
+{{- required "A valid .Values.lighthouse.database.connection.host is required when postgresql is not enabled" .Values.lighthouse.database.connection.host -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Postgres host for the backend
+*/}}
+{{- define "backend.postgresql.host" -}}
+{{- if .Values.postgresql.enabled }}
+{{- include "postgresql.serviceName" . }}
+{{- else -}}
+{{- required "A valid .Values.appConfig.backend.database.connection.host is required when postgresql is not enabled" .Values.appConfig.backend.database.connection.host -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Postgres port for the backend
+*/}}
+{{- define "backend.postgresql.port" -}}
+{{- if .Values.postgresql.enabled }}
+{{- .Values.postgresql.service.port }}
+{{- else if .Values.appConfig.backend.database.connection.port -}}
+{{- .Values.appConfig.backend.database.connection.port }}
+{{ else }}
+5432
+{{- end -}}
+{{- end -}}
+
+{{/*
+Postgres port for lighthouse
+*/}}
+{{- define "lighthouse.postgresql.port" -}}
+{{- if .Values.postgresql.enabled }}
+{{- .Values.postgresql.service.port }}
+{{- else if .Values.lighthouse.database.connection.port -}}
+{{- .Values.lighthouse.database.connection.port }}
+{{- else -}}
+5432
+{{- end -}}
+{{- end -}}
+
+{{/*
+Postgres user for backend
+*/}}
+{{- define "backend.postgresql.user" -}}
+{{- if .Values.postgresql.enabled }}
+{{- .Values.global.postgresql.postgresqlUsername }}
+{{- else -}}
+{{- required "A valid .Values.appConfig.backend.database.connection.user is required when postgresql is not enabled" .Values.appConfig.backend.database.connection.user -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Postgres user for lighthouse
+*/}}
+{{- define "lighthouse.postgresql.user" -}}
+{{- if .Values.postgresql.enabled }}
+{{- .Values.global.postgresql.postgresqlUsername }}
+{{- else -}}
+{{- required "A valid .Values.lighthouse.database.connection.user is required when postgresql is not enabled" .Values.lighthouse.database.connection.user -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Postgres password secret for backend
+*/}}
+{{- define "backend.postgresql.passwordSecret" -}}
+{{- if .Values.postgresql.enabled }}
+{{- template "postgresql.fullname" . }}
+{{- else -}}
+{{ $secretName := (printf "%s-backend-postgres" (include "backstage.fullname" . )) }}
+{{- required "A valid .Values.appConfig.backend.database.connection.password is required when postgresql is not enabled" $secretName -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Postgres password for lighthouse
+*/}}
+{{- define "lighthouse.postgresql.passwordSecret" -}}
+{{- if .Values.postgresql.enabled }}
+{{- template "postgresql.fullname" . }}
+{{- else -}}
+{{ $secretName := (printf "%s-lighthouse-postgres" (include "backstage.fullname" . )) }}
+{{- required "A valid .Values.lighthouse.database.connection.password is required when postgresql is not enabled" $secretName -}}
+{{- end -}}
+{{- end -}}

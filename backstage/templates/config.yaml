@@ -10,10 +10,10 @@ data:
   APP_CONFIG_backend_listen: {{ .Values.appConfig.backend.listen | quote | quote }}
   APP_CONFIG_backend_cors_origin: {{ .Values.appConfig.backend.cors.origin | quote | quote }}
   APP_CONFIG_backend_database_client: {{ .Values.appConfig.backend.database.client | quote | quote }}
-  APP_CONFIG_backend_database_connection_port: {{ .Values.postgresql.service.port | quote }}
-  APP_CONFIG_backend_database_connection_host: {{ .Values.postgresql.fullnameOverride | quote | quote }}
-  APP_CONFIG_backend_database_connection_user: {{ .Values.global.postgresql.postgresqlUsername | quote | quote }}
-  APP_CONFIG_backend_database_connection_database: {{ .Values.appConfig.backend.database.db | quote | quote }}
+  APP_CONFIG_backend_database_connection_port: {{ include "backend.postgresql.port" . | quote }}
+  APP_CONFIG_backend_database_connection_host: {{ include "backend.postgresql.host" . | quote | quote }}
+  APP_CONFIG_backend_database_connection_user: {{ include "backend.postgresql.user" . | quote | quote }}
+  APP_CONFIG_backend_database_connection_database: {{ .Values.appConfig.backend.database.connection.database | quote | quote }}
   APP_CONFIG_backend_database_connection_ssl_rejectUnauthorized: {{ .Values.appConfig.backend.database.connection.ssl.rejectUnauthorized | quote }}
   APP_CONFIG_backend_database_connection_ssl_ca: {{ include "backstage.backend.postgresCaFilename" . | quote | quote }}
   APP_CONFIG_sentry_organization: {{ .Values.appConfig.sentry.organization | quote | quote }}
@@ -52,10 +52,10 @@ kind: ConfigMap
 metadata:
   name: backstage-lighthouse
 data:
-  PGDATABASE: {{ .Values.lighthouse.database.connection.database }}
-  PGUSER: {{ .Values.global.postgresql.postgresqlUsername }}
-  PGPORT: {{ .Values.postgresql.service.port | quote }}
-  PGHOST: {{ .Values.postgresql.fullnameOverride }}
+  PGDATABASE: {{ .Values.lighthouse.database.connection.database | quote }}
+  PGUSER: {{ include "lighthouse.postgresql.user" . | quote }}
+  PGPORT: {{ include "lighthouse.postgresql.port" . | quote }}
+  PGHOST: {{ include "lighthouse.postgresql.host" . | quote }}
   PGPATH_TO_CA: {{ include "backstage.lighthouse.postgresCaFilename" . | quote }}
 {{- if .Values.postgresql.enabled }}
 ---

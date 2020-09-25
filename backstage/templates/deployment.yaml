@@ -74,7 +74,7 @@ spec:
             - name: APP_CONFIG_backend_postgresPassword
               valueFrom:
                 secretKeyRef:
-                  name: backstage-postgresql
+                  name: {{ include "backend.postgresql.passwordSecret" .}}
                   key: postgresql-password
           volumeMounts:
             - name: ca-pemstore
@@ -129,7 +129,7 @@ spec:
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: backstage-postgresql
+                  name: {{ include "lighthouse.postgresql.passwordSecret" . }}
                   key: postgresql-password
 
           volumeMounts:
