@@ -50,8 +50,7 @@ lighthouse:
       user:
       password:
       database: lighthouse_audit_service
-  # TODO: Next this under the configs above?
-  pathToDatabaseCa:
+    pathToDatabaseCa:
 
 nameOverride: ""
 fullnameOverride: ""
@@ -61,16 +60,6 @@ ingress:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 
-  hosts:
-    - host: lighthouse.example.com
-      paths:
-        - service: lighthouse
-    - host: demo.example.com
-      paths:
-        - service: frontend
-    - host: backend.example.com
-      paths:
-        - service: backend
   tls:
     - secretName: backstage-tls
       hosts:
@@ -79,17 +68,15 @@ ingress:
         - backend.example.com
 
 global:
-  caVolumeMountDir: /etc/config/postgresql
   postgresql:
     postgresqlUsername: backend-user
 
 postgresql:
   enabled: true
   fullnameOverride: backstage-postgresql
-#  postgresqlUsername: postgres
   tls:
     enabled: true
-    certificatesSecret: backstage-postgresql-ca
+    certificatesSecret: backstage-postgresql-certs
     certFilename: tls.crt
     certKeyFilename: tls.key
   volumePermissions:

@@ -78,12 +78,12 @@ spec:
                   key: postgresql-password
           volumeMounts:
             - name: ca-pemstore
-              mountPath: {{ .Values.global.caVolumeMountDir }}
+              mountPath: {{ include "backstage.backend.postgresCaDir" . }}
 
       volumes:
         - name: ca-pemstore
-          secret:
-            secretName: {{ .Values.postgresql.fullnameOverride }}-ca
+          configMap:
+            name: ca-pemstore
 {{- if .Values.lighthouse.enabled }}
 ---
 apiVersion: apps/v1
@@ -134,10 +134,10 @@ spec:
 
           volumeMounts:
             - name: ca-pemstore
-              mountPath: {{ .Values.global.caVolumeMountDir }}
+              mountPath: {{ include "backstage.lighthouse.postgresCaDir" . }}
 
       volumes:
         - name: ca-pemstore
-          secret:
-            secretName: {{ .Values.postgresql.fullnameOverride }}-ca
+          configMap:
+            name: ca-pemstore
 {{- end }}

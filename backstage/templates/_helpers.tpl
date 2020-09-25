@@ -83,15 +83,39 @@ Create the name of the service account to use for the backend
 Path to the CA certificate file in the backend
 */}}
 {{- define "backstage.backend.postgresCaFilename" -}}
-{{ .Values.global.caVolumeMountDir }}/tls.crt
+{{ include "backstage.backend.postgresCaDir" . }}/ca.crt
+{{- end -}}
+{{/*
+
+{{/*
+Directory path to the CA certificate file in the backend
+*/}}
+{{- define "backstage.backend.postgresCaDir" -}}
+{{- if .Values.appConfig.backend.database.connection.ssl.ca -}}
+    {{ .Values.appConfig.backend.database.connection.ssl.ca }}
+{{- else -}}
+/etc/postgresql
+{{- end -}}
 {{- end -}}
 {{/*
 
 Path to the CA certificate file in lighthouse
 */}}
 {{- define "backstage.lighthouse.postgresCaFilename" -}}
-{{ .Values.global.caVolumeMountDir }}/tls.crt
+{{ include "backstage.lighthouse.postgresCaDir" . }}/ca.crt
 {{- end -}}
+
+{{/*
+Directory path to the CA certificate file in lighthouse
+*/}}
+{{- define "backstage.lighthouse.postgresCaDir" -}}
+{{- if .Values.lighthouse.database.pathToDatabaseCa -}}
+    {{ .Values.lighthouse.database.pathToDatabaseCa }}
+{{- else -}}
+/etc/postgresql
+{{- end -}}
+{{- end -}}
+{{/*
 
 {{/*
 Generate ca for postgresql
@@ -99,15 +123,14 @@ Generate ca for postgresql
 {{- define "backstage.postgresql.generateCA" -}}
 {{- $ca := .ca | default (genCA .Values.postgresql.fullnameOverride 365) -}}
 {{- $_ := set . "ca" $ca -}}
-tls.crt: {{ $ca.Cert | b64enc }}
-tls.key: {{ $ca.Key | b64enc }}
+{{- $ca.Cert -}}
 {{- end -}}
 
 {{/*
 Generate certificates for postgresql
 */}}
 {{- define "generateCerts" -}}
-{{- $altNames := list ( printf "%s.%s" ( .Values.postgresql.fullnameOverride ) .Release.Namespace ) ( printf "%s.%s.svc" ( .Values.postgresql.fullnameOverride ) .Release.Namespace ) -}}
+{{- $altNames := list .Values.postgresql.fullnameOverride ( printf "%s.%s" ( .Values.postgresql.fullnameOverride ) .Release.Namespace ) ( printf "%s.%s.svc" ( .Values.postgresql.fullnameOverride ) .Release.Namespace ) -}}
 {{- $ca := .ca | default (genCA .Values.postgresql.fullnameOverride 365) -}}
 {{- $_ := set . "ca" $ca -}}
 {{- $cert := genSignedCert ( .Values.postgresql.fullnameOverride ) nil $altNames 365 $ca -}}
@@ -144,3 +167,11 @@ Name of the lighthouse backend service
 {{- define "lighthouse.serviceName" -}}
 {{ include "backstage.fullname" . }}-lighthouse
 {{- end -}}
+
+{{/*
+Name of the postgresql service
+*/}}
+{{- define "postgresql.serviceName" -}}
+{{ .Values.postgresql.fullnameOverride }}
+{{- end -}}
+

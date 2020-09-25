@@ -57,3 +57,19 @@ data:
   PGPORT: {{ .Values.postgresql.service.port | quote }}
   PGHOST: {{ .Values.postgresql.fullnameOverride }}
   PGPATH_TO_CA: {{ include "backstage.lighthouse.postgresCaFilename" . | quote }}
+{{- if .Values.postgresql.enabled }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ca-pemstore
+  labels:
+    app: {{ .Values.postgresql.fullnameOverride }}
+    release: {{ .Release.Name }}
+  annotations:
+    "helm.sh/hook": "pre-install"
+    "helm.sh/hook-delete-policy": "before-hook-creation"
+data:
+  ca.crt: |
+{{ include "backstage.postgresql.generateCA" . | indent 4}}
+{{- end }}
