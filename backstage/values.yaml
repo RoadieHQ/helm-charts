@@ -70,6 +70,8 @@ ingress:
 global:
   postgresql:
     postgresqlUsername: backend-user
+    caFilename: ca.crt
+
 
 postgresql:
   enabled: true

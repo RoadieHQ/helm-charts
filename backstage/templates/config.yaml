@@ -70,6 +70,6 @@ metadata:
     "helm.sh/hook": "pre-install"
     "helm.sh/hook-delete-policy": "before-hook-creation"
 data:
-  ca.crt: |
+  {{ .Values.global.postgresql.caFilename }}: |
 {{ include "backstage.postgresql.generateCA" . | indent 4}}
 {{- end }}

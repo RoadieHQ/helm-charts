@@ -83,7 +83,7 @@ Create the name of the service account to use for the backend
 Path to the CA certificate file in the backend
 */}}
 {{- define "backstage.backend.postgresCaFilename" -}}
-{{ include "backstage.backend.postgresCaDir" . }}/ca.crt
+{{ include "backstage.backend.postgresCaDir" . }}/{{- required "The name for the CA certificate file for postgresql is required" .Values.global.postgresql.caFilename }}
 {{- end -}}
 {{/*
 
@@ -102,7 +102,7 @@ Directory path to the CA certificate file in the backend
 Path to the CA certificate file in lighthouse
 */}}
 {{- define "backstage.lighthouse.postgresCaFilename" -}}
-{{ include "backstage.lighthouse.postgresCaDir" . }}/ca.crt
+{{ include "backstage.lighthouse.postgresCaDir" . }}/{{- required "The name for the CA certificate file for postgresql is required" .Values.global.postgresql.caFilename }}
 {{- end -}}
 
 {{/*
