@@ -64,7 +64,7 @@ kind: ConfigMap
 metadata:
   name: ca-pemstore
   labels:
-    app: {{ .Values.postgresql.fullnameOverride }}
+    app: {{ include "backstage.postgresql.fullname" . }}
     release: {{ .Release.Name }}
   annotations:
     "helm.sh/hook": "pre-install"

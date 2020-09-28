@@ -58,6 +58,15 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
+Name for postgresql dependency
+See https://github.com/helm/helm/issues/3920#issuecomment-686913512
+*/}}
+{{- define "backstage.postgresql.fullname" -}}
+{{ printf "%s-%s" .Release.Name .Values.postgresql.nameOverride }}
+{{- end -}}
+
+
+{{/*
 Create the name of the service account to use for the app
 */}}
 {{- define "backstage.app.serviceAccountName" -}}
@@ -121,7 +130,7 @@ Directory path to the CA certificate file in lighthouse
 Generate ca for postgresql
 */}}
 {{- define "backstage.postgresql.generateCA" -}}
-{{- $ca := .ca | default (genCA .Values.postgresql.fullnameOverride 365) -}}
+{{- $ca := .ca | default (genCA (include "backstage.postgresql.fullname" .) 365) -}}
 {{- $_ := set . "ca" $ca -}}
 {{- $ca.Cert -}}
 {{- end -}}
@@ -130,10 +139,11 @@ Generate ca for postgresql
 Generate certificates for postgresql
 */}}
 {{- define "generateCerts" -}}
-{{- $altNames := list .Values.postgresql.fullnameOverride ( printf "%s.%s" ( .Values.postgresql.fullnameOverride ) .Release.Namespace ) ( printf "%s.%s.svc" ( .Values.postgresql.fullnameOverride ) .Release.Namespace ) -}}
-{{- $ca := .ca | default (genCA .Values.postgresql.fullnameOverride 365) -}}
+{{- $postgresName := (include "backstage.postgresql.fullname" .) }}
+{{- $altNames := list $postgresName ( printf "%s.%s" $postgresName .Release.Namespace ) ( printf "%s.%s.svc" ( $postgresName ) .Release.Namespace ) -}}
+{{- $ca := .ca | default (genCA (include "backstage.postgresql.fullname" .) 365) -}}
 {{- $_ := set . "ca" $ca -}}
-{{- $cert := genSignedCert ( .Values.postgresql.fullnameOverride ) nil $altNames 365 $ca -}}
+{{- $cert := genSignedCert ( $postgresName ) nil $altNames 365 $ca -}}
 tls.crt: {{ $cert.Cert | b64enc }}
 tls.key: {{ $cert.Key | b64enc }}
 {{- end -}}
@@ -172,7 +182,7 @@ Name of the lighthouse backend service
 Name of the postgresql service
 */}}
 {{- define "postgresql.serviceName" -}}
-{{- include "postgresql.fullname" . }}
+{{- include "backstage.postgresql.fullname" . }}
 {{- end -}}
 
 {{/*
@@ -250,7 +260,7 @@ Postgres password secret for backend
 */}}
 {{- define "backend.postgresql.passwordSecret" -}}
 {{- if .Values.postgresql.enabled }}
-{{- template "postgresql.fullname" . }}
+{{- template "backstage.postgresql.fullname" . }}
 {{- else -}}
 {{ $secretName := (printf "%s-backend-postgres" (include "backstage.fullname" . )) }}
 {{- required "A valid .Values.appConfig.backend.database.connection.password is required when postgresql is not enabled" $secretName -}}
@@ -262,7 +272,7 @@ Postgres password for lighthouse
 */}}
 {{- define "lighthouse.postgresql.passwordSecret" -}}
 {{- if .Values.postgresql.enabled }}
-{{- template "postgresql.fullname" . }}
+{{- template "backstage.postgresql.fullname" . }}
 {{- else -}}
 {{ $secretName := (printf "%s-lighthouse-postgres" (include "backstage.fullname" . )) }}
 {{- required "A valid .Values.lighthouse.database.connection.password is required when postgresql is not enabled" $secretName -}}
