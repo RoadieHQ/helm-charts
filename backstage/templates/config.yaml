@@ -72,4 +72,8 @@ metadata:
 data:
   {{ .Values.global.postgresql.caFilename }}: |
 {{ include "backstage.postgresql.generateCA" . | indent 4}}
+{{- else }}
+{{- if not ( lookup "v1" "ConfigMap" .Release.Namespace "ca-pemstore" ) }}
+{{- fail "\n\nPlease create the 'ca-pemstore' configmap with the CA certificate for your existing postgresql: kubectl create configmap ca-pemstore --from-file=ca.crt" }}
+{{- end }}
 {{- end }}
