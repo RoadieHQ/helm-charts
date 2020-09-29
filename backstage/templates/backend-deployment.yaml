@@ -31,9 +31,9 @@ spec:
 
           envFrom:
             - configMapRef:
-                name: backstage-app
+                name: {{ include "backstage.fullname" . }}-app
             - configMapRef:
-                name: backend-auth
+                name: {{ include "backstage.fullname" . }}-auth
             - secretRef:
                 name: {{ include "backstage.fullname" . }}-backend
           env:
@@ -43,13 +43,13 @@ spec:
                   name: {{ include "backend.postgresql.passwordSecret" .}}
                   key: postgresql-password
           volumeMounts:
-            - name: ca-pemstore
+            - name: postgres-ca
               mountPath: {{ include "backstage.backend.postgresCaDir" . }}
 
       volumes:
-        - name: ca-pemstore
+        - name: postgres-ca
           configMap:
-            name: ca-pemstore
+            name: {{ include "backstage.fullname" . }}-postgres-ca
 
 {{- if .Values.backend.enabled }}
 ---

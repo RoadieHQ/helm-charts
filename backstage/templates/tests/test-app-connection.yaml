@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: {{ include "backstage.name" . -}}-test-app-connection
+  name: {{ include "backstage.fullname" . -}}-test-app-connection
   annotations:
     "helm.sh/hook": test
 spec:

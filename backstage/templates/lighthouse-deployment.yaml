@@ -46,13 +46,13 @@ spec:
                   key: postgresql-password
 
           volumeMounts:
-            - name: ca-pemstore
+            - name: postgres-ca
               mountPath: {{ include "backstage.lighthouse.postgresCaDir" . }}
 
       volumes:
-        - name: ca-pemstore
+        - name: postgres-ca
           configMap:
-            name: ca-pemstore
+            name: {{ include "backstage.fullname" . }}-postgres-ca
 ---
 apiVersion: v1
 kind: Service

@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ca-pemstore
+  name: {{ include "backstage.fullname" . }}-postgres-ca
   labels:
     app: {{ include "backstage.postgresql.fullname" . }}
     release: {{ .Release.Name }}
@@ -14,7 +14,8 @@ data:
   {{ .Values.global.postgresql.caFilename }}: |
 {{ include "backstage.postgresql.generateCA" . | indent 4}}
 {{- else }}
-{{- if not ( lookup "v1" "ConfigMap" .Release.Namespace "ca-pemstore" ) }}
-{{- fail "\n\nPlease create the 'ca-pemstore' configmap with the CA certificate for your existing postgresql: kubectl create configmap ca-pemstore --from-file=ca.crt" }}
+{{- $caConfig := printf "%s-postgres-ca"  (include "backstage.fullname" .) }}
+{{- if not ( lookup "v1" "ConfigMap" .Release.Namespace $caConfig ) }}
+{{- fail (printf "\n\nPlease create the '%s' configmap with the CA certificate for your existing postgresql: kubectl create configmap %s --from-file=ca.crt" $caConfig $caConfig) }}
 {{- end }}
 {{- end }}

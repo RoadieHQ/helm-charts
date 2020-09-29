@@ -30,7 +30,7 @@ spec:
             {{- toYaml .Values.backend.resources | nindent 12 }}
           envFrom:
           - configMapRef:
-              name: {{ include "backstage.name" . }}-app
+              name: {{ include "backstage.fullname" . }}-app
 {{- if .Values.frontend.enabled }}
 ---
 apiVersion: v1

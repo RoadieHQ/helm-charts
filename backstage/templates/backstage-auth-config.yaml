@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: backend-auth
+  name: {{ include "backstage.fullname" . }}-auth
 data:
   AUTH_GOOGLE_CLIENT_ID: {{ .Values.auth.google.clientId }}
   AUTH_GITHUB_CLIENT_ID: {{ .Values.auth.github.clientId }}
