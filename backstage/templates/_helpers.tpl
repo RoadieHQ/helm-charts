@@ -190,7 +190,7 @@ Postgres host for lighthouse
 */}}
 {{- define "lighthouse.postgresql.host" -}}
 {{- if .Values.postgresql.enabled }}
-{{- .Values.postgresql.service.port }}
+{{- include "postgresql.serviceName" . }}
 {{- else -}}
 {{- required "A valid .Values.lighthouse.database.connection.host is required when postgresql is not enabled" .Values.lighthouse.database.connection.host -}}
 {{- end -}}
