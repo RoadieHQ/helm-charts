@@ -1,0 +1,20 @@
+{{- if .Values.postgresql.enabled }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ca-pemstore
+  labels:
+    app: {{ include "backstage.postgresql.fullname" . }}
+    release: {{ .Release.Name }}
+  annotations:
+    "helm.sh/hook": "pre-install"
+    "helm.sh/hook-delete-policy": "before-hook-creation"
+data:
+  {{ .Values.global.postgresql.caFilename }}: |
+{{ include "backstage.postgresql.generateCA" . | indent 4}}
+{{- else }}
+{{- if not ( lookup "v1" "ConfigMap" .Release.Namespace "ca-pemstore" ) }}
+{{- fail "\n\nPlease create the 'ca-pemstore' configmap with the CA certificate for your existing postgresql: kubectl create configmap ca-pemstore --from-file=ca.crt" }}
+{{- end }}
+{{- end }}
