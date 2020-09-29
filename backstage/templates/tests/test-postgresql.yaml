@@ -5,7 +5,7 @@ kind: Pod
 metadata:
   name: {{ include "backstage.name" . -}}-test-postgres
   annotations:
-    "helm.sh/hook": test-success
+    "helm.sh/hook": test
 spec:
   containers:
     - name: postgresql-client
