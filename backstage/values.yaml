@@ -243,6 +243,7 @@ auth:
   # Used by the scaffolder to create GitHub repos. Must have 'repo' scope.
   githubAccessToken: g
   gitlabAccessToken: g
+  azurePrivateToken: h
 
 issuer:
   email: hello@example.com
