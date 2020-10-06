@@ -244,6 +244,7 @@ auth:
   githubAccessToken: g
   gitlabAccessToken: g
   azurePrivateToken: h
+  githubPrivateToken: y
 
 issuer:
   email: hello@example.com
