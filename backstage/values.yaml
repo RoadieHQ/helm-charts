@@ -241,10 +241,10 @@ auth:
   # This is a 'Personal Access Token'
   circleciAuthToken: r
   # Used by the scaffolder to create GitHub repos. Must have 'repo' scope.
-  githubAccessToken: g
-  gitlabAccessToken: g
-  azurePrivateToken: h
-  githubPrivateToken: y
+  # Also used by the org ingestor. Must have user:email, read:user, read:org for this.
+  githubToken: g
+  gitlabToken: g
+  azureToken: h
 
 issuer:
   email: hello@example.com
