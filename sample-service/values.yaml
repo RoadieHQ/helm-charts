@@ -5,13 +5,14 @@
 replicaCount: 1
 
 image:
-  repository: registry.digitalocean.com/larder/sample-service
-  tag: 0.0.1
+  repository: roadiehq/sample-service
+  tag: 0.1.0
   pullPolicy: IfNotPresent
 
 appConfig:
   rollbarAccessToken:
   sentryIngestionUrl:
+  newRelicLicenseKey:
   nodeEnv: production
 
 containerPort: 3000
