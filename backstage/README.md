@@ -1,207 +1,220 @@
-# Getting started
+# Backstage demo helm charts
 
-Once the prerequisites are handled, installing Backstage should be a simple matter of:
+This folder contains Helm charts that can easily create a Kubernetes deployment of a demo Backstage app.
 
-```shell
-helm repo add roadie https://charts.roadie.io
-helm install backstage roadie/backstage -f my-custom-values.yml
+### Pre-requisites
+
+These charts depend on the `nginx-ingress` controller being present in the cluster. If it's not already installed you
+can run:
+
+```
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install nginx-ingress ingress-nginx/ingress-nginx
 ```
 
-## Accessing PostgreSQL
+### Installing the charts
 
-Both the Backstage backend and Lighthouse Audit Service require access to a PostgreSQL
-database. These helm charts require that communication with the database happen over SSL.
+After choosing a DNS name where backstage will be hosted create a yaml file for your custom configuration.
 
-The location of the PG database can be specified by overriding the `app-config.yaml` which comes
-with Backstage with some environment variables.
+```
+appConfig:
+  app:
+    baseUrl: https://backstage.mydomain.com
+    title: Backstage
+  backend:
+    baseUrl: https://backstage.mydomain.com
+    cors:
+      origin: https://backstage.mydomain.com
+  lighthouse:
+    baseUrl: https://backstage.mydomain.com/lighthouse-api
+  techdocs:
+    storageUrl: https://backstage.mydomain.com/api/techdocs/static/docs
+    requestUrl: https://backstage.mydomain.com/api/techdocs
 
-To do this, set the following Helm values:
+```
 
-```yaml
-lighthouse:
-  database:
-    connection:
-      port:
-      host:
-      user:
-      password:
-      database:
-  pathToDatabaseCa:
+Then use it to run:
+
+```
+git clone https://github.com/spotify/backstage.git
+cd contrib/chart/backstage
+helm dependency update
+helm install -f backstage-mydomain.yaml backstage .
+```
+
+This command will deploy the following pieces:
+
+- Backstage frontend
+- Backstage backend with scaffolder and auth plugins
+- (optional) a PostgreSQL instance
+- lighthouse plugin
+- ingress
+
+After a few minutes Backstage should be up and running in your cluster under the DNS specified earlier.
+
+Make sure to create the appropriate DNS entry in your infrastructure. To find the public IP address run:
+
+```bash
+$ kubectl get ingress
+NAME                HOSTS   ADDRESS         PORTS   AGE
+backstage-ingress   *       123.1.2.3       80      17m
+```
+
+> **NOTE**: this is not a production ready deployment.
+
+## Caveats
+
+The current implementation does not generate certificates for the ingress which means the browser will alert that the
+site is insecure and using self-signed certificates.
+
+## Customization
+
+### Custom PostgreSQL instance
+
+Configuring a connection to an existing PostgreSQL instance is possible through the chart's values.
+
+First create a yaml file with the configuration you want to override, for example `backstage-prod.yaml`:
+
+```bash
+postgresql:
+  enabled: false
 
 appConfig:
+  app:
+    baseUrl: https://backstage-demo.mydomain.com
+    title: Backstage
   backend:
+    baseUrl: https://backstage-demo.mydomain.com
+    cors:
+      origin: https://backstage-demo.mydomain.com
     database:
       client: pg
       connection:
-        # Do not specifiy a database. Database names are inferred from plugin names.
-        host:
-        user:
-        port:
-        password:
-        ssl:
-          rejectUnauthorized: false
+        database: backstage_plugin_catalog
+        host: <host>
+        user: <pg user>
+        password: <password>
+  lighthouse:
+    baseUrl: https://backstage-demo.mydomain.com/lighthouse-api
 
-# This is only used by lighthouse.
-pg:
-  caVolumeMountDir:
-```
-
-`appConfig.backend.postgresPathToCa` and `pg.caVolumeMountDir` are properties which are not
-required to run Backstage locally and connect it to your local PosgtreSQL instance.
-
-`postgresPathToCa` is used to tell the NodeJS `pg` library where to find the certificate authority (CA)
-cert that it can use to validate SSL connections. `pg.caVolumeMountDir` tells Kubernetes where
-on each pod to mount the CA cert.
-
-The CA cert must be loaded into a configmap manually so that Kubernetes can find it and mount
-it to the pods which require it.
-
-```shell
-kubectl create configmap ca-pemstore --from-file=/path/to/ca-certificate.crt
-```
-
-### Example for DigitalOcean
-
-First create a managed PostgreSQL database on DigitalOcean, using their console. Note the
-connection properties it provides for you.
-
-Download the CA file from DigitalOcean.
-
-Create a `values.yaml` file which we will use to override some default Helm values.
-
-```yaml
 lighthouse:
   database:
+    client: pg
     connection:
-      port: 25061
-      host: private-db-postgresql-lon1-18737-do-user-9374938-0.a.db.ondigitalocean.com
-      user: doadmin
-      password:  "<your password>"
+      host: <host>
+      user: <pg user>
+      password: <password>
       database: lighthouse_audit_service
-  pathToDatabaseCa: /etc/config/ca-certificate.crt
-
-appConfig:
-  backend:
-    database:
-      client: pg
-      connection:
-        # Do not specifiy a database. Database names are inferred from plugin names.
-        host: private-db-postgresql-lon1-18737-do-user-9374938-0.a.db.ondigitalocean.com
-        user: doadmin
-        port: 25061
-        password: "<your password>"
-        ssl:
-          rejectUnauthorized: false
-
-pg:
-  # This must match the path provided to appConfig.backend.postgresPathToCa. For example, if
-  # postgresPathToCa is /etc/config/my-ca.crt then pg.caVolumeMountDir must be /etc/config.
-  caVolumeMountDir: /etc/config
 
 ```
 
-Now store the `crt` file that you downloaded from DigitalOcean in a configmap so Kubernetes can
-mount it onto each pod.
+For the CA, create a `configMap` named `<release name>-<chart name>-postgres-ca` with a file called `ca.crt`:
 
-```shell
-kubectl create configmap ca-pemstore --from-file=/path/to/ca-certificate.crt
+```
+kubectl create configmap my-company-backstage-postgres-ca --from-file=ca.crt"
 ```
 
-## Getting docker images
-Docker images are public on docker hub. No credentials are needed to pull them.
+> Where the release name contains the chart name "backstage" then only the release name will be used.
 
-## Install dependencies
+Now install the helm chart:
 
-All HTTP ingress to the cluster must happen over SSL. In order to get SSL certificates for
-ingress, we must install [cert-manager](https://cert-manager.io/) into the cluster.
-
-```shell
-kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.12.0/cert-manager.yaml
+```
+cd contrib/chart/backstage
+helm install -f backstage-prod.yaml my-backstage .
 ```
 
-Nginx is required to act as the ingress. (Note: It is likely possible to skip this part and
-use native Kubernetes ingress but I haven't tested that path).
+### Use your own docker images
 
-```shell
-helm install nginx-ingress stable/nginx-ingress --set controller.publishService.enabled=true
+The docker images used for the deployment can be configured through the charts values:
+
+```
+frontend:
+  image:
+    repository: <image-name>
+    tag: <image-tag>
+
+backend:
+  image:
+    repository: <image-name>
+    tag: <image-tag>
+
+lighthouse:
+  image:
+    repository: <image-name
+    tag: <image-tag>
 ```
 
-## Install the app
+### Different namespace
 
-### General install
+To install the charts a specific namespace use `--namespace <ns>`:
 
-```shell
-helm repo add roadie https://charts.roadie.io
-helm install backstage roadie/backstage -f my-custom-values.yml
+```
+helm install -f my_values.yaml --namespace demos backstage .
 ```
 
-### Local install
+### Disable loading of demo data
 
-If you've made local changes to the Helm charts, you may wish to test them before releasing
-to the general public. To install a local chart, do the following.
+To deploy backstage with the pre-loaded demo data disable `backend.demoData`:
 
-```shell
-helm install backstage ./
+```
+helm install -f my_values.yaml --set backend.demoData=false backstage .
 ```
 
-You will likely need to provide some custom Helm values like this:
+### Other options
 
-```shell
-hem install backstage ./ -f custom-values.yaml
+For more customization options take a look at the [values.yaml](/contrib/chart/backstage/values.yaml) file.
+
+## Troubleshooting
+
+Some resources created by these charts are meant to survive after upgrades and even after uninstalls. When
+troubleshooting these charts it can be useful to delete these resources between re-installs.
+
+Secrets:
+
+```
+<release-name>-postgresql-certs -- contains the certificates used by the deployed PostgreSQL
 ```
 
-# Adding new components
+Persistent volumes:
 
-A semi-frequent activity is adding new components to the cluster. For example, when WeaveWorks
-released their GitOps Backstage plugin, I wanted to make it available in the demo for people
-to try out.
-
-There are usually a few steps
-
- 1. Add a deployment for the new container in `templates/deployment.yaml`.
- 2. Add values for the service in `values.yaml`.
- 3. Add a service for the new component in `templates/service.yaml`.
- 4. Add ingress rules for the new component in the `values.yaml`.
- 5. Add the new component's URL (e.g. gitops.backstage-demo.roadie.io) as an A record in your DNS provider,
-    pointing to the external ingress IP of the cluster.
- 6. Upgrade everything with helm: `helm upgrade backstage ./`.
- 7. Ensure a certificate is generated for the new URL.
-
-
-# Troubleshooting
-
-## SSL Challenge not succeeding for new hostnane
-
-I just added the GitOps component and I couldn't get a certificate to be generated for it
-so it could be accessed.
-
-The smells were
-
- 1. non-ready `backstage-tls` certificate
- 2. non-ready `backstage-tls` secret
-
-```shell
-» k get certificates
-NAME            READY   SECRET          AGE
-backstage-tls   False   backstage-tls   8m6s
+```
+data-<release-name>-postgresql-0 -- this is the data volume used by PostgreSQL to store data and configuration
 ```
 
-I debugged this by describing the HTTP acme challenges.
+> **NOTE**: this volume also stores the configuration for PostgreSQL which includes things like the password for the
+> `postgres` user. This means that uninstalling and re-installing the charts with `postgres.enabled` set to `true` and
+> auto generated passwords will fail. The solution is to delete this volume with
+> `kubectl delete pvc data-<release-name>-postgresql-0`
 
-```shell
-k get challenges -o wide
+ConfigMaps:
+
+```
+<release-name>-postgres-ca -- contains the generated CA certificate for PostgreSQL when `postgres` is enabled
 ```
 
-One challenge is marked as `pending` and stayed in this state for a long time. I found I could
- `curl` the `.well-known` endpoint from my laptop but not from within a pod.
+#### Unable to verify signature
 
-I eventually fixed this by reinstalling `nginx-ingress` with Helm. I was pointed to this idea
-by [this page](https://cert-manager.io/docs/faq/acme/) and [this GitHub issue.](https://github.com/jetstack/cert-manager/issues/656#issuecomment-415606297).
-
-```shell
-helm uninstall nginx-ingress
-helm install nginx-ingress stable/nginx-ingress --set controller.publishService.enabled=true
+```
+Backend failed to start up Error: unable to verify the first certificate
+    at TLSSocket.onConnectSecure (_tls_wrap.js:1501:34)
+    at TLSSocket.emit (events.js:315:20)
+    at TLSSocket._finishInit (_tls_wrap.js:936:8)
+    at TLSWrap.ssl.onhandshakedone (_tls_wrap.js:710:12) {
+  code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
 ```
 
-**WARNING:** Reinstalling `nginx-ingress` will change the external IP of the cluster and require
-updating your DNS provider with the new A records.
+This error happens in the backend when it tries to connect to the configured PostgreSQL database and the specified CA is not correct. The solution is to make sure that the contents of the `configMap` that holds the certificate match the CA for the PostgreSQL instance. A workaround is to set `appConfig.backend.database.connection.ssl.rejectUnauthorized` to `false` in the chart's values.
+
+<!-- TODO Add example command when we know the final name of the charts -->
+
+## Uninstalling Backstage
+
+To uninstall Backstage simply run:
+
+```
+RELEASE_NAME=<release-name> # use `helm list` to find out the name
+helm uninstall ${RELEASE_NAME}
+kubectl delete pvc data-${RELEASE_NAME}-postgresql-0
+kubectl delete secret ${RELEASE_NAME}-postgresql-certs
+kubectl delete configMap ${RELEASE_NAME}-postgres-ca
+```
