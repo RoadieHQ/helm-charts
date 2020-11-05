@@ -6,8 +6,8 @@ frontend:
   enabled: true
   replicaCount: 1
   image:
-    repository: roadiehq/backstage-k8s-demo-frontend
-    tag: latest
+    repository: martinaif/backstage-k8s-demo-frontend
+    tag: test1
     pullPolicy: IfNotPresent
   containerPort: 80
   resources:
@@ -18,10 +18,12 @@ frontend:
 
 backend:
   enabled: true
+  nodeEnv: development
+  demoData: true
   replicaCount: 1
   image:
-    repository: roadiehq/backstage-k8s-demo-backend
-    tag: latest
+    repository: martinaif/backstage-k8s-demo-backend
+    tag: test1
     pullPolicy: IfNotPresent
   containerPort: 7000
   resources:
@@ -50,51 +52,46 @@ lighthouse:
       user:
       password:
       database: lighthouse_audit_service
-  # TODO: Next this under the configs above?
-  pathToDatabaseCa:
+    pathToDatabaseCa:
 
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: ''
+fullnameOverride: ''
 
 ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 
-  hosts:
-    - host: lighthouse.example.com
-      paths:
-        - service: lighthouse
-    - host: demo.example.com
-      paths:
-        - service: frontend
-    - host: backend.example.com
-      paths:
-        - service: backend
+global:
+  postgresql:
+    postgresqlUsername: backend-user
+    caFilename: ca.crt
+
+postgresql:
+  enabled: true
+  nameOverride: postgresql
   tls:
-    - secretName: backstage-tls
-      hosts:
-        - lighthouse.example.com
-        - demo.example.com
-        - backend.example.com
-
-pg:
-  # This must match the path provided to appConfig.backend.postgresPathToCa. For example, if
-  # postgresPathToCa is /etc/config/my-ca.crt then pg.caVolumeMountDir must be /etc/config.
-  caVolumeMountDir:
+    enabled: true
+    certificatesSecret: backstage-postgresql-certs
+    certFilename: tls.crt
+    certKeyFilename: tls.key
+  volumePermissions:
+    enabled: true
+  initdbScriptsSecret: backstage-postgresql-initdb
 
 appConfig:
   app:
     baseUrl: https://demo.example.com
     title: Backstage
   backend:
-    baseUrl: https://backend.example.com
-    listen: 0.0.0.0:7000
+    baseUrl: https://demo.example.com
+    listen:
+      port: 7000
     cors:
       origin: https://demo.example.com
     database:
       client: pg
       connection:
+        database: backstage_plugin_catalog
         host:
         user:
         port:
@@ -105,10 +102,10 @@ appConfig:
   sentry:
     organization: spotify
   techdocs:
-    storageUrl: https://backend.example.com/techdocs/static/docs
-    requestUrl: https://backend.example.com/techdocs/docs
+    storageUrl: https://demo.example.com/api/techdocs/static/docs
+    requestUrl: https://demo.example.com/api/techdocs
   lighthouse:
-    baseUrl: https://lighthouse.example.com
+    baseUrl: https://demo.example.com/lighthouse-api
   rollbar:
     organization: roadie
 
@@ -122,7 +119,7 @@ appConfig:
     providers:
       google:
         development:
-          appOrigin: "http://localhost:3000/"
+          appOrigin: 'http://localhost:3000/'
           secure: false
           clientId:
             $secret:
@@ -132,7 +129,7 @@ appConfig:
               env: AUTH_GOOGLE_CLIENT_SECRET
       github:
         development:
-          appOrigin: "http://localhost:3000/"
+          appOrigin: 'http://localhost:3000/'
           secure: false
           clientId:
             $secret:
@@ -140,12 +137,12 @@ appConfig:
           clientSecret:
             $secret:
               env: AUTH_GITHUB_CLIENT_SECRET
-          enterpriseInstanceUrl: 
+          enterpriseInstanceUrl:
             $secret:
               env: AUTH_GITHUB_ENTERPRISE_INSTANCE_URL
       gitlab:
         development:
-          appOrigin: "http://localhost:3000/"
+          appOrigin: 'http://localhost:3000/'
           secure: false
           clientId:
             $secret:
@@ -158,7 +155,7 @@ appConfig:
               env: GITLAB_BASE_URL
       okta:
         development:
-          appOrigin: "http://localhost:3000/"
+          appOrigin: 'http://localhost:3000/'
           secure: false
           clientId:
             $secret:
@@ -171,7 +168,7 @@ appConfig:
               env: AUTH_OKTA_AUDIENCE
       oauth2:
         development:
-          appOrigin: "http://localhost:3000/"
+          appOrigin: 'http://localhost:3000/'
           secure: false
           clientId:
             $secret:
@@ -236,14 +233,13 @@ auth:
     clientId: f
     clientSecret: f
     tenantId: f
+  azure:
+    api:
+      token: h
   sentryToken: e
   rollbarAccountToken: f
   # This is a 'Personal Access Token'
   circleciAuthToken: r
   # Used by the scaffolder to create GitHub repos. Must have 'repo' scope.
-  githubAccessToken: g
-  gitlabAccessToken: g
-  azurePrivateToken: h
-
-issuer:
-  email: hello@example.com
+  githubToken: g
+  gitlabToken: g
