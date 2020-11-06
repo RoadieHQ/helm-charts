@@ -12,8 +12,7 @@ version: 0.2.2
 appVersion: v0.1.1-alpha.24
 
 sources:
-  - https://github.com/spotify/backstage
-  - https://github.com/spotify/lighthouse-audit-service
+  - https://github.com/RoadieHQ/helm-charts
 
 dependencies:
   - name: postgresql
