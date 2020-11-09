@@ -1,4 +1,9 @@
-{{- if .Values.postgresql.enabled }}
+{{- if not ( or .Values.postgresql.enabled .Values.rds.enabled) }}
+  {{- $caConfig := printf "%s-postgres-ca"  (include "backstage.fullname" .) }}
+  {{- if not ( lookup "v1" "ConfigMap" .Release.Namespace $caConfig ) }}
+  {{- fail (printf "\n\nPlease create the '%s' configmap with the CA certificate for your existing postgresql: kubectl create configmap %s --from-file=ca.crt" $caConfig $caConfig) }}
+  {{- end }}
+{{- else}}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -12,10 +17,9 @@ metadata:
     "helm.sh/hook-delete-policy": "before-hook-creation"
 data:
   {{ .Values.global.postgresql.caFilename }}: |
+{{- if .Values.postgresql.enabled}}
 {{ include "backstage.postgresql.generateCA" . | indent 4}}
-{{- else }}
-{{- $caConfig := printf "%s-postgres-ca"  (include "backstage.fullname" .) }}
-{{- if not ( lookup "v1" "ConfigMap" .Release.Namespace $caConfig ) }}
-{{- fail (printf "\n\nPlease create the '%s' configmap with the CA certificate for your existing postgresql: kubectl create configmap %s --from-file=ca.crt" $caConfig $caConfig) }}
+{{- else if .Values.rds.enabled }}
+{{ tpl (.Files.Get "files/rds-ca.crt.tpl") . | indent 4 }}
 {{- end }}
 {{- end }}

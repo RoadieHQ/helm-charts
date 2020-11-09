@@ -67,6 +67,9 @@ global:
     postgresqlUsername: backend-user
     caFilename: ca.crt
 
+rds:
+  enabled: false
+
 postgresql:
   enabled: true
   nameOverride: postgresql
