@@ -12,8 +12,13 @@ metadata:
   {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  {{- if .Values.ingress.tls }}
   tls:
+    - secretName: {{ include "backstage.fullname" . }}-tls
+      hosts:
+        - {{ $frontendUrl.host }}
+        - {{ $backendUrl.host }}
+        - {{ $lighthouseUrl.host }}
+  {{- if .Values.ingress.tls }}
     {{- with .Values.ingress.tls }}
     {{- toYaml . | nindent 4 }}
     {{- end}}
