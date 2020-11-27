@@ -56,3 +56,4 @@ techdocs:
 
 proxy:
   '/lighthouse': http://{{ include "lighthouse.serviceName" . }}
+  {{- toYaml .Values.appConfig.proxy | nindent 4 }}
