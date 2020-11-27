@@ -54,6 +54,12 @@ techdocs:
   generators:
     techdocs: 'local'
 
+{{- if .Values.appConfig.authenticatedProxy }}
+authenticatedProxy:
+  {{- toYaml .Values.appConfig.authenticatedProxy | nindent 2 }}
+{{- end }}
+
+
 proxy:
   '/lighthouse': http://{{ include "lighthouse.serviceName" . }}
   {{- toYaml .Values.appConfig.proxy | nindent 4 }}
