@@ -59,7 +59,11 @@ authenticatedProxy:
   {{- toYaml .Values.appConfig.authenticatedProxy | nindent 2 }}
 {{- end }}
 
-
 proxy:
   '/lighthouse': http://{{ include "lighthouse.serviceName" . }}
   {{- toYaml .Values.appConfig.proxy | nindent 4 }}
+
+single-sign-on:
+  name: vouch
+  config:
+    cookieName: VouchCookie
