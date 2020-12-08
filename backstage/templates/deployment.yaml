@@ -76,7 +76,7 @@ spec:
             - name: APP_CONFIG_backend_cors_origin
               value: {{ .Values.backend.cors.origin }}
             - name: JENKINS_URL
-              value: { { .Values.jenkins.url } }
+              value: {{ .Values.jenkins.url }}
           envFrom:
             - configMapRef:
                 name: {{ include "backstage.fullname" . }}-auth
