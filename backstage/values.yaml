@@ -57,6 +57,21 @@ lighthouse:
 nameOverride: ''
 fullnameOverride: ''
 
+externalSecrets:
+  enabled: false
+  defaultRegion: eu-west-1
+  path:
+  secrets:
+    - name: github-token
+      key: GITHUB_TOKEN
+      region:
+    - name: github-client-id
+      key: AUTH_GITHUB_CLIENT_ID
+      region:
+    - name: github-client-secret
+      key: AUTH_GITHUB_CLIENT_SECRET
+      region:
+
 ingress:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod

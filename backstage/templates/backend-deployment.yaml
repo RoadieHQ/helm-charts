@@ -15,6 +15,7 @@ spec:
     metadata:
       annotations:
         ad.datadoghq.com/backstage.logs: '[{"source":"backstage","service":"backend"}]'
+        secret.reloader.stakater.com/reload: "github-token,github-client-id,github-client-secret"
       labels:
         app: backstage
         component: backend
@@ -40,6 +41,15 @@ spec:
                 name: {{ include "backstage.fullname" . }}-app-env
             - configMapRef:
                 name: {{ include "backstage.fullname" . }}-auth
+            # To make sure the keys in SSM parameters override the default chart values
+            # these secrets have to be the last ones
+            {{- if .Values.externalSecrets.enabled }}
+            {{- range .Values.externalSecrets.secrets }}
+            - secretRef:
+                name: {{ .name }}
+                optional: true
+            {{- end }}
+            {{- end }}
           env:
             - name: NODE_ENV
               value: {{ .Values.backend.nodeEnv | default "development" }}
