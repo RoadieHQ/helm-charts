@@ -13,7 +13,9 @@ frontend:
       memory: 128Mi
     limits:
       memory: 256Mi
-
+techdocs:
+  storageUrl: http://localhost:7000/api/techdocs/static/docs
+  requestUrl: http://localhost:7000/api/techdocs
 backend:
   enabled: true
   replicaCount: 1
