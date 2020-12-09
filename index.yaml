@@ -3,7 +3,24 @@ entries:
   backstage:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.965965071Z"
+    created: "2020-12-09T11:54:56.013496506Z"
+    description: A Helm chart for Backstage by Spotify
+    digest: c8506af1d48728d1e1bab03c25dd7763fcf644034111ce42a0da31931a6fdd62
+    maintainers:
+    - email: david@roadie.io
+      name: David Tuite
+      url: https://roadie.io
+    name: backstage
+    sources:
+    - https://github.com/spotify/backstage
+    - https://github.com/spotify/lighthouse-audit-service
+    type: application
+    urls:
+    - backstage/backstage-0.2.16.tgz
+    version: 0.2.16
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2020-12-09T11:54:56.012767201Z"
     description: A Helm chart for Backstage by Spotify
     digest: 443dcc6eb7675dd41f13087539790fb70b144b5a43b910660ffafaedcd91848b
     maintainers:
@@ -20,7 +37,7 @@ entries:
     version: 0.2.15
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.965000075Z"
+    created: "2020-12-09T11:54:56.012057797Z"
     description: A Helm chart for Backstage by Spotify
     digest: d486a2217cc95930b36b2f58f1a96afd125a1205d7efe0bcf0708eef730d9e82
     maintainers:
@@ -37,7 +54,7 @@ entries:
     version: 0.2.14
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.964010479Z"
+    created: "2020-12-09T11:54:56.011354192Z"
     description: A Helm chart for Backstage by Spotify
     digest: 00f18cec078ffff1385a18b19b2b0334d867cfa5a10ff36bfb133c4458f9a118
     maintainers:
@@ -54,7 +71,7 @@ entries:
     version: 0.2.13
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.961771388Z"
+    created: "2020-12-09T11:54:56.010615488Z"
     description: A Helm chart for Backstage by Spotify
     digest: c59657b199530b67571d0d759bc983a530c980a7cec3645bc43fcde6afb6c36a
     maintainers:
@@ -71,7 +88,7 @@ entries:
     version: 0.2.12
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.960571293Z"
+    created: "2020-12-09T11:54:56.009097078Z"
     description: A Helm chart for Backstage by Spotify
     digest: 1e5ecd49b6c7b05c9725c8e1cbcda9d5f82d4ec277b9713cd101c5704f17b66f
     maintainers:
@@ -88,7 +105,7 @@ entries:
     version: 0.2.11
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.9589195Z"
+    created: "2020-12-09T11:54:56.008387074Z"
     description: A Helm chart for Backstage by Spotify
     digest: 4854d1a7a6dbe32828ccfee4b06bfd32e397694727bf72619f59ae58d12a4062
     maintainers:
@@ -105,7 +122,7 @@ entries:
     version: 0.2.10
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.993640257Z"
+    created: "2020-12-09T11:54:56.043784794Z"
     description: A Helm chart for Backstage by Spotify
     digest: 28290c7e42ed136ad82806b0599c1744adb158a82d434cf37ece30b63973353c
     maintainers:
@@ -122,7 +139,7 @@ entries:
     version: 0.2.9
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.992667961Z"
+    created: "2020-12-09T11:54:56.042990289Z"
     description: A Helm chart for Backstage by Spotify
     digest: 4d52e9ac57fde0f40b55963fd262fd263845ae1ad1775c091cd0d4771fae5775
     maintainers:
@@ -139,7 +156,7 @@ entries:
     version: 0.2.8
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.991641065Z"
+    created: "2020-12-09T11:54:56.034746238Z"
     description: A Helm chart for Backstage by Spotify
     digest: b22990cd4796b314ee9a22ca0acd1debfd0bdb91eaa1a19459b6e9f650b208e9
     maintainers:
@@ -156,7 +173,7 @@ entries:
     version: 0.2.6
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.982215704Z"
+    created: "2020-12-09T11:54:56.02699519Z"
     description: A Helm chart for Backstage by Spotify
     digest: ad45fdb0e4e4fbc9c9a11cfe5e6dbd354d848fdafc6a92387304369877710b8d
     maintainers:
@@ -173,7 +190,7 @@ entries:
     version: 0.2.5
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.974909434Z"
+    created: "2020-12-09T11:54:56.021896358Z"
     description: A Helm chart for Backstage by Spotify
     digest: 1fdeeab595e7150a4a9ecab214539b8e37913f8f0123e1dd4f997749b4d8d730
     maintainers:
@@ -190,7 +207,7 @@ entries:
     version: 0.2.4
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.970919651Z"
+    created: "2020-12-09T11:54:56.018094534Z"
     description: A Helm chart for Backstage by Spotify
     digest: a0e33c5a5a4c570a69e72a81e2508deb96b841cb437c361ca78db882b93808d1
     maintainers:
@@ -207,7 +224,7 @@ entries:
     version: 0.2.3
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.968136562Z"
+    created: "2020-12-09T11:54:56.015287917Z"
     description: A Helm chart for Backstage by Spotify
     digest: 40be1efeec266569eb9463bfe36d9e388053561958619894bcefd711bf7b32cd
     maintainers:
@@ -224,7 +241,7 @@ entries:
     version: 0.2.2
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.957798105Z"
+    created: "2020-12-09T11:54:56.00767567Z"
     description: A Helm chart for Backstage by Spotify
     digest: 4bf4c0783bf7108d327badde0bec5f724685ea44681a75c1f63eda08dc62391e
     maintainers:
@@ -241,7 +258,7 @@ entries:
     version: 0.2.1
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.954816617Z"
+    created: "2020-12-09T11:54:56.002481137Z"
     description: A Helm chart for Backstage by Spotify
     digest: e2f20c23c792de3a49f7cef9e9724a669da4ecc6e7938f2085b0a636ad52e811
     maintainers:
@@ -258,7 +275,7 @@ entries:
     version: 0.2.0
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2020-12-08T12:24:51.923986444Z"
+    created: "2020-12-09T11:54:55.998082808Z"
     description: A Helm chart for Backstage by Spotify
     digest: 1e6159fdb82436d9992afc477ff8400b9c63de72aeb7057a58222d995ee37dfb
     maintainers:
@@ -276,7 +293,7 @@ entries:
   kubewise:
   - apiVersion: v2
     appVersion: 0.11.11
-    created: "2020-12-08T12:24:51.994182655Z"
+    created: "2020-12-09T11:54:56.044230497Z"
     description: Get Helm notifications in your team chat
     digest: f5efbbca95a8812666885729f7f37cbdd81da99140dcb041f374b2423cd2db47
     icon: https://github.com/RoadieHQ/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -293,7 +310,7 @@ entries:
     version: 0.11.11
   - apiVersion: v2
     appVersion: 0.11.8
-    created: "2020-12-08T12:24:51.915546579Z"
+    created: "2020-12-09T11:54:55.989141649Z"
     description: Get Helm notifications in your team chat
     digest: 255770688227a8c7e379874f83731f7554df82ecfab46d5233f14dd9df59d5aa
     icon: https://github.com/RoadieHQ/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -310,7 +327,7 @@ entries:
     version: 0.11.8
   - apiVersion: v2
     appVersion: 0.11.6
-    created: "2020-12-08T12:24:51.914629582Z"
+    created: "2020-12-09T11:54:55.988659846Z"
     description: Get Helm notifications in your team chat
     digest: 0d61a96602633b9f6922f52be17f651ec728345973f92963fcadc31dee2011ca
     icon: https://github.com/RoadieHQ/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -327,7 +344,7 @@ entries:
     version: 0.11.7
   - apiVersion: v2
     appVersion: 0.11.4
-    created: "2020-12-08T12:24:51.913608587Z"
+    created: "2020-12-09T11:54:55.988175142Z"
     description: Get Helm notifications in your team chat
     digest: 082483ba4e914f900aa83ed3af4f49cf481e605bf17ad6ccaa94e6dcf8b48146
     icon: https://github.com/RoadieHQ/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -344,7 +361,7 @@ entries:
     version: 0.11.5
   - apiVersion: v2
     appVersion: 0.8.1
-    created: "2020-12-08T12:24:51.911642695Z"
+    created: "2020-12-09T11:54:55.987690939Z"
     description: Get Helm notifications in your team chat
     digest: 4f45cb40636d39fb487aeeaf10ee2f2a0f9d8949cbc773056bffdd044693b7eb
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -361,7 +378,7 @@ entries:
     version: 0.11.2
   - apiVersion: v2
     appVersion: 0.8.1
-    created: "2020-12-08T12:24:51.910253601Z"
+    created: "2020-12-09T11:54:55.987203436Z"
     description: Get Helm notifications in your team chat
     digest: b9ecb88643241e51ce3d3d8addde953115c4c4914e732d903f78c0b19838cec7
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -378,7 +395,7 @@ entries:
     version: 0.11.1
   - apiVersion: v2
     appVersion: 0.8.0
-    created: "2020-12-08T12:24:51.908270009Z"
+    created: "2020-12-09T11:54:55.986741533Z"
     description: Get Helm notifications in your team chat
     digest: 542d4d385c74f0e7b4300562edaa366da315bdc55af3358808d8040c3240a7e6
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -395,7 +412,7 @@ entries:
     version: 0.11.0
   - apiVersion: v2
     appVersion: 0.6.1
-    created: "2020-12-08T12:24:51.921591954Z"
+    created: "2020-12-09T11:54:55.995942994Z"
     description: Get Helm notifications in your team chat
     digest: 67022ae323222f4887079f32c9ef355aea1393bd64e9278b2c69a0f548b9326d
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -412,7 +429,7 @@ entries:
     version: 0.9.0
   - apiVersion: v2
     appVersion: 0.5.0
-    created: "2020-12-08T12:24:51.921050156Z"
+    created: "2020-12-09T11:54:55.995163789Z"
     description: Get Helm notifications in your team chat
     digest: cc12ddacf30d1db77dc80d46d491b89e7b46154a91fa270c6cb8f0bb5b1f89a7
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -429,7 +446,7 @@ entries:
     version: 0.8.0
   - apiVersion: v2
     appVersion: 0.4.1
-    created: "2020-12-08T12:24:51.920585958Z"
+    created: "2020-12-09T11:54:55.994242083Z"
     description: A Slack Bot for Helm
     digest: bc23c0fb3a8fb04032b84778675b2987c353de0571ba44199f936b218ad92342
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -446,7 +463,7 @@ entries:
     version: 0.7.0
   - apiVersion: v2
     appVersion: 0.4.1
-    created: "2020-12-08T12:24:51.92011296Z"
+    created: "2020-12-09T11:54:55.992665972Z"
     description: A Slack Bot for Helm
     digest: 553391174d0865ca628c23609cb85c6d887d59fbf2eff192abbbde2d7115ecb7
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -463,7 +480,7 @@ entries:
     version: 0.6.2
   - apiVersion: v2
     appVersion: 0.4.1
-    created: "2020-12-08T12:24:51.919622762Z"
+    created: "2020-12-09T11:54:55.992211469Z"
     description: A Slack Bot for Helm
     digest: 289e61beed2192a613df8d138f0457dfca1edad6f0240006faeb0ba82a561845
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -480,7 +497,7 @@ entries:
     version: 0.6.1
   - apiVersion: v2
     appVersion: 0.4.0
-    created: "2020-12-08T12:24:51.919150364Z"
+    created: "2020-12-09T11:54:55.991234163Z"
     description: A Slack Bot for Helm
     digest: ae40d26da726caeff9ef1e3e437b2c8c6d8c6bead2cb328a2af65100c0333638
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -497,7 +514,7 @@ entries:
     version: 0.6.0
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2020-12-08T12:24:51.918664366Z"
+    created: "2020-12-09T11:54:55.99078756Z"
     description: A Slack Bot for Helm
     digest: f9bac9794c33eb0ecd143255e62c6510d24a24b9da584122524374325b74e6d7
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -514,7 +531,7 @@ entries:
     version: 0.5.0
   - apiVersion: v2
     appVersion: 0.2.0
-    created: "2020-12-08T12:24:51.918115468Z"
+    created: "2020-12-09T11:54:55.990367257Z"
     description: A Slack Bot for Helm
     digest: 894b3f03f26d5117fc01db538ae6c96a4c55f51429e3b0939a2e4bd79a1004b3
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -531,7 +548,7 @@ entries:
     version: 0.4.0
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2020-12-08T12:24:51.917059072Z"
+    created: "2020-12-09T11:54:55.989925254Z"
     description: A Slack Bot for Helm
     digest: c00898da666263185b5d0269077cd991da8aa5a10a06ff4c8be534e229fdb393
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -548,7 +565,7 @@ entries:
     version: 0.3.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2020-12-08T12:24:51.916294676Z"
+    created: "2020-12-09T11:54:55.989528451Z"
     description: A Slack Bot for Helm
     digest: 36e18bb1c5d3548bd2f7198378e2911f3074b4f103796bc994e1d30c09396c79
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -565,7 +582,7 @@ entries:
     version: 0.2.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2020-12-08T12:24:51.907741011Z"
+    created: "2020-12-09T11:54:55.986207329Z"
     description: A Slack Bot for Helm
     digest: a6ccfb6bc8f28a8103824fea9d415db43923c1b7bb1f8c99dacda113353f3d74
     name: kubewise
@@ -575,7 +592,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2020-12-08T12:24:51.907260313Z"
+    created: "2020-12-09T11:54:55.985811827Z"
     description: A Slack Bot for Helm
     digest: 488ba2318eedb12348a798ccd2fa9090b755fd8ff7c5a42ddc05af32790eb79b
     name: kubewise
@@ -583,4 +600,4 @@ entries:
     urls:
     - kubewise-0.1.0.tgz
     version: 0.1.0
-generated: "2020-12-08T12:24:51.87384265Z"
+generated: "2020-12-09T11:54:55.984361717Z"
