@@ -284,3 +284,16 @@ app-config file name
 {{- define "backstage.appConfigFilename" -}}
 {{- "app-config.development.yaml" -}}
 {{- end -}}
+
+{{/*
+List of external secrets configured
+*/}}
+{{- define "backstage.externalSecretsList" -}}
+{{- $secrets := list -}}
+{{- range .Values.externalSecrets.secrets -}}
+{{- if .key -}}
+{{- $secrets = append $secrets .name  -}}
+{{- end -}}
+{{- end -}}
+{{- join "," $secrets | quote -}}
+{{- end -}}
