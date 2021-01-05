@@ -61,16 +61,19 @@ externalSecrets:
   enabled: false
   defaultRegion: eu-west-1
   path:
+  keyId:
   secrets:
     - name: github-token
       key: GITHUB_TOKEN
       region:
     - name: github-client-id
       key: AUTH_GITHUB_CLIENT_ID
-      region:
     - name: github-client-secret
       key: AUTH_GITHUB_CLIENT_SECRET
-      region:
+    - name: google-client-id
+      key: AUTH_GOOGLE_CLIENT_ID
+    - name: google-client-secret
+      key: AUTH_GOOGLE_CLIENT_SECRET
 
 ingress:
   annotations:
