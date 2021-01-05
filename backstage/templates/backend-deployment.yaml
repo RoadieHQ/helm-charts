@@ -39,6 +39,8 @@ spec:
           envFrom:
             - secretRef:
                 name: {{ include "backstage.fullname" . }}-backend
+            - secretRef:
+                name: external-secrets-creds
             - configMapRef:
                 name: {{ include "backstage.fullname" . }}-app-env
             - configMapRef:
