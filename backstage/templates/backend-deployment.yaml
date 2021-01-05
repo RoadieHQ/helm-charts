@@ -23,6 +23,9 @@ spec:
         component: backend
 
     spec:
+      {{- if .Values.externalSecrets.enabled }}
+      serviceAccountName: {{ .Values.externalSecrets.serviceAccountName }}
+      {{- end }}
       {{- if .Values.dockerRegistrySecretName }}
       imagePullSecrets:
         - name: {{ .Values.dockerRegistrySecretName }}

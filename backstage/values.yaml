@@ -59,6 +59,7 @@ fullnameOverride: ''
 
 externalSecrets:
   enabled: false
+  serviceAccountName: ssm-parameter-rw
   defaultRegion: eu-west-1
   path:
   keyId:
