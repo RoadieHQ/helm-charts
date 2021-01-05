@@ -39,6 +39,14 @@ catalog:
   locations: []
 {{- end }}
 
+{{- if .Values.externalSecrets.enabled }}
+secretsSettings:
+  ssm:
+    path: {{ required "path to SSM secrets .Values.externalSecrets.path is required" .Values.externalSecrets.path }}
+    keyId: {{ required "id or alias of the KMS key is required in .Values.externalSecrets.keyId" .Values.externalSecrets.keyId }}
+    region: {{ required ".Values.eternalSecrets.defaultRegion is required for accessing SSM parameters" .Values.externalSecrets.defaultRegion }}
+{{- end }}
+
 auth:
   providers:
     microsoft: null
