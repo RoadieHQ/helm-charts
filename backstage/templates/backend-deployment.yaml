@@ -24,7 +24,7 @@ spec:
 
     spec:
       {{- if .Values.externalSecrets.enabled }}
-      serviceAccountName: secrets-manager-sa
+      serviceAccountName: backstage-ssm
       {{- end }}
       {{- if .Values.dockerRegistrySecretName }}
       imagePullSecrets:
