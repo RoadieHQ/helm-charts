@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: roadie-backstage-monitor
+  name: roadie-backstage-monitor-deployment
+  namespace: default
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: roadie-backstage-monitor
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: roadie-backstage-monitor
+    spec:
+      containers:
+      - env:
+        - name: BACKSTAGE_ENDPOINT
+          value: http://{{ include "backstage.fullname" . }}-frontend
+        image: roadiehq/roadie-backstage-monitor
+        imagePullPolicy: Always
+        name: roadie-backstage-monitor
+        ports:
+        - containerPort: 9292
+          name: metrics
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: roadie-backstage-monitor-service
+
+spec:
+  ports:
+    - port: 9292
+      targetPort: 9292
+
+  selector:
+    app: roadie-backstage-monitor
+
+  type: ClusterIP
