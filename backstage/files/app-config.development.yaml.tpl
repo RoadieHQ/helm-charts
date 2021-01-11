@@ -45,6 +45,21 @@ secretsSettings:
     path: {{ required "path to SSM secrets .Values.externalSecrets.path is required" .Values.externalSecrets.path }}
     keyId: {{ required "id or alias of the KMS key is required in .Values.externalSecrets.keyId" .Values.externalSecrets.keyId }}
     region: {{ required ".Values.eternalSecrets.defaultRegion is required for accessing SSM parameters" .Values.externalSecrets.defaultRegion }}
+  secrets:
+    - name: GITHUB_TOKEN
+      internalName: GITHUB_TOKEN
+      description: Github PAT used for reading entity yaml files
+    - name: GITHUB_CLIENT_ID
+      internalName: AUTH_GITHUB_CLIENT_ID
+      description: Github Client ID
+    - name: GITHUB_CLIENT_SECRET
+      internalName: AUTH_GITHUB_CLIENT_SECRET
+    - name: GOOGLE_CLIENT_ID
+      internalName: AUTH_GOOGLE_CLIENT_ID
+      description: 'Google Client ID'
+    - name: GOOGLE_CLIENT_SECRET
+      internalName: AUTH_GOOGLE_CLIENT_SECRET
+      description: Google Client Secret
 {{- end }}
 
 auth:
