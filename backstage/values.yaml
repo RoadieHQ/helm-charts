@@ -59,7 +59,7 @@ fullnameOverride: ''
 
 externalSecrets:
   enabled: false
-  serviceAccountName: backstage-ssm
+  serviceAccountName: ssm-parameter-rw
   defaultRegion: eu-west-1
   path:
   keyId:
