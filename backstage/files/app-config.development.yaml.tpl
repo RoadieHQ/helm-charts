@@ -51,9 +51,10 @@ secretsSettings:
       description: Github PAT used for reading entity yaml files
     - name: GITHUB_CLIENT_ID
       internalName: AUTH_GITHUB_CLIENT_ID
-      description: Github Client ID
+      description: Client id for the Github oauth app
     - name: GITHUB_CLIENT_SECRET
       internalName: AUTH_GITHUB_CLIENT_SECRET
+      description: Client secret for the Github oauth app
     - name: GOOGLE_CLIENT_ID
       internalName: AUTH_GOOGLE_CLIENT_ID
       description: 'Google Client ID'
