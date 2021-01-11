@@ -27,8 +27,8 @@ spec:
       - env:
         - name: BACKSTAGE_ENDPOINT
           value: http://{{ include "backstage.fullname" . }}-frontend
-        image: roadiehq/roadie-backstage-monitor
-        imagePullPolicy: Always
+        image: {{ .Values.monitor.image.repository }}:{{ .Values.monitor.image.tag }}
+        imagePullPolicy: {{ .Values.monitor.image.pullPolicy }}
         name: roadie-backstage-monitor
         ports:
         - containerPort: 9292

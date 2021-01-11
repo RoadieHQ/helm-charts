@@ -32,6 +32,12 @@ backend:
     limits:
       memory: 1024Mi
 
+monitor:
+  image:
+    repository: roadiehq/roadie-backstage-monitor
+    tag: 578d33b9467dc9c412f5434236529c070e161b1e
+    pullPolicy: Always
+
 lighthouse:
   enabled: true
   replicaCount: 1
