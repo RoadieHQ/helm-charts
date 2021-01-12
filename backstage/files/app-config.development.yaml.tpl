@@ -61,6 +61,24 @@ secretsSettings:
     - name: GOOGLE_CLIENT_SECRET
       internalName: AUTH_GOOGLE_CLIENT_SECRET
       description: Google Client Secret
+    - name: CIRCLECI_AUTH_TOKEN
+      internalName: CIRCLECI_AUTH_TOKEN
+      description: Token for the integration with CircleCI
+    - name: OKTA_CLIENT_ID
+      internalName: AUTH_OKTA_CLIENT_ID
+      description: Client secret for the Okta integration
+    - name: OKTA_CLIENT_SECRET
+      internalName: AUTH_OKTA_CLIENT_SECRET
+      description: Client secret for the Okta integration
+    - name: OKTA_AUDIENCE
+      internalName: AUTH_OKTA_AUDIENCE
+      description: Audience for the Okta integration
+    - name: SENTRY_TOKEN
+      internalName: SENTRY_TOKEN
+      description: Token for Sentry integration
+    - name: ROLLBAR_ACCOUNT_TOKEN
+      internalName: ROLLBAR_ACCOUNT_TOKEN
+      description: Token for Rollbar
 {{- end }}
 
 auth:
