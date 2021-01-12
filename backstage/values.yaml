@@ -35,7 +35,7 @@ backend:
 monitor:
   image:
     repository: roadiehq/roadie-backstage-monitor
-    tag: 578d33b9467dc9c412f5434236529c070e161b1e
+    tag: cdb07063f78389e50b1bbe1fb48880e10017dd32
     pullPolicy: Always
 
 lighthouse:
