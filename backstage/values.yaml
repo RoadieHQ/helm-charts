@@ -81,6 +81,18 @@ externalSecrets:
       key: AUTH_GOOGLE_CLIENT_ID
     - name: google-client-secret
       key: AUTH_GOOGLE_CLIENT_SECRET
+    - name: circleci_auth_token
+      key: CIRCLECI_AUTH_TOKEN
+    - name: auth_okta_client_id
+      key: AUTH_OKTA_CLIENT_ID
+    - name: auth_okta_client_secret
+      key: AUTH_OKTA_CLIENT_SECRET
+    - name: auth_okta_audience
+      key: AUTH_OKTA_AUDIENCE
+    - name: sentry_token
+      key: SENTRY_TOKEN
+    - name: rollbar_account_token
+      key: ROLLBAR_ACCOUNT_TOKEN
 
 ingress:
   annotations:
