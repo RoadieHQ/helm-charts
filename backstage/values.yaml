@@ -82,6 +82,11 @@ externalSecrets:
     - name: google-client-secret
       key: AUTH_GOOGLE_CLIENT_SECRET
 
+externalVouchSecret:
+  enabled: false
+  path:
+  region: eu-west-1
+
 ingress:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
