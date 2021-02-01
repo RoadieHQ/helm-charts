@@ -36,7 +36,8 @@ catalog:
     - type: github
       target: https://github.com/spotify/backstage/blob/master/plugins/scaffolder-backend/sample-templates/all-templates.yaml
 {{- else }}
-  locations: []
+  locations:
+{{- toYaml .Values.backend.locations | nindent 4 }}
 {{- end }}
 
 {{- if .Values.externalSecrets.enabled }}
