@@ -20,6 +20,7 @@ backend:
   enabled: true
   nodeEnv: development
   demoData: true
+  locations: []
   replicaCount: 1
   image:
     repository: martinaif/backstage-k8s-demo-backend
