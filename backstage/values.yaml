@@ -88,6 +88,10 @@ externalSecrets:
       key: SENTRY_TOKEN
     - name: rollbar-account-token
       key: ROLLBAR_ACCOUNT_TOKEN
+    - name: gcp-client-email
+      key: GCP_CLIENT_EMAIL
+    - name: gcp-private-key
+      key: GCP_PRIVATE_KEY
 
 ingress:
   annotations:
@@ -277,6 +281,8 @@ auth:
   rollbarAccountToken: f
   # This is a 'Personal Access Token'
   circleciAuthToken: r
+  gcpClientEmail: g
+  gcpPrivateKey: g
   # Used by the scaffolder to create GitHub repos. Must have 'repo' scope.
   githubToken: g
   gitlabToken: g
