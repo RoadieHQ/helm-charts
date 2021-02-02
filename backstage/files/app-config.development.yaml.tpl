@@ -71,6 +71,12 @@ secretsSettings:
     - name: ROLLBAR_ACCOUNT_TOKEN
       internalName: ROLLBAR_ACCOUNT_TOKEN
       description: Token for Rollbar
+    - name: GCP_CLIENT_EMAIL
+      internalName: GCP_CLIENT_EMAIL
+      description: Google Cloud Platform Client Email
+    - name: GCP_PRIVATE_KEY
+      internalName: GCP_PRIVATE_KEY
+      description: Google Cloud Platform Private Key
 {{- end }}
 
 auth:
