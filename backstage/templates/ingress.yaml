@@ -17,7 +17,9 @@ spec:
       hosts:
         - {{ $frontendUrl.host }}
         - {{ $backendUrl.host }}
+        {{- if .Values.lighthouse.enabled }}
         - {{ $lighthouseUrl.host }}
+        {{- end }}
   {{- if .Values.ingress.tls }}
     {{- with .Values.ingress.tls }}
     {{- toYaml . | nindent 4 }}
@@ -49,6 +51,7 @@ spec:
          {{- end }}
 
 {{/* Route lighthouse through a different host */}}
+{{- if .Values.lighthouse.enabled }}
 {{- if not ( eq $frontendUrl.host $lighthouseUrl.host ) }}
     - host: {{ $lighthouseUrl.host }}
       http:
@@ -57,4 +60,5 @@ spec:
             backend:
               serviceName: {{ include "lighthouse.serviceName" . }}
               servicePort: 80
+{{- end }}
 {{- end }}

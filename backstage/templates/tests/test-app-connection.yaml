@@ -17,7 +17,9 @@ spec:
           wget -q -O - {{ printf "%s.%s" (include "frontend.serviceName" .) .Release.Namespace | quote }}
           echo -e "\n\n===== Testing the connection with the backend...\n"
           wget -q -O - {{ printf "http://%s.%s/catalog/entities" (include "backend.serviceName" .) .Release.Namespace | quote }}
+          {{- if .Values.lighthouse.enabled }}
           echo -e "\n\n===== Testing the connection with the lighthouse plugin...\n"
           wget -q -O - {{ printf "%s.%s/v1/audits" (include "lighthouse.serviceName" .) .Release.Namespace | quote }}
+          {{- end }}
           echo -e   "\n"
   restartPolicy: Never
