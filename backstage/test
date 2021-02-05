@@ -1,0 +1,11 @@
+apiVersion: kubernetes-client.io/v1
+kind: ExternalSecret
+metadata:
+  name: vouch-values-external-secret
+  namespace: default
+spec:
+  backendType: systemManager
+  data:
+  - key: /prod/brian-demo/vouch/vouch-values
+    name: vouch-values-with-external-secret
+  region: eu-west-1

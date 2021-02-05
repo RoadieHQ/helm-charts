@@ -1,0 +1,11 @@
+---
+externalVouchSecret:
+  enabled: true
+  region: 'brians-spregion'
+
+backend:
+  demoData: false
+  locations: []
+
+issuer:
+  email: brian@roadie.io
