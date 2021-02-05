@@ -1,0 +1,23 @@
+---
+    backend:
+      lighthouseHostname: "backstage-lighthouse"
+      listen:
+          port: 7000
+      csp:
+        script-src:
+          - "'self'"
+          - "'unsafe-inline'"
+      database:
+        client: "pg"
+        connection:
+          host: "backstage-postgresql"
+          port: "5432"
+          user: "backend-user"
+          database: "backstage_plugin_catalog"
+          ssl:
+            rejectUnauthorized: "false"
+            ca: "/etc/postgresql/ca.crt"
+
+    catalog:
+      locations:
+        []
