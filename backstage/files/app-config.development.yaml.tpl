@@ -108,7 +108,3 @@ single-sign-on:
   config:
     cookieName: VouchCookie
 
-{{- if .Values.appConfig.techradar }}
-techradar:
-  {{- toYaml .Values.appConfig.techradar | nindent 2 }}
-{{- end }}
