@@ -119,10 +119,10 @@ postgresql:
   initdbScriptsSecret: backstage-postgresql-initdb
 
 appConfig:
+  tenant: roadie
   app:
     baseUrl: https://demo.example.com
     title: Backstage
-    tenant: roadie
     googleAnalyticsTrackingId:
   backend:
     baseUrl: https://demo.example.com
