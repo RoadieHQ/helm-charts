@@ -16,6 +16,10 @@ data:
   {{- if .Values.appConfig.app.googleAnalyticsTrackingId }}
   APP_CONFIG_app_googleAnalyticsTrackingId: {{ .Values.appConfig.app.googleAnalyticsTrackingId | quote | quote }}
   {{- end }}
+  {{- if .Values.appConfig.app.tenant }}
+  APP_CONFIG_app_tenant: {{ .Values.appConfig.app.tenant | quote | quote }}
+  TENANT_NAME: {{ .Values.appConfig.app.tenant | quote | quote }}
+  {{- end }}
   APP_CONFIG_backend_baseUrl: {{ .Values.appConfig.backend.baseUrl | quote | quote }}
   APP_CONFIG_backend_cors_origin: {{ .Values.appConfig.backend.cors.origin | quote | quote }}
   APP_CONFIG_techdocs_storageUrl: {{ .Values.appConfig.techdocs.storageUrl | quote | quote }}
