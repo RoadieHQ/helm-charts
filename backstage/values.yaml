@@ -117,9 +117,8 @@ postgresql:
   volumePermissions:
     enabled: true
   initdbScriptsSecret: backstage-postgresql-initdb
-
+tenant: roadie
 appConfig:
-  tenant: roadie
   app:
     baseUrl: https://demo.example.com
     title: Backstage
