@@ -107,4 +107,7 @@ single-sign-on:
   name: vouch
   config:
     cookieName: VouchCookie
+    {{- if .Values.singleSignOn.vouch.customUserIdFieldName }}
+    customUserIdFieldName: {{ .Values.singleSignOn.vouch.customUserIdFieldName }}
+    {{- end }}
 

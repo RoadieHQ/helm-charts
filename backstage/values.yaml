@@ -33,6 +33,9 @@ backend:
     limits:
       memory: 1024Mi
 
+singleSignOn:
+  vouch: {}
+
 monitor:
   image:
     repository: roadiehq/roadie-backstage-monitor
