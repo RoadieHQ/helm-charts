@@ -81,6 +81,10 @@ secretsSettings:
       internalName: JIRA_API_TOKEN
       description: Jira API Token
       helpUrl: https://roadie.io/docs/integrations/jira/
+    - name: JIRA_API_URL
+      internalName: JIRA_API_URL
+      description: Jira API URL
+      helpUrl: https://roadie.io/docs/integrations/jira/
 {{- end }}
 
 auth:
