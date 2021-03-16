@@ -94,6 +94,8 @@ externalSecrets:
       key: GCP_PRIVATE_KEY
     - name: jira-token
       key: JIRA_API_TOKEN
+    - name: jira-url
+      key: JIRA_API_URL
 
 ingress:
   annotations:
