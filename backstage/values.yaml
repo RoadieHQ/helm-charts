@@ -292,3 +292,4 @@ auth:
   githubToken: g
   gitlabToken: g
   jiraToken: unset
+  jiraUrl: unset
