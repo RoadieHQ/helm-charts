@@ -95,6 +95,8 @@ externalSecrets:
       key: GCP_CLIENT_EMAIL
     - name: gcp-private-key
       key: GCP_PRIVATE_KEY
+    - name: jira-token
+      key: JIRA_API_TOKEN
 
 ingress:
   annotations:
