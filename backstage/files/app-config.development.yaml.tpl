@@ -107,6 +107,21 @@ proxy:
   '/lighthouse': http://{{ include "lighthouse.serviceName" . }}
   {{- toYaml .Values.appConfig.proxy | nindent 4 }}
 
+  {{- if .Values.appConfig.jiraProxy.enabled }}
+  '/jira/api':
+    target:
+      $env:
+        JIRA_API_URL
+    headers:
+      Authorization:
+        $env:
+          JIRA_API_TOKEN
+      Accept: 'application/json'
+      Content-Type: 'application/json'
+      X-Atlassian-Token: 'no-check'
+      User-Agent: "Roadie-Backstage"
+  {{- end }}
+
 single-sign-on:
   name: vouch
   config:
