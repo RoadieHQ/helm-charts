@@ -50,30 +50,30 @@ secretsSettings:
     - name: GITHUB_TOKEN
       internalName: GITHUB_TOKEN
       description: Github PAT used for reading entity yaml files
-      helpUrl: https://docs.google.com/document/d/1tsiJzbZ7kPIhhjHa78Sq94nozlLYOthmciEoONudFYE
+      helpUrl: https://roadie.io/docs/integrations/github-token/
     - name: GITHUB_CLIENT_ID
       internalName: AUTH_GITHUB_CLIENT_ID
       description: Client id for the Github oauth app
-      helpUrl: https://docs.google.com/document/d/1kHVFq5EDMFuA3XMXW4dVrLql0om3XtpOXeZCxNz6984
+      helpUrl: https://roadie.io/docs/integrations/github-client/
     - name: GITHUB_CLIENT_SECRET
       internalName: AUTH_GITHUB_CLIENT_SECRET
       description: Client secret for the Github oauth app
     - name: CIRCLECI_AUTH_TOKEN
       internalName: CIRCLECI_AUTH_TOKEN
       description: Token for the integration with CircleCI
-      helpUrl: https://docs.google.com/document/d/1GsBRG6cY7EpwZt-bmXCHJ3zocaGE8unqSx0dPUCf3D8
+      helpUrl: https://roadie.io/docs/integrations/circleci/
     - name: SENTRY_TOKEN
       internalName: SENTRY_TOKEN
       description: Token for Sentry integration
-      helpUrl: https://docs.google.com/document/d/1kIFThABtevO512ouALW8ZZr308pJsZCGuDaiKV9A6kQ/edit?usp=sharing
+      helpUrl: https://roadie.io/docs/integrations/sentry/
     - name: ROLLBAR_ACCOUNT_TOKEN
       internalName: ROLLBAR_ACCOUNT_TOKEN
       description: Token for Rollbar
-      helpUrl: https://docs.google.com/document/d/19aikKRTxJT9GYBXdCXwmVOU8ccHZr7sJOYSSQqo-m48/edit?usp=sharing
+      helpUrl: https://roadie.io/backstage/plugins/rollbar/
     - name: GCP_CLIENT_EMAIL
       internalName: GCP_CLIENT_EMAIL
       description: Google Cloud Platform Client Email
-      helpUrl: https://docs.google.com/document/d/1gjIYrLIFuQXGu5gvGFuaRhPUPmuiZnbZBz9hk3PxkPM
+      helpUrl: https://roadie.io/docs/integrations/gcp/
     - name: GCP_PRIVATE_KEY
       internalName: GCP_PRIVATE_KEY
       description: Google Cloud Platform Private Key
