@@ -77,6 +77,10 @@ secretsSettings:
     - name: GCP_PRIVATE_KEY
       internalName: GCP_PRIVATE_KEY
       description: Google Cloud Platform Private Key
+    - name: JIRA_API_TOKEN
+      internalName: JIRA_API_TOKEN
+      description: Jira API Token
+      helpUrl: https://roadie.io/docs/integrations/jira/
 {{- end }}
 
 auth:
