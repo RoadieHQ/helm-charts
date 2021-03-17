@@ -156,6 +156,8 @@ appConfig:
     baseUrl: https://demo.example.com/lighthouse-api
   rollbar:
     organization: roadie
+  jiraProxy:
+    enabled: false
 
   # Auth config has recently moved into the app config file in upstream Backstage. However,
   # most of this config simply mandates that items like the client id and client secret should
