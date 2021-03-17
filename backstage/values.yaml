@@ -157,7 +157,7 @@ appConfig:
   rollbar:
     organization: roadie
   jiraProxy:
-    enabled: false
+    enabled: true
 
   # Auth config has recently moved into the app config file in upstream Backstage. However,
   # most of this config simply mandates that items like the client id and client secret should
