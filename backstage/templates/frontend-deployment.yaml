@@ -15,6 +15,7 @@ spec:
     metadata:
       annotations:
         ad.datadoghq.com/backstage.logs: '[{"source":"backstage","service":"frontend"}]'
+        reloader.stakater.com/auto: "true"
       labels:
         app: backstage
         component: frontend

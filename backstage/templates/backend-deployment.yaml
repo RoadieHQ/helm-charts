@@ -16,7 +16,7 @@ spec:
       annotations:
         ad.datadoghq.com/backstage.logs: '[{"source":"backstage","service":"backend"}]'
         {{- if .Values.externalSecrets.enabled }}
-        secret.reloader.stakater.com/reload: {{ include "backstage.externalSecretsList" . }}
+        reloader.stakater.com/auto: "true"
         {{- end }}
       labels:
         app: backstage
