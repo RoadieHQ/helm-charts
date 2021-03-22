@@ -13,8 +13,8 @@ metadata:
 data:
   APP_CONFIG_app_baseUrl: {{ .Values.appConfig.app.baseUrl | quote | quote }}
   APP_CONFIG_app_title: {{ .Values.appConfig.app.title | quote | quote }}
-  {{- if .Values.appConfig.app.googleAnalyticsTrackingId }}
-  APP_CONFIG_app_googleAnalyticsTrackingId: {{ .Values.appConfig.app.googleAnalyticsTrackingId | quote | quote }}
+  {{- if .Values.appConfig.app.googleTagManagerId }}
+  APP_CONFIG_app_googleTagManagerId {{ .Values.appConfig.app.googleTagManagerId | quote | quote }}
   {{- end }}
   {{- if .Values.tenant }}
   APP_CONFIG_tenant: {{ .Values.tenant | quote | quote }}
