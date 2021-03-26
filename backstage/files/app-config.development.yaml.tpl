@@ -108,7 +108,6 @@ authenticatedProxy:
 {{- end }}
 
 proxy:
-  '/lighthouse': http://{{ include "lighthouse.serviceName" . }}
   {{- toYaml .Values.appConfig.proxy | nindent 4 }}
 
   {{- if .Values.appConfig.jiraProxy.enabled }}
