@@ -1,5 +1,7 @@
 backend:
+{{- if .Values.lighthouse.enabled }}
   lighthouseHostname: {{ include "lighthouse.serviceName" . | quote }}
+{{- end }}
   listen:
       port: {{ .Values.appConfig.backend.listen.port | default 7000 }}
   csp:
