@@ -1,7 +1,9 @@
 This repository contains all of RoadieHQ's public Helm charts.
 
-For example, you can use the chart in the `backstage` directory to install a fully working
-Backstage instance into Kubernetes.
+> **NOTE: the backstage chart is deprecated. Please use the chart in [the official repo][repo] instead.**
+
+[repo]: https://github.com/backstage/backstage/tree/master/contrib/chart/backstage
+
 
 ## Using the charts
 
@@ -9,7 +11,7 @@ Typically, these charts can be installed in a pattern like this:
 
 ```shell
 helm repo add roadie https://charts.roadie.io
-helm install backstage roadie/backstage
+helm install kubewise roadie/kubewise
 ```
 
 They may require pre-requisites such as PostgreSQL databases to be set up before running
@@ -33,5 +35,5 @@ Wait for the GitHub action which indexes and publishes the chars to run, then:
 
 ```shell
 helm repo update
-helm upgrade backstage roadie/backstage -f values-overrides.yaml
+helm upgrade kubewise roadie/kubewise -f values-overrides.yaml
 ```
