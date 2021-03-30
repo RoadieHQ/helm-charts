@@ -296,4 +296,4 @@ auth:
   githubToken: g
   gitlabToken: g
   jiraToken: unset
-  jiraUrl: unset
+  jiraUrl: https://roadie-dev.atlassian.net
