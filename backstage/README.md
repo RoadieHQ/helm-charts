@@ -1,3 +1,10 @@
+# Deprecated
+
+This chart is **deprecated**. Please use the chart in the [official backstage repo][repo] instead.
+
+[repo]: https://github.com/backstage/backstage/tree/master/contrib/chart/backstage
+
+
 # Backstage demo helm charts
 
 This folder contains Helm charts that can easily create a Kubernetes deployment of a demo Backstage app.
