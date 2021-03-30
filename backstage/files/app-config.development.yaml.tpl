@@ -85,6 +85,9 @@ secretsSettings:
       internalName: JIRA_API_URL
       description: Jira API URL
       helpUrl: https://roadie.io/docs/integrations/jira/
+    - name: PAGERDUTY_TOKEN
+      internalName: PAGERDUTY_TOKEN
+      description: Token for authenticating against the PagerDuty API
 {{- end }}
 
 auth:
@@ -129,6 +132,13 @@ proxy:
       Content-Type: 'application/json'
       X-Atlassian-Token: 'no-check'
       User-Agent: "Roadie-Backstage"
+  {{- end }}
+  {{- if .Values.appConfig.pagerduty.enabled }}
+  '/pagerduty':
+    target: https://api.pagerduty.com
+    headers:
+      Authorization:
+        $env: PAGERDUTY_TOKEN
   {{- end }}
 
 single-sign-on:
