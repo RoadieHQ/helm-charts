@@ -99,6 +99,8 @@ externalSecrets:
       key: JIRA_API_TOKEN
     - name: jira-url
       key: JIRA_API_URL
+    - name: pagerduty-token
+      key: PAGERDUTY_TOKEN
 
 ingress:
   annotations:
@@ -157,6 +159,8 @@ appConfig:
   rollbar:
     organization: roadie
   jiraProxy:
+    enabled: false
+  pagerduty:
     enabled: false
 
   # Auth config has recently moved into the app config file in upstream Backstage. However,
@@ -297,3 +301,4 @@ auth:
   gitlabToken: g
   jiraToken: unset
   jiraUrl: https://roadie-dev.atlassian.net
+  pagerdutyToken: unset
