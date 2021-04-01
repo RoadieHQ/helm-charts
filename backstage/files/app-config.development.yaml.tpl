@@ -138,8 +138,7 @@ proxy:
   '/pagerduty':
     target: https://api.pagerduty.com
     headers:
-      Authorization:
-        $env: PAGERDUTY_TOKEN
+      Authorization: "Token token=${PAGERDUTY_TOKEN}"
   {{- end }}
 
 single-sign-on:
