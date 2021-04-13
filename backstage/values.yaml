@@ -19,7 +19,7 @@ frontend:
 backend:
   enabled: true
   nodeEnv: development
-  demoData: true
+  demoData: false
   locations: []
   replicaCount: 1
   image:
