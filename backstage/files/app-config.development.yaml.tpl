@@ -104,9 +104,11 @@ scaffolder:
 sentry:
   organization: {{ .Values.appConfig.sentry.organization | quote }}
 
+{{- if .Values.appConfig.techdocs }}
 techdocs:
-  generators:
-    techdocs: 'local'
+  {{- toYaml .Values.appConfig.techdocs | nindent 2 }}
+{{- end }}
+
 
 {{- if .Values.appConfig.authenticatedProxy }}
 authenticatedProxy:
