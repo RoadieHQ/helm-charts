@@ -134,6 +134,7 @@ appConfig:
     googleTagManagerId:
   backend:
     baseUrl: https://demo.example.com
+    refreshLoopMs: 100000
     listen:
       port: 7000
     cors:

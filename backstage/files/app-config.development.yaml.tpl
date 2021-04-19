@@ -1,4 +1,5 @@
 backend:
+  refreshLoopMs: {{ .Values.appConfig.backend.refreshLoopMs }}
 {{- if .Values.lighthouse.enabled }}
   lighthouseHostname: {{ include "lighthouse.serviceName" . | quote }}
 {{- end }}
