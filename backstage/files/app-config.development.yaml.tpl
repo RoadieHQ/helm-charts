@@ -146,8 +146,8 @@ proxy:
 
 single-sign-on:
   name: vouch
-  {{- if .Values.singleSignOn.retrieveGithubUsername }}
-  retrieveGithubUsername: {{ .Values.singleSignOn.retrieveGithubUsername }}
+  {{- if .Values.singleSignOn.backstageIdentityProvider }}
+  backstageIdentityProvider: {{ .Values.singleSignOn.backstageIdentityProvider }}
   {{- end }}
   config:
     cookieName: VouchCookie
