@@ -132,6 +132,20 @@ appConfig:
     baseUrl: https://demo.example.com
     title: Backstage
     googleTagManagerId:
+    support:
+      url: mailto:support@roadie.io
+      items:
+        - title: Documentation
+          icon: docs
+          links:
+            - url: https://roadie.io/docs/
+              title: Roadie Documentation
+        - title: Email
+          icon: email
+          links:
+            - url: mailto:support@roadie.io
+              title: support@roadie.io
+
   backend:
     baseUrl: https://demo.example.com
     refreshLoopMs: 100000
