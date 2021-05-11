@@ -13,7 +13,7 @@ metadata:
 data:
   APP_CONFIG_app_baseUrl: {{ .Values.appConfig.app.baseUrl | quote | quote }}
   APP_CONFIG_app_title: {{ .Values.appConfig.app.title | quote | quote }}
-  APP_CONFIG_app_support: {{ toJson .Values.appConfig.app.support | quote | quote }}
+  APP_CONFIG_app_support: {{ toJson .Values.appConfig.app.support }}
   {{- if .Values.appConfig.app.googleTagManagerId }}
   APP_CONFIG_app_googleTagManagerId: {{ .Values.appConfig.app.googleTagManagerId | quote | quote }}
   {{- end }}
