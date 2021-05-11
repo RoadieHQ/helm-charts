@@ -132,6 +132,7 @@ appConfig:
     baseUrl: https://demo.example.com
     title: Backstage
     googleTagManagerId:
+    hiddenFeatures:
     support:
       url: mailto:support@roadie.io
       items:
