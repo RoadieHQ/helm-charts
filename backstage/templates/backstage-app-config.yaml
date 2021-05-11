@@ -15,7 +15,7 @@ data:
   APP_CONFIG_app_title: {{ .Values.appConfig.app.title | quote | quote }}
   APP_CONFIG_app_support: {{ toJson .Values.appConfig.app.support | quote }}
   {{- if .Values.appConfig.app.hiddenFeatures }}
-  APP_CONFIG_app_hiddenFeatures: {{ .Values.appConfig.app.hiddenFeatures | quote }}
+  APP_CONFIG_app_hiddenFeatures: {{ .Values.appConfig.app.hiddenFeatures | quote | quote }}
   {{- end }}
   {{- if .Values.appConfig.app.googleTagManagerId }}
   APP_CONFIG_app_googleTagManagerId: {{ .Values.appConfig.app.googleTagManagerId | quote | quote }}
