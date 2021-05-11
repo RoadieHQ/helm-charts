@@ -133,6 +133,7 @@ appConfig:
     title: Backstage
     googleTagManagerId:
     hiddenFeatures:
+    catalogIndexPage:
     support:
       url: mailto:support@roadie.io
       items:

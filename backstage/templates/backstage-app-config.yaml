@@ -21,6 +21,9 @@ data:
   APP_CONFIG_app_googleTagManagerId: {{ .Values.appConfig.app.googleTagManagerId | quote | quote }}
   {{- end }}
   {{- if .Values.tenant }}
+  {{- if .Values.appConfig.app.catalogIndexPage }}
+  APP_CONFIG_app_catalogIndexPage: {{ toJson .Values.appConfig.app.catalogIndexPage | quote }}
+  {{- end }}
   APP_CONFIG_tenant: {{ .Values.tenant | quote | quote }}
   TENANT_NAME: {{ .Values.tenant | quote | quote }}
   {{- end }}
