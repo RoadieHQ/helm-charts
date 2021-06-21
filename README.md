@@ -11,7 +11,7 @@ Typically, these charts can be installed in a pattern like this:
 
 ```shell
 helm repo add roadie https://charts.roadie.io
-helm install kubewise roadie/sample-service
+helm install sample-service roadie/sample-service
 ```
 
 ## Releasing new chart versions
@@ -32,5 +32,5 @@ Wait for the GitHub action which indexes and publishes the chars to run, then:
 
 ```shell
 helm repo update
-helm upgrade kubewise roadie/sample-service -f values-overrides.yaml
+helm upgrade sample-service roadie/sample-service -f values-overrides.yaml
 ```
