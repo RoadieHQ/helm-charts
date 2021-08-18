@@ -10,9 +10,9 @@ image:
   pullPolicy: IfNotPresent
 
 appConfig:
-  rollbarAccessToken:
-  sentryIngestionUrl:
-  newRelicLicenseKey:
+  rollbarAccessToken: ""
+  sentryIngestionUrl: ""
+  newRelicLicenseKey: ""
   nodeEnv: production
 
 containerPort: 3000
