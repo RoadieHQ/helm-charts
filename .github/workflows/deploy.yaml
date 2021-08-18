@@ -1,0 +1,28 @@
+---
+name: Deploy Sample Service
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'sample-service/**'
+
+jobs:
+  deploy-dev:
+    defaults:
+      run:
+        working-directory: ./sample-service
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: peymanmortazavi/eks-helm-deploy@v1
+        with:
+          aws-access-key-id: ${{ secrets.INF_AUTOMATION_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.INF_AUTOMATION_AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+          cluster-name: dev0
+          namespace: sample-service
+          name: sample-service
+          chart-path: sample-service/
+
