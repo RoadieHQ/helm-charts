@@ -72,27 +72,6 @@ ingress:
   tls: []
 
 auth:
-  google:
-    clientId: a
-    clientSecret: a
-  github:
-    clientId: c
-    clientSecret: c
-  gitlab:
-    clientId: b
-    clientSecret: b
-    baseUrl: b
-  okta:
-    clientId: b
-    clientSecret: b
-    audience: b
-  oauth2:
-    clientId: b
-    clientSecret: b
-    authUrl: b
-    tokenUrl: b
-  sentryToken: e
-  rollbarAccountToken: f
 
 issuer:
   email: hello@example.com

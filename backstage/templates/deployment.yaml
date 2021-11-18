@@ -1,41 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "backstage.fullname" . }}-frontend
-
-spec:
-  replicas: {{ .Values.frontend.replicaCount }}
-
-  selector:
-    matchLabels:
-      app: backstage
-      component: frontend
-
-  template:
-    metadata:
-      labels:
-        app: backstage
-        component: frontend
-
-    spec:
-      containers:
-        - name: {{ .Chart.Name }}-frontend
-          image: {{ .Values.frontend.image }}
-          imagePullPolicy: {{ .Values.frontend.imagePullPolicy }}
-          env:
-            - name: APP_CONFIG_backend_baseUrl
-              value: {{ .Values.backend.baseUrl }}
-            - name: APP_CONFIG_app_baseUrl 
-              value: {{ .Values.frontend.baseUrl }}
-          ports:
-            - containerPort: {{ .Values.frontend.containerPort }}
-          resources:
-            {{- toYaml .Values.backend.resources | nindent 12 }}
-      
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
   name: {{ include "backstage.fullname" . }}-backend
 
 spec:
@@ -69,18 +34,6 @@ spec:
               value: {{ .Values.backend.db.host }}
             - name: POSTGRES_SSL
               value: {{ .Values.backend.db.ssl }}
-            - name: APP_CONFIG_backend_baseUrl
-              value: {{ .Values.backend.baseUrl }}
-            - name: APP_CONFIG_app_baseUrl 
-              value: {{ .Values.frontend.baseUrl }}
-            - name: APP_CONFIG_backend_cors_origin
-              value: {{ .Values.backend.cors.origin }}
-            - name: JENKINS_URL
-              value: {{ .Values.jenkins.url }}
-            - name: APP_CONFIG_techdocs_storageUrl
-              value: {{ .Values.techdocs.storageUrl }}
-            - name: APP_CONFIG_techdocs_requestUrl
-              value: {{ .Values.techdocs.requestUrl }}
           envFrom:
             - configMapRef:
                 name: {{ include "backstage.fullname" . }}-auth
