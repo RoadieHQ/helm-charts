@@ -32,7 +32,7 @@ spec:
               value: {{ .Values.backend.db.user }}
             - name: POSTGRES_HOST
               value: {{ .Values.backend.db.host }}
-            - name: POSTGRES_SSL
+            - name: PGSSLMODE
               value: {{ .Values.backend.db.ssl }}
           envFrom:
             - configMapRef:
