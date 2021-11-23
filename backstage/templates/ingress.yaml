@@ -24,4 +24,3 @@ spec:
           - backend:
               serviceName: backstage
               servicePort: 80
-  {{- end }}

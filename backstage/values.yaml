@@ -18,6 +18,11 @@ backend:
       memory: 512Mi
     limits:
       memory: 1024Mi
+  db:
+    password: ""
+
+scaffolder:
+  githubToken: ""
 
 lighthouse:
   enabled: false
@@ -55,6 +60,10 @@ ingress:
   tls: []
 
 auth:
+  github:
+    clientSecret: ""
+  microsoft:
+    clientSecret: ""
 
 issuer:
   email: hello@example.com
