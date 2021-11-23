@@ -1,27 +1,9 @@
-{{- if .Values.frontend.enabled }}
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ include "backstage.fullname" . }}-frontend
-
-spec:
-  ports:
-    - port: 80
-      targetPort: {{ .Values.frontend.containerPort }}
-
-  selector:
-    app: backstage
-    component: frontend
-
-  type: ClusterIP
-{{- end }}
-
 {{- if .Values.backend.enabled }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "backstage.fullname" . }}-backend
+  name: {{ include "backstage.fullname" . }}
 
 spec:
   ports:

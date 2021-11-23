@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "backstage.fullname" . }}-backend
+  name: {{ include "backstage.fullname" . }}
 
 spec:
   replicas: {{ .Values.backend.replicaCount }}
@@ -19,7 +19,7 @@ spec:
 
     spec:
       containers:
-        - name: {{ .Chart.Name }}-backend
+        - name: {{ .Chart.Name }}
           image: {{ .Values.backend.image }}
           imagePullPolicy: {{ .Values.backend.imagePullPolicy }}
           ports:
@@ -34,6 +34,10 @@ spec:
               value: {{ .Values.backend.db.host }}
             - name: PGSSLMODE
               value: {{ .Values.backend.db.ssl }}
+            - name: APP_CONFIG_app_baseUrl
+              value: https://{{ .Values.ingress.host }}
+            - name: APP_CONFIG_backend_baseUrl
+              value: https://{{ .Values.ingress.host }}
           envFrom:
             - configMapRef:
                 name: {{ include "backstage.fullname" . }}-auth
