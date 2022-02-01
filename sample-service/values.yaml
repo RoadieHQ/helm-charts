@@ -13,6 +13,8 @@ appConfig:
   rollbarAccessToken: ""
   sentryIngestionUrl: ""
   newRelicLicenseKey: ""
+  newRelicAppName: ""
+  bugsnagApiKey: ""
   nodeEnv: production
 
 containerPort: 3000
