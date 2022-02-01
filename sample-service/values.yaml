@@ -13,7 +13,7 @@ appConfig:
   rollbarAccessToken: ""
   sentryIngestionUrl: ""
   newRelicLicenseKey: ""
-  newRelicAppName: ""
+  newRelicAppName: "sample-service"
   bugsnagApiKey: ""
   nodeEnv: production
 
