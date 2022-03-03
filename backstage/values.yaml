@@ -10,7 +10,7 @@ backend:
   replicaCount: 1
   image: roadiehq/backstage-k8s-demo-backend
   imagePullPolicy: IfNotPresent
-  containerPort: 7000
+  containerPort: 7001
   cors:
     origin: https://demo.example.com
   resources:
