@@ -14,7 +14,7 @@ helm repo add roadie https://charts.roadie.io
 helm install kubewise roadie/kubewise
 ```
 
-They may require pre-requisites such as PostgreSQL databases to be set up before running
+They may require pre-requisites such as PostgreSQL databases to be set up before running 
 Helm (backstage does!).
 
 ## Releasing new chart versions
