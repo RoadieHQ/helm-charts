@@ -3,7 +3,7 @@ kind: Component
 metadata:
   name: helm-charts
   description: |
-    All Roadie Helm charts and packages.
+    All Roadie Helm charts and packages
   annotations:
     github.com/project-slug: roadiehq/helm-charts
   tags:
