@@ -11,5 +11,5 @@ metadata:
     - oss
 spec:
   type: website
-  owner: group:roadie
+  owner: group:open-source
   lifecycle: experimental
