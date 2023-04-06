@@ -1,0 +1,65 @@
+---
+# Source: roadie-kubernetes-cluster-access/templates/service-account.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: roadie
+  namespace: default
+---
+# Source: roadie-kubernetes-cluster-access/templates/cluster-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: roadie-read-access
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - configmaps
+      - services
+      - deployments
+      - replicasets
+      - horizontalpodautoscalers
+      - ingresses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+      - cronjobs
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+      - apps
+      - autoscaling
+      - networking.k8s.io
+    resources:
+      - deployments
+      - ingresses
+      - replicasets
+      - horizontalpodautoscalers
+    verbs:
+      - get
+      - list
+      - watch
+---
+# Source: roadie-kubernetes-cluster-access/templates/cluster-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: roadie-role-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: roadie-read-access
+subjects:
+  - kind: ServiceAccount
+    name: roadie
+    namespace: default
