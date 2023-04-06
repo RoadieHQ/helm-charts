@@ -1,0 +1,52 @@
+
+clusterRoleBinding:
+  name: roadie-role-binding
+
+clusterRole:
+  name: roadie-read-access
+  rules:
+    set1:
+      apiGroups:
+        - ""
+      resources:
+        - "pods"
+        - "configmaps"
+        - "services"
+        - "deployments"
+        - "replicasets"
+        - "horizontalpodautoscalers"
+        - "ingresses"
+      verbs:
+        - "get"
+        - "list"
+        - "watch"
+    set2:
+      apiGroups:
+        - "batch"
+      resources:
+        - "jobs"
+        - "cronjobs"
+      verbs:
+        - "get"
+        - "list"
+        - "watch"
+    set3:
+      apiGroups:
+        - "extensions"
+        - "apps"
+        - "autoscaling"
+        - "networking.k8s.io"
+      resources:
+        - "deployments"
+        - "ingresses"
+        - "replicasets"
+        - "horizontalpodautoscalers"
+      verbs:
+        - "get"
+        - "list"
+        - "watch"
+
+serviceAccount:
+  name: roadie
+  namespace: default
+
