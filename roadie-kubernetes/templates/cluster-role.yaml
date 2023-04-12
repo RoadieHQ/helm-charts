@@ -17,6 +17,6 @@ roleRef:
   kind: ClusterRole
   name: {{ .Values.clusterRole.name }}
 subjects:
-  - kind: ServiceAccount
-    name: {{ .Values.serviceAccount.name }}
-    namespace: {{ .Values.serviceAccount.namespace }}
+  - kind: User
+    name: {{ .Values.user.name }}
+    namespace: {{ .Values.user.namespace }}

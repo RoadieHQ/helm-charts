@@ -46,7 +46,7 @@ clusterRole:
           - "list"
           - "watch"
 
-serviceAccount:
+user:
   name: roadie
   namespace: default
 
