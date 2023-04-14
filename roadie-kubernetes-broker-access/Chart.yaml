@@ -1,0 +1,15 @@
+apiVersion: v2
+name: roadie-kubernetes-broker-access
+description: Allows read access from Roadie Backstage to a Kubernetes cluster with a Service Account
+type: application
+version: 0.0.1
+appVersion: 0.1.0
+sources:
+  - https://github.com/RoadieHQ/helm-charts
+maintainers:
+  - name: Brian Fletcher
+    email: engineering@roadie.io
+    url: https://roadie.io
+  - name: Sam Blausten
+    email: engineering@roadie.io
+    url: https://roadie.io
