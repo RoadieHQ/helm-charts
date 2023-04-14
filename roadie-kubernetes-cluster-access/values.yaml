@@ -1,4 +1,12 @@
 
+broker:
+  enabled: false
+  serviceAccount:
+    name: roadie-broker-pod
+    namespace: default
+  token:
+  tenantName:
+
 clusterRoleBinding:
   name: roadie-role-binding
 

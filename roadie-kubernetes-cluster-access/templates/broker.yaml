@@ -1,0 +1,50 @@
+{{ if .Values.broker.enabled }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Values.broker.serviceAcount.name }}
+  namespace: {{ .Values.broker.serviceAcount.namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: roadie-broker-pod-role-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ .Values.clusterRole.name }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ .Values.broker.serviceAcount.name }}
+    namespace: {{ .Values.broker.serviceAcount.namespace }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broker-client
+  labels:
+    app: roadie-broker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: roadie-broker
+  template:
+    metadata:
+      labels:
+        app: roadie-broker
+    spec:
+      serviceAccountName: roadie-broker-pod
+      containers:
+        - name: roadie-broker
+          image: roadiehq/broker:kubernetes
+          imagePullPolicy: Always
+          env:
+            - name: BROKER_TOKEN
+              value: {{ .Values.broker.token }}
+            - name: BROKER_SERVER_URL
+              value: https://{{ .Values.broker.tenantName }}.broker.roadie.so
+          ports:
+            - containerPort: 8000
+{{ end }}
