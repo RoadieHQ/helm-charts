@@ -1,5 +1,5 @@
 
-## Roadie K8s read access role
+## Roadie K8s read access 
 
 This chart sets up read access to your Kubernetes cluster from Roadie so that the Backstage Kubernetes plugin running in Roadie's infrastructure can read information from your cluster running in AWS.
 
