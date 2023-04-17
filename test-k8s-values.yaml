@@ -1,8 +1,0 @@
-
-broker:
-  enabled: true
-  serviceAccount:
-    name: roadie-test-broker-pod
-    namespace: default
-  token: kube-api
-  tenantName: roadie
