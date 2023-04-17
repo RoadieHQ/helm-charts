@@ -2,7 +2,7 @@ name: Release helm charts
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   index_charts:
