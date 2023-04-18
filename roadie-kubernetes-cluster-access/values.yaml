@@ -1,8 +1,12 @@
 
 broker:
   enabled: false
+  image: roadiehq/broker:4231273077.6.1-kubernetes
   serviceAccount:
-    name: roadie-broker-pod
+    name: roadie-broker
+    namespace: default
+  deployment:
+    name: roadie-broker
     namespace: default
   token:
   tenantName:

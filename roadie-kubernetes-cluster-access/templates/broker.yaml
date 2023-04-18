@@ -3,8 +3,8 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ .Values.broker.serviceAcount.name }}
-  namespace: {{ .Values.broker.serviceAcount.namespace }}
+  name: {{ .Values.broker.serviceAccount.name }}
+  namespace: {{ .Values.broker.serviceAccount.namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -16,13 +16,14 @@ roleRef:
   name: {{ .Values.clusterRole.name }}
 subjects:
   - kind: ServiceAccount
-    name: {{ .Values.broker.serviceAcount.name }}
-    namespace: {{ .Values.broker.serviceAcount.namespace }}
+    name: {{ .Values.broker.serviceAccount.name }}
+    namespace: {{ .Values.broker.serviceAccount.namespace }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: broker-client
+  name: {{ .Values.broker.deployment.name }}
+  namespace: {{ .Values.broker.deployment.namespace }}
   labels:
     app: roadie-broker
 spec:
@@ -35,10 +36,10 @@ spec:
       labels:
         app: roadie-broker
     spec:
-      serviceAccountName: roadie-broker-pod
+      serviceAccountName: {{ .Values.broker.serviceAccount.name }}
       containers:
         - name: roadie-broker
-          image: roadiehq/broker:kubernetes
+          image: {{ .Values.broker.image }}
           imagePullPolicy: Always
           env:
             - name: BROKER_TOKEN
