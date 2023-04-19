@@ -4,7 +4,6 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: {{ .Values.broker.serviceAccount.name }}
-  namespace: {{ .Values.broker.serviceAccount.namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -17,13 +16,12 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: {{ .Values.broker.serviceAccount.name }}
-    namespace: {{ .Values.broker.serviceAccount.namespace }}
+    namespace: {{ .Release.Namespace }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.broker.deployment.name }}
-  namespace: {{ .Values.broker.deployment.namespace }}
   labels:
     app: roadie-broker
 spec:
@@ -46,6 +44,8 @@ spec:
               value: {{ .Values.broker.token }}
             - name: BROKER_SERVER_URL
               value: https://{{ .Values.broker.tenantName }}.broker.roadie.so
+            - name: CA_CERT
+              value: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
           ports:
             - containerPort: 8000
 {{ end }}

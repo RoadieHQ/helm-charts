@@ -1,7 +1,7 @@
 
 broker:
   enabled: false
-  image: roadiehq/broker:4231273077.6.1-kubernetes
+  image: roadiehq/broker:kubernetes
   serviceAccount:
     name: roadie-broker
     namespace: default
@@ -28,6 +28,7 @@ clusterRole:
           - "replicasets"
           - "horizontalpodautoscalers"
           - "ingresses"
+          - "namespaces"
         verbs:
           - "get"
           - "list"

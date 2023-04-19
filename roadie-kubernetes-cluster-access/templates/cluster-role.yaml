@@ -19,4 +19,3 @@ roleRef:
 subjects:
   - kind: User
     name: {{ .Values.user.name }}
-    namespace: {{ .Values.user.namespace }}
