@@ -10,3 +10,24 @@ The chart can be installed like this when you are connected to the cluster you w
 helm repo add roadie https://charts.roadie.io
 helm install roadie-kubernetes-cluster-access roadie/roadie-kubernetes
 ```
+
+# Test
+
+To enable the Roadie Broker on your infra so that Roadie can connect to you Kubernetes clusters without needing any secrets, add the following to an override `test-values.yaml` file and pass it to the `helm install` command. 
+```yaml
+broker:
+  enabled: true
+  token: <some-secret-string>
+  tenantName: <your-roadie-tenant-name>
+  serviceAccount:
+    name: roadie-test-broker
+  deployment:
+    name: roadie-test-broker
+```
+
+Connect to the cluster you want to expose to Roadie and install this chart:
+```shell
+helm install roadie-kubernetes-cluster-access ./roadie-kubernetes-cluster-access -f test-values.yaml -n <some-namespace> --create-namespace
+```
+
+
