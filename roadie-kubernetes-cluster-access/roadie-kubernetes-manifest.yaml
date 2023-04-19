@@ -1,11 +1,3 @@
-NAME: roadie-kubernetes-cluster-access
-LAST DEPLOYED: Wed Apr 19 18:30:42 2023
-NAMESPACE: default
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-  √ helm-charts > cd roadie-kubernetes-cluster-access
-  √ roadie-kubernetes-cluster-access > helm template .
 ---
 # Source: roadie-kubernetes-cluster-access/templates/cluster-role.yaml
 apiVersion: rbac.authorization.k8s.io/v1
