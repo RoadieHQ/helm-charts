@@ -8,7 +8,7 @@ broker:
   deployment:
     name: roadie-broker
     namespace: default
-  token:
+  token: roadie-kube-api
   tenantName:
 
 clusterRoleBinding:
