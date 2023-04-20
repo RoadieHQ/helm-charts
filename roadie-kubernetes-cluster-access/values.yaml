@@ -11,6 +11,11 @@ broker:
   token: roadie-kube-api
   tenantName:
 
+serviceAccount:
+  enabled: false
+  name:
+  namespace:
+
 clusterRoleBinding:
   name:
 
