@@ -14,7 +14,7 @@ appConfig:
   sentryIngestionUrl: ""
   newRelicLicenseKey: ""
   newRelicAppName: "sample-service"
-  bugsnagAccessToken: "something"
+  bugsnagAccessToken: ""
   nodeEnv: production
 
 containerPort: 3000
