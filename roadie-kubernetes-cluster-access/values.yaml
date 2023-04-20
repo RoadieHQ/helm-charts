@@ -12,10 +12,10 @@ broker:
   tenantName:
 
 clusterRoleBinding:
-  name: roadie-role-binding
+  name:
 
 clusterRole:
-  name: roadie-read-access
+  name:
   rules:
     set1:
       - apiGroups:
