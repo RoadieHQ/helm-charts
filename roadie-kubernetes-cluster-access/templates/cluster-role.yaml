@@ -17,5 +17,11 @@ roleRef:
   kind: ClusterRole
   name: {{ .Values.clusterRole.name | default (printf "%s-cluster-role" .Release.Name) }}
 subjects:
+  {{ if .Values.serviceAccount.enabled }}
+  - kind: ServiceAccount
+    name: {{ .Values.serviceAccount.name }}
+    namespace: {{ .Values.serviceAccount.namespace }}
+  {{ else }}
   - kind: User
     name: {{ .Values.user.name }}
+  {{ end }}
