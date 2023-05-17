@@ -13,7 +13,7 @@ helm install roadie-kubernetes-cluster-access roadie/roadie-kubernetes-cluster-a
 
 # Testing
 
-Generate test charts using `helm template` i.e. for the Broker configuration `helm template . --set broker.imagePullSecret=something123,broker.enabled=true,broker.token=test1` etc
+Generate test charts using `helm template` i.e. for the Broker configuration `helm template . --set broker.enabled=true,broker.token=test1` etc
 
 # Broker Configuration
 
