@@ -37,6 +37,9 @@ spec:
       serviceAccountName: {{ .Values.broker.serviceAccount.name }}
       containers:
         - name: roadie-broker
+          {{ if .Values.broker.imagePullSecret -}}
+          imagePullSecret: {{ .Values.broker.imagePullSecret }}
+          {{ end -}}
           image: {{ .Values.broker.image }}
           imagePullPolicy: Always
           env:
