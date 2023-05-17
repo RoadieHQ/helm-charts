@@ -2,6 +2,7 @@
 broker:
   enabled: false
   image: roadiehq/broker:kubernetes
+  imagePullSecret:
   serviceAccount:
     name: roadie-broker
     namespace: default
