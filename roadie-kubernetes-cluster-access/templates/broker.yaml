@@ -38,8 +38,8 @@ spec:
       containers:
         - name: roadie-broker
           {{ if .Values.broker.imagePullSecret -}}
-          imagePullSecret:
-            name: {{ .Values.broker.imagePullSecret }}
+          imagePullSecrets:
+            name: {{ .Values.broker.imagePullSecrets }}
           {{ end -}}
           image: {{ .Values.broker.image }}
           imagePullPolicy: Always
