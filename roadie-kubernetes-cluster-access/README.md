@@ -11,6 +11,10 @@ helm repo add roadie https://charts.roadie.io
 helm install roadie-kubernetes-cluster-access roadie/roadie-kubernetes-cluster-access
 ```
 
+# Testing
+
+Generate test charts using `helm template` i.e. for the Broker configuration `helm template . --set broker.imagePullSecret=something123,broker.enabled=true,broker.token=test1` etc
+
 # Broker Configuration
 
 To enable the Roadie Broker on your infra so that Roadie can connect to you Kubernetes clusters without needing any secrets, add the following to an override `test-values.yaml` file and pass it to the `helm install` command. 
