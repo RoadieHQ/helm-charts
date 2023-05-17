@@ -39,7 +39,7 @@ spec:
         - name: roadie-broker
           {{ if .Values.broker.imagePullSecret -}}
           imagePullSecrets:
-            name: {{ .Values.broker.imagePullSecrets }}
+            name: {{ .Values.broker.imagePullSecret }}
           {{ end -}}
           image: {{ .Values.broker.image }}
           imagePullPolicy: Always
