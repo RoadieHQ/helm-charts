@@ -1,0 +1,8 @@
+broker:
+  enabled: true
+  token: test-4.147.0
+  tenantName: roadie
+  serviceAccount:
+    name: roadie-test-broker-4.147.0
+  deployment:
+    name: roadie-test-broker-4.147.0
