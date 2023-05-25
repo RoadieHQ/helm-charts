@@ -17,10 +17,10 @@ roleRef:
   kind: ClusterRole
   name: {{ .Values.clusterRole.name | default (printf "%s-cluster-role" .Release.Name) }}
 subjects:
-  {{ if and (eq .Values.serviceAccount.enabled true)  (eq .Values.broker.enabled false)}}
+  {{ if or (eq .Values.serviceAccount.enabled true)  (eq .Values.broker.enabled true)}}
   - kind: ServiceAccount
-    name: {{ .Values.serviceAccount.name }}
-    namespace: {{ .Values.serviceAccount.namespace }}
+    name: {{ .Values.broker.serviceAccount.name }}
+    namespace: {{ .Release.Namespace }}
   {{ else }}
   - kind: User
     name: {{ .Values.user.name }}
