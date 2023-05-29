@@ -1,7 +1,7 @@
 
 broker:
   enabled: false
-  image: roadiehq/broker:kubernetes
+  image: "roadiehq/broker:kubernetes"
   imagePullSecret:
   serviceAccount:
     name: roadie-broker
@@ -11,6 +11,7 @@ broker:
     namespace: default
   token: roadie-kube-api
   tenantName:
+  securityContext:
 
 serviceAccount:
   enabled: false
