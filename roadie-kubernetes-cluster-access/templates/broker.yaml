@@ -37,6 +37,10 @@ spec:
               value: https://{{ .Values.broker.tenantName }}.broker.roadie.so
             - name: CA_CERT
               value: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            - name: LOG_LEVEL
+              value: {{ .Values.broker.logLevel }}
+            - name: LOG_ENABLE_BODY
+              value: {{ .Values.broker.logBody }}
           ports:
             - containerPort: 8000
           {{- if .Values.broker.securityContext }}
