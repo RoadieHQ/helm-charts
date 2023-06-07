@@ -3,6 +3,8 @@ broker:
   enabled: false
   image: "roadiehq/broker:kubernetes"
   imagePullSecret:
+  logLevel: info
+  logBody: "false"
   serviceAccount:
     name: roadie-broker
     namespace: default
