@@ -13,8 +13,7 @@ broker:
     namespace: default
   token:
   tenantName:
-  containerSecurityContext:
-  podSecurityContext:
+  securityContext:
 
 serviceAccount:
   enabled: false
