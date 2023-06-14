@@ -11,9 +11,10 @@ broker:
   deployment:
     name: roadie-broker
     namespace: default
-  token: roadie-kube-api
+  token:
   tenantName:
-  securityContext:
+  containerSecurityContext:
+  podSecurityContext:
 
 serviceAccount:
   enabled: false
