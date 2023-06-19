@@ -38,6 +38,7 @@ clusterRole:
           - "horizontalpodautoscalers"
           - "ingresses"
           - "namespaces"
+          - "limitranges"
         verbs:
           - "get"
           - "list"
@@ -63,10 +64,21 @@ clusterRole:
           - "ingresses"
           - "replicasets"
           - "horizontalpodautoscalers"
+          - "statefulsets"
+          - "daemonsets"
         verbs:
           - "get"
           - "list"
           - "watch"
+    set4:
+      - apiGroups:
+          - "metrics.k8s.io"
+        resources:
+          - "pods"
+          - "namespaces"
+        verbs:
+          - "get"
+          - "list"
 
 user:
   name: roadie
