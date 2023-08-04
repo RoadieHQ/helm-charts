@@ -26,6 +26,10 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.broker.imagePullSecret }}
       {{ end -}}
+      {{ if .Values.broker.dnsConfig -}}
+      dnsConfig:
+      {{- toYaml .Values.broker.dnsConfig | nindent 8 }}
+      {{ end -}}
       containers:
         - name: roadie-broker
           image: {{ .Values.broker.image }}
