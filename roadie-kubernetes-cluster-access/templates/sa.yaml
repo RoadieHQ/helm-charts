@@ -1,0 +1,8 @@
+{{ if .Values.serviceAccount.create }}
+apiversion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Values.broker.serviceAccount.name }}
+  namespace: {{ .Values.broker.serviceAccount.namespace }}
+{{ end }}
+
