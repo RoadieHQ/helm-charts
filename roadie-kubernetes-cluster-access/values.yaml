@@ -30,6 +30,7 @@ clusterRole:
       - apiGroups:
           - ""
         resources:
+          - "pods/log"
           - "pods"
           - "configmaps"
           - "services"
