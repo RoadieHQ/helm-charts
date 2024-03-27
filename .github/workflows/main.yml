@@ -17,7 +17,7 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Package helm
-        run: ls */Chart.yaml | cut -d/ -f1 | xargs helm package
+        run: ls */Chart.yaml | cut -d/ -f1 | xargs -L 1 bash -c 'cd "$0" && pwd && helm package .'
 
       - name: Index helm
         run: helm repo index .
