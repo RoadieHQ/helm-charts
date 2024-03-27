@@ -1,0 +1,24 @@
+
+broker:
+  enabled: false
+  image: "roadiehq/broker:jenkins"
+  imagePullSecret:
+  logLevel: debug
+  logBody: false
+  serviceAccount:
+    name: roadie-broker
+    namespace: default
+  deployment:
+    name: roadie-broker
+    namespace: default
+  token:
+  tenantName:
+  securityContext:
+
+user:
+  name: roadie
+  namespace: default
+
+jenkins:
+  username:
+  password:
