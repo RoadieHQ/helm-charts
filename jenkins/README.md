@@ -17,7 +17,7 @@ Generate test charts using `helm template` i.e. for the Broker configuration `he
 
 # Broker Configuration
 
-To enable the Roadie Broker on your infra so that Roadie can connect to you Jenkins server without needing any secrets, add the following to an override `test-values.yaml` file and pass it to the `helm install` command. 
+To enable the Roadie Broker on your infra so that Roadie can connect to you Jenkins server without needing any secrets, add the following to an override `custom-jenkins-values.yaml` file and pass it to the `helm install` command. 
 ```yaml
 broker:
   enabled: true
@@ -36,7 +36,7 @@ jenkins:
 Connect to the cluster you want to expose to Roadie and install this chart:
 ```shell
 helm repo add roadie https://charts.roadie.io
-helm install jenkins roadie/jenkins -f test-values.yaml -n <some-namespace> --create-namespace
+helm install jenkins roadie/jenkins -f custom-jenkins-values.yaml -n <some-namespace> --create-namespace
 ```
 
 
