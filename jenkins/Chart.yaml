@@ -2,8 +2,8 @@ apiVersion: v2
 name: jenkins
 description: Allows read access from Roadie Backstage to a Jenkins instance
 type: application
-version: 0.1.5
-appVersion: 0.1.5
+version: 0.0.1
+appVersion: 0.0.1
 sources:
   - https://github.com/RoadieHQ/helm-charts
 maintainers:
@@ -13,6 +13,6 @@ maintainers:
   - name: Sam Blausten
     email: engineering@roadie.io
     url: https://roadie.io
-  - name: Ian LInk
+  - name: Ian Link
     email: engineering@roadie.io
     url: https://roadie.io

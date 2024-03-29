@@ -6,10 +6,10 @@ broker:
   logLevel: debug
   logBody: false
   serviceAccount:
-    name: roadie-broker
+    name: roadie-jenkins-broker
     namespace: default
   deployment:
-    name: roadie-broker
+    name: roadie-jenkins-broker
     namespace: default
   token:
   tenantName:
