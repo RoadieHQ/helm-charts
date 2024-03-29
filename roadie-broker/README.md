@@ -3,6 +3,8 @@
 
 This chart sets up secure access to services (like Jenkins) hosted on internal infrastructure from Roadie so that the Backstage plugins running in Roadie's infrastructure can read information without exposing secrets to Roadie.
 
+It is designed to use images with the [Snyk Broker client](https://docs.snyk.io/enterprise-setup/snyk-broker) configured with `accept.json` for different services. Some images have already been created by Roadie for immediate use and can be found here [https://hub.docker.com/r/roadiehq/broker](https://hub.docker.com/r/roadiehq/broker/tags?page=1&ordering=name)
+
 The chart can be installed like this when you are connected to the cluster you want to add it to:
 ```shell
 helm repo add roadie https://charts.roadie.io
