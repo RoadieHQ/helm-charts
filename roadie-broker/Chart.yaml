@@ -1,9 +1,9 @@
 apiVersion: v2
-name: roadie-kubernetes-cluster-access
-description: Allows read access from Roadie Backstage to a Kubernetes cluster
+name: roadie-broker
+description: Allows access from Roadie Backstage to internal services via a Snyk Broker Client
 type: application
-version: 0.1.6
-appVersion: 0.1.6
+version: 0.0.1
+appVersion: 0.0.1
 sources:
   - https://github.com/RoadieHQ/helm-charts
 maintainers:
