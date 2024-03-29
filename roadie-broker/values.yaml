@@ -1,0 +1,19 @@
+
+broker:
+  image:
+  token:
+  tenantName:
+  appName: roadie-broker
+  imagePullSecret:
+  logLevel: debug
+  logBody: false
+  serviceAccount:
+    name: roadie-broker
+    namespace: default
+  deployment:
+    name: roadie-broker
+    namespace: default
+  dnsConfig:
+  securityContext:
+  envFrom: []
+  env: []

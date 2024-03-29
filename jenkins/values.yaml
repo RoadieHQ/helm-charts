@@ -1,6 +1,4 @@
-
 broker:
-  enabled: false
   image: "roadiehq/broker:jenkins"
   imagePullSecret:
   logLevel: debug
@@ -14,11 +12,10 @@ broker:
   token:
   tenantName:
   securityContext:
-
-user:
-  name: roadie
-  namespace: default
-
-jenkins:
-  username:
-  password:
+  dnsConfig:
+  envFrom: []
+  env:
+    - name: JENKINS_USERNAME
+      value:
+    - name: JENKINS_PASSWORD
+      value:

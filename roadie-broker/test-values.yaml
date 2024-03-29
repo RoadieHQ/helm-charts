@@ -1,0 +1,16 @@
+broker:
+  image: "roadiehq/broker:kubernetes"
+  imagePullSecret:
+  logLevel: debug
+  logBody: false
+  serviceAccount:
+    name: roadie-broker-test-generic-1
+    namespace: default
+  deployment:
+    name: roadie-broker-test-generic-1
+    namespace: default
+  token: test-sam-1
+  tenantName: roadie
+  securityContext:
+  envFrom: [ ]
+  env: [ ]
