@@ -26,6 +26,10 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.broker.imagePullSecret }}
       {{ end -}}
+      {{ if .Values.broker.dnsConfig -}}
+      dnsConfig:
+      {{- toYaml .Values.broker.dnsConfig | nindent 8 }}
+      {{ end -}}
       containers:
         - name: roadie-broker
           image: {{ .Values.broker.image }}
@@ -41,6 +45,13 @@ spec:
               value: {{ .Values.broker.logLevel }}
             - name: LOG_ENABLE_BODY
               value: "{{ .Values.broker.logBody }}"
+            {{- if .Values.broker.env }}
+            {{- toYaml .Values.broker.env | nindent 12 }}
+            {{- end }}
+            {{- if .Values.broker.envFrom }}
+          envFrom:
+            {{- toYaml .Values.broker.envFrom | nindent 12 }}
+            {{- end }}
           ports:
             - containerPort: 8000
           {{- if .Values.broker.securityContext }}

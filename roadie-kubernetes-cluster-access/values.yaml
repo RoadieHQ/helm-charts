@@ -13,7 +13,10 @@ broker:
     namespace: default
   token:
   tenantName:
+  dnsConfig:
   securityContext:
+  envFrom: []
+  env: []
 
 serviceAccount:
   enabled: false
