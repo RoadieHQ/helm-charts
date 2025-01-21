@@ -2,8 +2,8 @@ apiVersion: v2
 name: roadie-kubernetes-cluster-access
 description: Allows read access from Roadie Backstage to a Kubernetes cluster
 type: application
-version: 0.1.8
-appVersion: 0.1.8
+version: 0.1.9
+appVersion: 0.1.9
 sources:
   - https://github.com/RoadieHQ/helm-charts
 maintainers:

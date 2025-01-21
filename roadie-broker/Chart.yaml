@@ -2,8 +2,8 @@ apiVersion: v2
 name: roadie-broker
 description: Allows access from Roadie Backstage to internal services via a Snyk Broker Client
 type: application
-version: 0.0.2
-appVersion: 0.0.2
+version: 0.0.3
+appVersion: 0.0.3
 sources:
   - https://github.com/RoadieHQ/helm-charts
 maintainers:
