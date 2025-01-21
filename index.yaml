@@ -3,7 +3,7 @@ entries:
   kubewise:
   - apiVersion: v2
     appVersion: 0.11.11
-    created: "2025-01-03T19:12:50.907816269Z"
+    created: "2025-01-21T18:45:37.184218533Z"
     description: Get Helm notifications in your team chat
     digest: f5efbbca95a8812666885729f7f37cbdd81da99140dcb041f374b2423cd2db47
     icon: https://github.com/RoadieHQ/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -20,7 +20,7 @@ entries:
     version: 0.11.11
   - apiVersion: v2
     appVersion: 0.11.8
-    created: "2025-01-03T19:12:50.909527731Z"
+    created: "2025-01-21T18:45:37.186207379Z"
     description: Get Helm notifications in your team chat
     digest: 255770688227a8c7e379874f83731f7554df82ecfab46d5233f14dd9df59d5aa
     icon: https://github.com/RoadieHQ/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -37,7 +37,7 @@ entries:
     version: 0.11.8
   - apiVersion: v2
     appVersion: 0.11.6
-    created: "2025-01-03T19:12:50.908717525Z"
+    created: "2025-01-21T18:45:37.185861504Z"
     description: Get Helm notifications in your team chat
     digest: 0d61a96602633b9f6922f52be17f651ec728345973f92963fcadc31dee2011ca
     icon: https://github.com/RoadieHQ/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -54,7 +54,7 @@ entries:
     version: 0.11.7
   - apiVersion: v2
     appVersion: 0.11.4
-    created: "2025-01-03T19:12:50.908407114Z"
+    created: "2025-01-21T18:45:37.18530067Z"
     description: Get Helm notifications in your team chat
     digest: 082483ba4e914f900aa83ed3af4f49cf481e605bf17ad6ccaa94e6dcf8b48146
     icon: https://github.com/RoadieHQ/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -71,7 +71,7 @@ entries:
     version: 0.11.5
   - apiVersion: v2
     appVersion: 0.8.1
-    created: "2025-01-03T19:12:50.908110249Z"
+    created: "2025-01-21T18:45:37.184488456Z"
     description: Get Helm notifications in your team chat
     digest: 4f45cb40636d39fb487aeeaf10ee2f2a0f9d8949cbc773056bffdd044693b7eb
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -88,7 +88,7 @@ entries:
     version: 0.11.2
   - apiVersion: v2
     appVersion: 0.8.1
-    created: "2025-01-03T19:12:50.907484629Z"
+    created: "2025-01-21T18:45:37.183924826Z"
     description: Get Helm notifications in your team chat
     digest: b9ecb88643241e51ce3d3d8addde953115c4c4914e732d903f78c0b19838cec7
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -105,7 +105,7 @@ entries:
     version: 0.11.1
   - apiVersion: v2
     appVersion: 0.8.0
-    created: "2025-01-03T19:12:50.906930262Z"
+    created: "2025-01-21T18:45:37.183451645Z"
     description: Get Helm notifications in your team chat
     digest: 542d4d385c74f0e7b4300562edaa366da315bdc55af3358808d8040c3240a7e6
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -122,7 +122,7 @@ entries:
     version: 0.11.0
   - apiVersion: v2
     appVersion: 0.6.1
-    created: "2025-01-03T19:12:50.91270831Z"
+    created: "2025-01-21T18:45:37.1887839Z"
     description: Get Helm notifications in your team chat
     digest: 67022ae323222f4887079f32c9ef355aea1393bd64e9278b2c69a0f548b9326d
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -139,7 +139,7 @@ entries:
     version: 0.9.0
   - apiVersion: v2
     appVersion: 0.5.0
-    created: "2025-01-03T19:12:50.912428968Z"
+    created: "2025-01-21T18:45:37.188517223Z"
     description: Get Helm notifications in your team chat
     digest: cc12ddacf30d1db77dc80d46d491b89e7b46154a91fa270c6cb8f0bb5b1f89a7
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -156,7 +156,7 @@ entries:
     version: 0.8.0
   - apiVersion: v2
     appVersion: 0.4.1
-    created: "2025-01-03T19:12:50.912165224Z"
+    created: "2025-01-21T18:45:37.188269962Z"
     description: A Slack Bot for Helm
     digest: bc23c0fb3a8fb04032b84778675b2987c353de0571ba44199f936b218ad92342
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -173,7 +173,7 @@ entries:
     version: 0.7.0
   - apiVersion: v2
     appVersion: 0.4.1
-    created: "2025-01-03T19:12:50.911901301Z"
+    created: "2025-01-21T18:45:37.188015217Z"
     description: A Slack Bot for Helm
     digest: 553391174d0865ca628c23609cb85c6d887d59fbf2eff192abbbde2d7115ecb7
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -190,7 +190,7 @@ entries:
     version: 0.6.2
   - apiVersion: v2
     appVersion: 0.4.1
-    created: "2025-01-03T19:12:50.911597202Z"
+    created: "2025-01-21T18:45:37.187735446Z"
     description: A Slack Bot for Helm
     digest: 289e61beed2192a613df8d138f0457dfca1edad6f0240006faeb0ba82a561845
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -207,7 +207,7 @@ entries:
     version: 0.6.1
   - apiVersion: v2
     appVersion: 0.4.0
-    created: "2025-01-03T19:12:50.911305015Z"
+    created: "2025-01-21T18:45:37.18749041Z"
     description: A Slack Bot for Helm
     digest: ae40d26da726caeff9ef1e3e437b2c8c6d8c6bead2cb328a2af65100c0333638
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -224,7 +224,7 @@ entries:
     version: 0.6.0
   - apiVersion: v2
     appVersion: 0.3.0
-    created: "2025-01-03T19:12:50.911014171Z"
+    created: "2025-01-21T18:45:37.187242047Z"
     description: A Slack Bot for Helm
     digest: f9bac9794c33eb0ecd143255e62c6510d24a24b9da584122524374325b74e6d7
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -241,7 +241,7 @@ entries:
     version: 0.5.0
   - apiVersion: v2
     appVersion: 0.2.0
-    created: "2025-01-03T19:12:50.910720762Z"
+    created: "2025-01-21T18:45:37.18698095Z"
     description: A Slack Bot for Helm
     digest: 894b3f03f26d5117fc01db538ae6c96a4c55f51429e3b0939a2e4bd79a1004b3
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -258,7 +258,7 @@ entries:
     version: 0.4.0
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2025-01-03T19:12:50.910396796Z"
+    created: "2025-01-21T18:45:37.186690319Z"
     description: A Slack Bot for Helm
     digest: c00898da666263185b5d0269077cd991da8aa5a10a06ff4c8be534e229fdb393
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -275,7 +275,7 @@ entries:
     version: 0.3.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2025-01-03T19:12:50.910103838Z"
+    created: "2025-01-21T18:45:37.186452806Z"
     description: A Slack Bot for Helm
     digest: 36e18bb1c5d3548bd2f7198378e2911f3074b4f103796bc994e1d30c09396c79
     icon: https://github.com/larderdev/kubewise/blob/master/assets/kubewise-mark-blue-512x512.png
@@ -292,7 +292,7 @@ entries:
     version: 0.2.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2025-01-03T19:12:50.906594344Z"
+    created: "2025-01-21T18:45:37.183155382Z"
     description: A Slack Bot for Helm
     digest: a6ccfb6bc8f28a8103824fea9d415db43923c1b7bb1f8c99dacda113353f3d74
     name: kubewise
@@ -302,7 +302,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-01-03T19:12:50.906364083Z"
+    created: "2025-01-21T18:45:37.182922779Z"
     description: A Slack Bot for Helm
     digest: 488ba2318eedb12348a798ccd2fa9090b755fd8ff7c5a42ddc05af32790eb79b
     name: kubewise
@@ -312,8 +312,25 @@ entries:
     version: 0.1.0
   roadie-broker:
   - apiVersion: v2
+    appVersion: 0.0.3
+    created: "2025-01-21T18:45:37.189878469Z"
+    description: Allows access from Roadie Backstage to internal services via a Snyk
+      Broker Client
+    digest: ab101d301d1f67d0b8809483e53f51f6349e79602585fe2bea918f509742feac
+    maintainers:
+    - email: engineering@roadie.io
+      name: RoadieHQ
+      url: https://roadie.io
+    name: roadie-broker
+    sources:
+    - https://github.com/RoadieHQ/helm-charts
+    type: application
+    urls:
+    - roadie-broker/roadie-broker-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
     appVersion: 0.0.2
-    created: "2025-01-03T19:12:50.913395616Z"
+    created: "2025-01-21T18:45:37.189396441Z"
     description: Allows access from Roadie Backstage to internal services via a Snyk
       Broker Client
     digest: 5aeee5249b74cf2fe2c918a860f82e0fda1c2719b8819b5c48d44b288670f987
@@ -330,7 +347,7 @@ entries:
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2025-01-03T19:12:50.913030543Z"
+    created: "2025-01-21T18:45:37.189092314Z"
     description: Allows access from Roadie Backstage to internal services via a Snyk
       Broker Client
     digest: f1a32645d24711cc12b9f335e0210eccd2e55c721d8b70779ee60bc0eaf495cf
@@ -347,8 +364,24 @@ entries:
     version: 0.0.1
   roadie-kubernetes-cluster-access:
   - apiVersion: v2
+    appVersion: 0.1.9
+    created: "2025-01-21T18:45:37.195497444Z"
+    description: Allows read access from Roadie Backstage to a Kubernetes cluster
+    digest: 38ab210469fe0cc478ef1b4fdbc134b191bbe6ceda01eff124fe9626e71cea8c
+    maintainers:
+    - email: engineering@roadie.io
+      name: RoadieHQ
+      url: https://roadie.io
+    name: roadie-kubernetes-cluster-access
+    sources:
+    - https://github.com/RoadieHQ/helm-charts
+    type: application
+    urls:
+    - roadie-kubernetes-cluster-access/roadie-kubernetes-cluster-access-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
     appVersion: 0.1.8
-    created: "2025-01-03T19:12:50.91920805Z"
+    created: "2025-01-21T18:45:37.195182557Z"
     description: Allows read access from Roadie Backstage to a Kubernetes cluster
     digest: e9a066cd727e700fc4d2a2a7f59c7fdc0aef0a2eace81e1dfc654562b5abe0d0
     maintainers:
@@ -364,7 +397,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: 0.1.7
-    created: "2025-01-03T19:12:50.918864758Z"
+    created: "2025-01-21T18:45:37.194849416Z"
     description: Allows read access from Roadie Backstage to a Kubernetes cluster
     digest: 9e41ff193c535366c4ebe67f9518d993c5ce32d206eec7ebda0805109c6c09d3
     maintainers:
@@ -380,7 +413,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.1.6
-    created: "2025-01-03T19:12:50.918493994Z"
+    created: "2025-01-21T18:45:37.19452965Z"
     description: Allows read access from Roadie Backstage to a Kubernetes cluster
     digest: 53ae0d78aa82866e9e999e024a412be82a6a1d7b86527f057991726a98fdf473
     maintainers:
@@ -396,7 +429,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.1.5
-    created: "2025-01-03T19:12:50.918130024Z"
+    created: "2025-01-21T18:45:37.194199926Z"
     description: Allows read access from Roadie Backstage to a Kubernetes cluster
     digest: 5f672ffe362c5b4b7c470cc4d6ddf8161a92b6d1cf4fd06f218d4876c1b817fa
     maintainers:
@@ -415,7 +448,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.1.4
-    created: "2025-01-03T19:12:50.916101828Z"
+    created: "2025-01-21T18:45:37.193069941Z"
     description: Allows read access from Roadie Backstage to a Kubernetes cluster
     digest: 36e14a09765165d860a030a6e63aa5fdf1a91ee550d1bf78e08c3080ec687782
     maintainers:
@@ -434,7 +467,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.1.3
-    created: "2025-01-03T19:12:50.915622481Z"
+    created: "2025-01-21T18:45:37.192598612Z"
     description: Allows read access from Roadie Backstage to a Kubernetes cluster
     digest: d3cb93513fbc35c76f375e5717dcfcfc7e1fb731bb9b51d6db5c835393466ccf
     maintainers:
@@ -453,7 +486,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2025-01-03T19:12:50.915187347Z"
+    created: "2025-01-21T18:45:37.19168759Z"
     description: Allows read access from Roadie Backstage to a Kubernetes cluster
     digest: 90a8a718a7cdc626d6d1fa1c98b25d51ba34eb51418dcad4358fa80e39bdee16
     maintainers:
@@ -472,7 +505,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2025-01-03T19:12:50.914725814Z"
+    created: "2025-01-21T18:45:37.191062816Z"
     description: Allows read access from Roadie Backstage to a Kubernetes cluster
     digest: c81b957206fe2dc3d5bfe0a39a29c4ec265eb21de71845e9324044f2b12680e7
     maintainers:
@@ -491,7 +524,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-01-03T19:12:50.914261435Z"
+    created: "2025-01-21T18:45:37.190633626Z"
     description: Allows read access from Roadie Backstage to a Kubernetes cluster
     digest: 098e9cc33b30bca2e8afe7e262e44454dd28e0ba3ee86a56c1f3976cc6451aaf
     maintainers:
@@ -510,7 +543,7 @@ entries:
     version: 0.1.0
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-01-03T19:12:50.913837442Z"
+    created: "2025-01-21T18:45:37.190246294Z"
     description: Allows read access from Roadie Backstage to a Kubernetes cluster
     digest: 511de7bbf3e7660c272e9c55b21a1ef11f50bdd4fc3d8c02e5dbcd4e180375d9
     maintainers:
@@ -530,9 +563,9 @@ entries:
   sample-service:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-01-03T19:12:50.921407825Z"
+    created: "2025-01-21T18:45:37.197441426Z"
     description: A sample service for testing integrations
-    digest: 39da19b01cd3587e10ab275d93873ff1b1fa5fd6f1e7032a33175a50bf9aa2f0
+    digest: fb37357b5410baf531f81ebcd6bbdb9cdb4b9e34733928a1c63d7b22aadb4e0c
     maintainers:
     - email: engineering@roadie.io
       name: RoadieHQ
@@ -546,7 +579,7 @@ entries:
     version: 0.0.5
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-01-03T19:12:50.920434675Z"
+    created: "2025-01-21T18:45:37.19653145Z"
     description: A sample service for testing integrations
     digest: 036f7bc1f8da93bf271e491efa6aae3f18b64aaccde0a5bf31986994cf8a4ddd
     maintainers:
@@ -562,7 +595,7 @@ entries:
     version: 0.0.4
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-01-03T19:12:50.92005247Z"
+    created: "2025-01-21T18:45:37.196196516Z"
     description: A sample service for testing integrations
     digest: 5cf24f5ac53b3d569df15047ad3b413fcd1fd5cb51fca3f67158850c84144840
     maintainers:
@@ -578,7 +611,7 @@ entries:
     version: 0.0.3
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-01-03T19:12:50.919579034Z"
+    created: "2025-01-21T18:45:37.195840392Z"
     description: A sample service for testing integrations
     digest: a7d8a86114458bdbd9e6e894892af8a0f39913c914a6521e853ca389d27e8e0b
     maintainers:
@@ -592,4 +625,4 @@ entries:
     urls:
     - sample-service/sample-service-0.0.2.tgz
     version: 0.0.2
-generated: "2025-01-03T19:12:50.905956941Z"
+generated: "2025-01-21T18:45:37.182543763Z"
