@@ -34,8 +34,10 @@ spec:
           image: {{ .Values.broker.image }}
           imagePullPolicy: Always
           env:
+            {{- if .Values.broker.token }}
             - name: BROKER_TOKEN
               value: {{ .Values.broker.token }}
+            {{- end }}
             - name: BROKER_SERVER_URL
               value: https://{{ .Values.broker.tenantName }}.broker.roadie.so
             - name: CA_CERTS
