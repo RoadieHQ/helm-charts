@@ -35,11 +35,13 @@ e.g.
 ```yaml
 broker:
   image: "roadiehq/broker:jenkins"
-  token: <some-string>
+  token: <broker-token>
   tenantName: <your-roadie-tenant-name>
   appName: roadie-jenkins-broker
   logLevel: debug
   env:
+    - name: JENKINS_URL
+      value: <jenkins-URL>
     - name: JENKINS_USERNAME
       value: test
     - name: JENKINS_PASSWORD
