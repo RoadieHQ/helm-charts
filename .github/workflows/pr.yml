@@ -19,4 +19,5 @@ jobs:
              --set broker.tenantDomain=enginehouse.dev \
              --set broker.image=roadiehq/broker:13371353312.75.1-kubernetes
       - run: |
+          kubectl rollout status deployment/roadie-k8s-broker
           kubectl logs deployment/roadie-k8s-broker
