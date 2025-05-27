@@ -20,4 +20,5 @@ jobs:
              --set broker.image=roadiehq/broker:13371353312.75.1-kubernetes
       - run: |
           kubectl rollout status deployment/roadie-k8s-broker
+          kubectl wait --for=condition=Ready pod -l app=roadie-broker --timeout=300s
           kubectl logs deployment/roadie-k8s-broker
