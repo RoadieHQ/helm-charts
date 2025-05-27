@@ -18,3 +18,5 @@ jobs:
              --set broker.tenantName=irma-test \
              --set broker.tenantDomain=enginehouse.dev \
              --set broker.image=roadiehq/broker:13371353312.75.1-kubernetes
+      - run: |
+          kubectl logs deployment/roadie-k8s-broker
