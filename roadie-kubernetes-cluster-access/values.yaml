@@ -5,7 +5,6 @@ broker:
   imagePullSecret:
   logLevel: debug
   logBody: false
-  serverUrl: ""
   serviceAccount:
     name: roadie-k8s-broker
     namespace: default
