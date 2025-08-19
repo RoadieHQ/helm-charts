@@ -30,6 +30,14 @@ spec:
       dnsConfig:
       {{- toYaml .Values.broker.dnsConfig | nindent 8 }}
       {{ end -}}
+      {{- if .Values.broker.nodeSelector }}
+      nodeSelector:
+{{- toYaml .Values.broker.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- if .Values.broker.affinity }}
+      affinity:
+{{- toYaml .Values.broker.affinity | nindent 8 }}
+      {{- end }}
       containers:
         - name: roadie-broker
           image: {{ .Values.broker.image }}
@@ -40,7 +48,7 @@ spec:
               value: {{ .Values.broker.token }}
             {{ end -}}
             - name: BROKER_SERVER_URL
-              value: https://{{ .Values.broker.tenantName }}.broker.roadie.so
+              value: {{ .Values.broker.serverUrl }}
             - name: CA_CERTS
               value: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
             - name: NODE_EXTRA_CA_CERTS
