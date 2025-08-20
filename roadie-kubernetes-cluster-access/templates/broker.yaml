@@ -48,7 +48,7 @@ spec:
               value: {{ .Values.broker.token }}
             {{ end -}}
             - name: BROKER_SERVER_URL
-              value: https://{{ .Values.broker.tenantName }}.broker.roadie.so
+              value: https://{{ .Values.broker.tenantName }}.broker.{{ default "roadie.so" .Values.broker.tenantDomain }}
             - name: CA_CERTS
               value: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
             - name: NODE_EXTRA_CA_CERTS

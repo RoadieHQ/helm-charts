@@ -1,0 +1,24 @@
+name: CI
+on:
+  - pull_request
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    name: build example and deploy to minikube
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start minikube
+        uses: medyagh/setup-minikube@latest
+      - uses: azure/setup-helm@v4.3.0
+      - name: Install the kubernetes cluster access
+        run: |
+          helm install test-kubernetes-cluster-access roadie-kubernetes-cluster-access \
+             --set broker.enabled=true \
+             --set broker.token=brian-test-123-delete \
+             --set broker.tenantName=irma-test \
+             --set broker.tenantDomain=enginehouse.dev \
+             --set broker.image=roadiehq/broker:13371353312.75.1-kubernetes
+      - run: |
+          kubectl rollout status deployment/roadie-k8s-broker
+          kubectl wait --for=condition=Ready pod -l app=roadie-broker --timeout=300s
+          kubectl logs deployment/roadie-k8s-broker
